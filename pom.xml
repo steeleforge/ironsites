@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	This is free and unencumbered software released into the public domain.
+	
+	Anyone is free to copy, modify, publish, use, compile, sell, or
+	distribute this software, either in source code form or as a compiled
+	binary, for any purpose, commercial or non-commercial, and by any
+	means.
+	
+	In jurisdictions that recognize copyright laws, the author or authors
+	of this software dedicate any and all copyright interest in the
+	software to the public domain. We make this dedication for the benefit
+	of the public at large and to the detriment of our heirs and
+	successors. We intend this dedication to be an overt act of
+	relinquishment in perpetuity of all present and future rights to this
+	software under copyright law.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+	OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+	OTHER DEALINGS IN THE SOFTWARE.
+	
+	For more information, please refer to <http://unlicense.org/>
+ -->
+ <project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.steeleforge.aem</groupId>
+	<artifactId>ironsites</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ironsites</name>
+	<description>AEM Development Utilities</description>
+	<modules>
+		<module>ironsites-core</module>
+		<module>ironsites-vault</module>
+		<module>ironsites-coreit</module>
+	</modules>
+	<properties>
+		<encoding>UTF-8</encoding>
+		<slf4j.version>1.6.1</slf4j.version>
+		<junit.version>4.8.2</junit.version>
+		<scr.annotations.version>1.7.0</scr.annotations.version>
+		<scr.generator.version>1.3.0</scr.generator.version>
+		<maven.bundle.version>2.3.7</maven.bundle.version>
+		<maven.scr.version>1.9.0</maven.scr.version>
+		<maven.sling.version>2.1.0</maven.sling.version>
+		<powermock.version>1.5</powermock.version>
+	</properties>
+	<profiles>
+		<profile>
+			<id>local-author</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>env</name>
+					<value>local-author</value>
+				</property>
+			</activation>
+			<properties>
+				<crx.host>localhost</crx.host>
+				<crx.port>4502</crx.port>
+				<crx.user>admin</crx.user>
+				<crx.password>admin</crx.password>
+				<vltpack.host>${crx.host}</vltpack.host>
+				<vltpack.port>${crx.port}</vltpack.port>
+				<vltpack.user>${crx.user}</vltpack.user>
+				<vltpack.pass>${crx.password}</vltpack.pass>
+				<crx.path.install>/libs/sling/install</crx.path.install>
+				<phase.package>package</phase.package>
+				<phase.install>install</phase.install>
+				<!-- deploy vault module -->
+				<supportITs>true</supportITs>
+			</properties>
+		</profile>
+		<profile>
+			<id>local-publish</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>local-publish</value>
+				</property>
+			</activation>
+			<properties>
+				<crx.host>localhost</crx.host>
+				<crx.port>4503</crx.port>
+				<crx.user>admin</crx.user>
+				<crx.password>admin</crx.password>
+				<vltpack.host>${crx.host}</vltpack.host>
+				<vltpack.port>${crx.port}</vltpack.port>
+				<vltpack.user>${crx.user}</vltpack.user>
+				<vltpack.pass>${crx.password}</vltpack.pass>
+				<crx.path.install>/libs/sling/install</crx.path.install>
+				<phase.package>package</phase.package>
+				<phase.install>install</phase.install>
+				<!-- deploy vault module -->
+				<supportITs>true</supportITs>
+			</properties>
+		</profile>
+	</profiles>
+	<dependencyManagement>
+		<dependencies>
+			<!-- testing -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<scope>test</scope>
+				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<scope>test</scope>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sling</groupId>
+				<artifactId>org.apache.sling.junit.core</artifactId>
+				<scope>provided</scope>
+				<version>1.0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sling</groupId>
+				<artifactId>org.apache.sling.junit.scriptable</artifactId>
+				<scope>provided</scope>
+				<version>1.0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<scope>test</scope>
+				<version>${powermock.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<scope>test</scope>
+				<version>${powermock.version}</version>
+			</dependency>
+			<!-- logging, build -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<scope>provided</scope>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<scope>provided</scope>
+				<version>${maven.bundle.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-scr-plugin</artifactId>
+				<scope>provided</scope>
+				<version>${maven.scr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.apache.felix.scr.annotations</artifactId>
+				<scope>provided</scope>
+				<version>${scr.annotations.version}</version>
+			</dependency>
+			<!-- common libraries/API -->
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.apache.felix.scr</artifactId>
+				<scope>provided</scope>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<scope>provided</scope>
+				<version>4.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sling</groupId>
+				<artifactId>org.apache.sling.api</artifactId>
+				<scope>provided</scope>
+				<version>2.3.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sling</groupId>
+				<artifactId>org.apache.sling.scripting.jsp</artifactId>
+				<scope>provided</scope>
+				<version>2.0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<scope>provided</scope>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.day.commons.osgi.wrapper</groupId>
+				<artifactId>com.day.commons.osgi.wrapper.commons-lang2</artifactId>
+				<scope>provided</scope>
+				<version>2.5-0001</version>
+			</dependency>
+			<dependency>
+				<groupId>com.day.cq</groupId>
+				<artifactId>cq-commons</artifactId>
+				<scope>provided</scope>
+				<version>5.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.day.cq.wcm</groupId>
+				<artifactId>cq-wcm-api</artifactId>
+				<scope>provided</scope>
+				<version>5.6.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.steeleforge.aem</groupId>
+				<artifactId>ironsites-coreit</artifactId>
+				<scope>test</scope>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<extensions>true</extensions>
+					<version>${maven.bundle.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-scr-plugin</artifactId>
+					<version>${maven.scr.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.sling</groupId>
+					<artifactId>maven-sling-plugin</artifactId>
+					<version>${maven.sling.version}</version>
+					<configuration>
+						<slingUrl>http://${crx.host}:${crx.port}${crx.path.install}
+						</slingUrl>
+						<usePut>true</usePut>
+						<user>${crx.user}</user>
+						<password>${crx.password}</password>
+						<refreshPackages>true</refreshPackages>
+						<bundleStart>true</bundleStart>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>net.adamcin</groupId>
+					<artifactId>vltpack-maven-plugin</artifactId>
+					<version>1.0.0</version>
+					<extensions>true</extensions>
+					<configuration>
+						<vltpack.host>${crx.host}</vltpack.host>
+						<vltpack.port>${crx.port}</vltpack.port>
+						<vltpack.user>${crx.user}</vltpack.user>
+						<vltpack.pass>${crx.password}</vltpack.pass>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.8.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.0</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.doxia</groupId>
+							<artifactId>doxia-module-markdown</artifactId>
+							<version>1.3</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<inputEncoding>UTF-8</inputEncoding>
+						<reportPlugins>
+							<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-javadoc-plugin</artifactId>
+							</plugin>
+							<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-project-info-reports-plugin</artifactId>
+								<version>2.4</version>
+							</plugin>
+						</reportPlugins>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<repositories>
+		<repository>
+			<id>adobe-public-releases</id>
+			<name>Adobe Basel Public Repository</name>
+			<url>http://repo.adobe.com/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>adobe-public-releases</id>
+			<name>Adobe Basel Public Repository</name>
+			<url>http://repo.adobe.com/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

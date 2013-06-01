@@ -1,0 +1,14 @@
+*.class
+*~
+*.jar
+*.war
+*.ear
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.iml
+*.log
+.project
+.classpath
+.settings/*

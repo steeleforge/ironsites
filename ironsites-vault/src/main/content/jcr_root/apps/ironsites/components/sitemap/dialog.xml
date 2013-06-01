@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    helpPath="en/cq/current/wcm/default_components.html#Sitemap"
+    title="Sitemap"
+    xtype="panel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <path
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Root Path"
+            name="./path"
+            xtype="pathfield"/>
+        <inclusions
+            jcr:primaryType="cq:Widget"
+            fieldDescription="Click the '+' to add a new page &lt;br/&gt; (supports {url}={title} format for external links)"
+            fieldLabel="Inclusions"
+            name="./inclusions"
+            xtype="multifield">
+            <fieldConfig
+                jcr:primaryType="cq:Widget"
+                width="155"
+                xtype="pathfield"/>
+        </inclusions>
+        <exclusions
+            jcr:primaryType="cq:Widget"
+            fieldDescription="Click the '+' to add a new page &lt;br/&gt; (takes precedence over inclusions)."
+            fieldLabel="Exclusions"
+            name="./exclusions"
+            xtype="multifield">
+            <fieldConfig
+                jcr:primaryType="cq:Widget"
+                width="155"
+                xtype="pathfield"/>
+        </exclusions>
+        <target
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Link Target"
+            fieldDescription="(e.g. _blank)"
+            name="./target"
+            xtype="textfield"/>
+        <hideProperty
+            jcr:primaryType="cq:Widget"
+            fieldLabel="'Hide' Page Property"
+        	fieldDescription="Default page property used to hide pages from Sitemap (e.g. hideInNav)"
+            name="./hideProperty"
+            xtype="textfield"/>
+    </items>
+</jcr:root>

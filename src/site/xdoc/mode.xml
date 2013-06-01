@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	This is free and unencumbered software released into the public domain.
+	
+	Anyone is free to copy, modify, publish, use, compile, sell, or
+	distribute this software, either in source code form or as a compiled
+	binary, for any purpose, commercial or non-commercial, and by any
+	means.
+	
+	In jurisdictions that recognize copyright laws, the author or authors
+	of this software dedicate any and all copyright interest in the
+	software to the public domain. We make this dedication for the benefit
+	of the public at large and to the detriment of our heirs and
+	successors. We intend this dedication to be an overt act of
+	relinquishment in perpetuity of all present and future rights to this
+	software under copyright law.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+	OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+	OTHER DEALINGS IN THE SOFTWARE.
+	
+	For more information, please refer to <http://unlicense.org/>
+ -->
+<document>
+	<properties>
+		<title>Usage - WCMMode Helpers</title>
+	</properties>
+	<body>
+		<section name="What/Why?">
+			<dl>
+				<dt>What is the motivation for these features?</dt>
+				<dd>Toggling display behavior based on WCMMode is very common. 
+					The boilerplate involved in the JSP import and comparison
+					code doesn't feel ideal. Dealing with this minor annoyance
+					in a global.jsp include is the common approach, which is
+					fine. Let's shoot for slightly better.
+				</dd>
+				
+				<dt>What does this provide that isn't out-of-box?</dt>
+				<dd>&lt;ism:modeHelper/&gt; provides JSP variable and EL access
+					to a Map with WCMMode comparisons and an WCMMode instance.</dd>
+				
+				<dt>What are some limitations?</dt>
+				<dd>This implementation places WCMMode information into 
+					PageContext at request scope and attempts to retrieve it
+					each tim instead of recomputing comparisons. Not really
+					a limitation, but developers may find edge cases causing
+					heartache when altering WCMMode programmatically.</dd>
+					
+				<dt>Where are the tests?</dt>
+				<dd>Working on it...</dd>
+			</dl>
+		</section>
+		<section name="Mode Map">
+			<p>
+				ironsites provides a Map JSP variable and PageContext object
+				called "ismode" which contains a boolean value comparing a
+				key corresponding to each WCMMode and an equals comparison
+				against the current WCMMode.
+				Usage is predicated on the taglib declaration found in
+				/apps/ironsites/common/global.jsp.
+				<br/>
+				<h4>/apps/ironsites/components/cachemonitor/cachemonitor.jsp</h4>
+				<source>
+					<![CDATA[
+							...
+<ism:modeHelper/>
+<c:if test="${ismode.EDIT}">
+							...
+</if>
+						]]>
+				</source>
+				The above evaluates the JSTL if tag body if "ismode" has a
+				value given key "EDIT" which resolves to boolean true. The 
+				body content would not evaluate/display if the value is falsey.
+				This will also behave the same for "edit" lowercase. This means
+				the below is equivalent.
+				<source>
+					<![CDATA[
+							...
+<ism:modeHelper/>
+<c:if test="${true eq ismode.edit}">
+							...
+</if>
+						]]>
+				</source>
+			</p>
+		</section>
+		<section name="WCMMode">
+			<p>
+				ironsites exposes WCMMode JSP variable and PageContext object
+				called "wcmmode". Similar to the above example in the Mode Map
+				section, the below would behave the same but be case sensitive.
+				<source>
+					<![CDATA[
+							...
+<ism:modeHelper/>
+<c:if test="${'EDIT' eq wcmmode}">
+							...
+</if>
+						]]>
+				</source>
+			</p>
+		</section>
+	</body>
+</document>

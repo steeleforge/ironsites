@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	This is free and unencumbered software released into the public domain.
+	
+	Anyone is free to copy, modify, publish, use, compile, sell, or
+	distribute this software, either in source code form or as a compiled
+	binary, for any purpose, commercial or non-commercial, and by any
+	means.
+	
+	In jurisdictions that recognize copyright laws, the author or authors
+	of this software dedicate any and all copyright interest in the
+	software to the public domain. We make this dedication for the benefit
+	of the public at large and to the detriment of our heirs and
+	successors. We intend this dedication to be an overt act of
+	relinquishment in perpetuity of all present and future rights to this
+	software under copyright law.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+	OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+	OTHER DEALINGS IN THE SOFTWARE.
+	
+	For more information, please refer to <http://unlicense.org/>
+ -->
+
+<document>
+	<properties>
+		<title>ironsites - Simple Cache</title>
+	</properties>
+	<body>
+		<section name="What/Why?">
+			<dl>
+				<dt>What is the motivation for these features?</dt>
+				<dd>Application caches can be helpful if you have some spare
+				 	memory around, especially if you have parameterized
+				 	requests or other 'live' requests which bypass dispatcher
+				 	and hit an application server directly to retrieve the same
+				 	information repeatedly. EHCache, OSCache, and the like are
+				 	absolutely fine. However, simplicity is a virtue, and the
+				 	cache provided by <a href="https://code.google.com/p/guava-libraries/wiki/CachesExplained" target="_blank">Google Guava</a>
+				 	is virtuous in this way.
+				</dd>
+				
+				<dt>What does this provide that isn't out-of-box?</dt>
+				<dd>An simple, configurable Cache that is slightly more 
+					utilitarian than ConcurrentHashMap.</dd>
+				
+				<dt>What are some limitations?</dt>
+				<dd>Type safety hazards ahead. The OSGi Service created to
+					manage this cache has not been abstracted to support
+					alternative implementations like the Spring 3.2+.</dd>
+					
+				<dt>Where are the tests?</dt>
+				<dd>Working on it...</dd>
+			</dl>
+		</section>
+		<section name="SimpleCache">
+			<p>
+				The javadoc for SimpleCacheService really should be the best
+				usage explanation. When a cache is requested by name, it is 
+				provided or a new basic Cache is created and provided.
+				Additionally, one method can spawn a Cache instance with
+				configurable specifications and a toggle to record statistics.
+			</p>
+			<p>
+				Google Guava Cache instances are created by a CacheBuilder 
+				factory that accepts a <a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html" target="_blank">specification String.</a>
+				This is particularly useful for tuning. Changing Cache specs
+				established in code may be daunting which is why an OSGi
+				configuration factory allows for Cache instances to be created
+				with configurable specifications.
+			</p>
+			<p>
+				To add OSGi managed cache configurations, go to felix configuration
+				manager console (/system/console/configMgr) and locate
+				"ironsites - Simple Cache Configuration". Add configurations and
+				you can confirm the creation of Cache instances in the
+				cachemonitor CQ component.
+			</p>
+			<p>
+				For more details on interacting with Google Guava Cache, please
+				read the below resources.
+				<ul>
+					<li><a href="https://code.google.com/p/guava-libraries/wiki/CachesExplained" target="_blank">https://code.google.com/p/guava-libraries/wiki/CachesExplained</a></li>
+					<li><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/Cache.html" target="_blank">http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/Cache.html</a></li>
+					<li><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilder.html" target="_blank">http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilder.html</a></li>
+					<li><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html" target="_blank">http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html</a></li>
+				</ul>
+			</p>
+		</section>
+	</body>
+</document>
