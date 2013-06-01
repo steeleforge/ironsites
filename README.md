@@ -1,5 +1,6 @@
-![ironsites](https://raw.github.com/steeleforge/ironsites/master/src/site/resources/ironsites_32x32.png "ironsites") ironsites <sub style="font-size: 0.5em">AEM better</sub>
+![ironsites](https://raw.github.com/steeleforge/ironsites/master/src/site/resources/ironsites_32x32.png "ironsites") ironsites
 =========
+##### AEM better
 
 Motivation
 -----------
