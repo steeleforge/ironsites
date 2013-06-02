@@ -36,15 +36,6 @@ Features
 
 ### i18n Helpers
 + Sane patterns for content-managed i18n copy with reasonable Sling supported fallbacks as well as low-effort access to the CQ out-of-box [i18n translation helper]( http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/i18n/I18n.html).
-+ Some copy must support String interpolation (e.g. "Hello {name}, how is the weather in {city}), but this becomes difficult when sentence order is not guaranteed. Just look at all that messy contractor code performing concatenation and asking authors to fill dialog textfield for the sentence fragment " of " -- gross. java.text.MessageFormat makes things slightly better if your authors are willing to put up with: "Hello {0}, how is the weather in {1}". Otherwise, String replacement works in a pinch. This is what the CQ I18n class helps with, and ironsites makes it accessible with a single tag.
-
-<!-- language-all: java -->
-	<%=i18n.get(StringUtils.replaceEach(
-			properties.get("greeting",""),
-			new String[]{"{name}", "{city}"}, new String[]{"{0}", "{1}"}),
-				null,
-				"David", "Detroit, MI") %>
-
 + Hard-coding copy in your JSPs is an anti-pattern; even if you need a placeholder default to maintain formatting. CQ5.5+ provides a translation UI that allows an experienced user to avoid that painful deploy due to a mispelling that was forgotten about in a dialog if you prepare in advance for it and make use of [sling internationlization support](http://sling.apache.org/documentation/bundles/internationalization-support-i18n.html). ironsites prescribes a development pattern and taglib to give developers a pattern to repeat, because the following common case is still practically hard-coding.
 
 <!-- language-all: java -->
@@ -70,6 +61,14 @@ Features
 
 + An ironsites tag makes available the above "messages" variable which does the work of finding a local property on a component instance resource/node and presenting that, or otherwise falling back to a component-wide default fallback based on sling:basename matching your component sling:resourceType.
 + The above may appear to be more work but it is worthwhile. Component dialogs will bloat as all component copy becomes some configurable properties; some copy doesn't need to burden the authoring community. Additionally, some developers will forget to make some copy authorable and inadvertantly bake-in defaults with no means to author them. In production, this could mean some untranslatable text could necessitates a patch deployment. As an alternative to this scenario, if developers are mandated to create sling:MessageEntry nodes for all copy and perhaps fallback to last-resort signals (such as `[greeting]` in the above scriptlet) to indicate absense of a sling:MessageEntry, these nodes can be reliably updated on a running instance with the [CQ5 Translator UI (note: change host/port)](http://localhost:4502/libs/cq/i18n/translator.html) and corrected in the next regular deployment. 
++ Some copy must support String interpolation (e.g. "Hello {name}, how is the weather in {city}), but this becomes difficult when sentence order is not guaranteed. Just look at all that messy contractor code performing concatenation and asking authors to fill dialog textfield for the sentence fragment " of " -- gross. java.text.MessageFormat makes things slightly better if your authors are willing to put up with: "Hello {0}, how is the weather in {1}". Otherwise, String replacement works in a pinch. This is what the CQ I18n class helps with, and ironsites makes it accessible with a single tag.
+
+<!-- language-all: java -->
+	<%=i18n.get(StringUtils.replaceEach(
+			properties.get("greeting",""),
+			new String[]{"{name}", "{city}"}, new String[]{"{0}", "{1}"}),
+				null,
+				"David", "Detroit, MI") %>
 
 ### XSS Helpers
 + taglib functions for [XSSAPI](http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html) such as encoding for XML/Javasscript/HTML.  
@@ -77,7 +76,7 @@ Features
 + Well-travelled CQ developers will have frequently been to arbitrarily parse/filter out HTML/CSS/etc for various valid and invalid reasons. Well you could still do that, or you could use an AntiSamy policy file with granular rules. That's up to you, but ironsites makes the latter course of action easier on the developer.
 
 <!-- language-all: java -->
-	<isx:filterHTML policy="ripout-javascript-from-authors.xml">
+	<isx:filterHTML policy="xss/ripout-javascript-from-authors.xml">
 		<cq:text property="text"/>
 	</isx:filterHTML>
 
@@ -102,7 +101,7 @@ feels goodman
 ### Simple Cache
 + Basic application caching powered by [Google Guava](https://code.google.com/p/guava-libraries/wiki/CachesExplained) which can be managed by OSGi configurations or created ad-hoc.
 + If you have the memory the spare, and want to skip re-computing/instantiating frequently accessed objects, why not use an application cache? You probably have a good reason not to, but if you need a slim & simple caching mechanism Google Guava is a reasonable route to go.
-+ SimpleCacheService is an OSGi managed service that provides access too configurable instances of [Cache](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/Cache.html).
++ SimpleCacheService is an OSGi managed service that provides access to configurable instances of [Cache](http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/Cache.html).
 
 ### Extended Page Filter
 + Composable, flexible, and configurable alternatives to [PageFilter](http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/wcm/api/PageFilter.html) which is commonly used to create navigation and sitemap components.
