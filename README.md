@@ -36,7 +36,7 @@ Features
 
 ### i18n Helpers
 + Sane patterns for content-managed i18n copy with reasonable Sling supported fallbacks as well as low-effort access to the CQ out-of-box [i18n translation helper]( http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/i18n/I18n.html).
-+ Some copy must support String interpolation (e.g. "Hello {name}, how is the weather in {city}, but this becomes difficult when sentence order is not guaranteed. Just look at all that messy contractor code performing concatenation and asking authors to fill dialog textfield for the sentence fragment " of " -- gross. java.text.MessageFormat makes things slightly better if your authors are willing to put up with: "Hello {0}, how is the weather in {1}". Otherwise, String replacement works in a pinch. This is what the CQ I18n class helps with, and ironsites makes it accessible with a single tag.
++ Some copy must support String interpolation (e.g. "Hello {name}, how is the weather in {city}), but this becomes difficult when sentence order is not guaranteed. Just look at all that messy contractor code performing concatenation and asking authors to fill dialog textfield for the sentence fragment " of " -- gross. java.text.MessageFormat makes things slightly better if your authors are willing to put up with: "Hello {0}, how is the weather in {1}". Otherwise, String replacement works in a pinch. This is what the CQ I18n class helps with, and ironsites makes it accessible with a single tag.
 
 <!-- language-all: java -->
 	<%=i18n.get(StringUtils.replaceEach(
