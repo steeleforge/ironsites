@@ -126,6 +126,7 @@ Author
 -----------
 + [site](http://www.steeleforge.com)
 + [twitter](http://www.twitter.com/davidsteele)
++ [gittip] (https://www.gittip.com/steeleforge/)
 
 Licence
 -----------
