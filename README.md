@@ -28,35 +28,35 @@ To deploy to a local publish instance, qualify the environment.
 + Patience required for exploring alpha-level software
 
 ## Features
-+ [Internationalization (i18n) Helpers](./wiki/Internationalization-Helpers)
-+ [Cross-Site Scripting (XSS) Helpers](./wiki/Cross-Site-Scripting-Helpers)
-+ [WCMMode Helpers](./wiki/WCMMode-Helpers)
-+ [Simple Cache](./wiki/Simple-Cache)
-+ [Components](./wiki/Components)
-+ [Misc.](./wiki/Miscellaneous)
++ [Internationalization (i18n) Helpers](https://github.com/steeleforge/ironsites/wiki/Internationalization-Helpers)
++ [Cross-Site Scripting (XSS) Helpers](https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-Helpers)
++ [WCMMode Helpers](https://github.com/steeleforge/ironsites/wiki/WCMMode-Helpers)
++ [Simple Cache](https://github.com/steeleforge/ironsites/wiki/Simple-Cache)
++ [Components](https://github.com/steeleforge/ironsites/wiki/Components)
++ [Misc.](https://github.com/steeleforge/ironsites/wiki/Miscellaneous)
 
-### Internationalization (i18n) Helpers [[wiki]](./wiki/Internationalization-Helpers)
+### Internationalization (i18n) Helpers [[wiki]](https://github.com/steeleforge/ironsites/wiki/Internationalization-Helpers)
 + Sane patterns for content-managed i18n copy in CQ components with reasonable Sling supported fallbacks as well as low-effort access to the CQ out-of-box [i18n translation helper]( http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/i18n/I18n.html).
 + Conveniences for supporting MessageFormat interpolation in i18n-ready copy.
 + Optional selector servlet to provide JSON serialzation of sling messages associated to a component/resourceType (e.g. /content/path/to/component.i18n.json) for usage with Javascript rich-client libraries.
 
-### XSS Helpers [[wiki]](./wiki/Cross-Site-Scripting-Helpers)
+### XSS Helpers [[wiki]](https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-Helpers)
 + taglib functions for [XSSAPI](http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html) such as encoding for XML/Javasscript/HTML.  
 + Filtering markup based on [XSSFilter](http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSFilter.html) and [AntiSamy policy files](https://www.owasp.org/index.php/Category:OWASP_AntiSamy_Project#Stage_3_-_Tailoring_the_policy_file) which can be managed in the JCR/CRX.
 
-### WCMMode Helpers [[wiki]](./wiki/WCMMode-Helpers)
+### WCMMode Helpers [[wiki]](https://github.com/steeleforge/ironsites/wiki/WCMMode-Helpers)
 + Elimination of scriptlet boilerplate for driving component display behavior based on WCMMode.
 
-### Simple Cache [[wiki]](./wiki/Simple-Cache)
+### Simple Cache [[wiki]](https://github.com/steeleforge/ironsites/wiki/Simple-Cache)
 + Basic application-level caching somewhere between a heavy Enterprise library and a basic ConcurrentHashMap.
 
-### Components [[wiki]](./wiki/Components)
+### Components [[wiki]](https://github.com/steeleforge/ironsites/wiki/Components)
 + ironsites Sitemap is a drop-in replacement for the CQ foundation Sitemap
 + ironsites Text component provides an example of HTML filtering utilizing XSS Helpers
 + ironsites Cache Monitor allows basic reporting on Simple Cache usage/access
 + ironsites Kitchen Sink is a demo component showcasing as much of the above features as reasonable for a developer that would like to build upon what is available
 
-### Misc. [[wiki]](./wiki/Misc)
+### Misc. [[wiki]](https://github.com/steeleforge/ironsites/wiki/Misc)
 + Composable, flexible, and configurable alternatives to [PageFilter](http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/wcm/api/PageFilter.html) which is commonly used to create navigation and sitemap components.
 
 ## Great projects that improve CQ development
