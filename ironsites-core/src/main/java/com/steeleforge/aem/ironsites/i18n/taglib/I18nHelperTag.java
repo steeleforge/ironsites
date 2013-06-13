@@ -38,14 +38,11 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
-import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.day.cq.i18n.I18n;
-import com.day.cq.wcm.api.LanguageManager;
 import com.steeleforge.aem.ironsites.i18n.I18nResourceBundle;
 import com.steeleforge.aem.ironsites.page.WCMUtil;
 
@@ -119,7 +116,7 @@ public class I18nHelperTag extends TagSupport {
 
 		Locale locale = null;
 		if (source == Source.PAGE)  {
-			locale = getPageLocale(request.getResource());
+			locale = WCMUtil.getLocale(request);
 			if (null != locale) {
 				return locale;
 			} else {
@@ -130,20 +127,11 @@ public class I18nHelperTag extends TagSupport {
 			return request.getLocale();
 		}
 
-		locale = getPageLocale(request.getResource());
+		locale = WCMUtil.getLocale(request);
 		if (null != locale) {
 			return locale;
 		}
 		return request.getLocale();
-	}
-
-	private Locale getPageLocale(Resource resource) {
-		SlingScriptHelper scriptHelper = WCMUtil.getSlingScriptHelper(pageContext);
-		LanguageManager languageManager = (LanguageManager)scriptHelper.getService(LanguageManager.class);
-		if (null == languageManager) {
-			return null;
-		}
-		return languageManager.getLanguage(resource);
 	}
 
 	public void release() {

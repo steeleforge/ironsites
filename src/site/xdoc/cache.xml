@@ -58,38 +58,7 @@
 			</dl>
 		</section>
 		<section name="SimpleCache">
-			<p>
-				The javadoc for SimpleCacheService really should be the best
-				usage explanation. When a cache is requested by name, it is 
-				provided or a new basic Cache is created and provided.
-				Additionally, one method can spawn a Cache instance with
-				configurable specifications and a toggle to record statistics.
-			</p>
-			<p>
-				Google Guava Cache instances are created by a CacheBuilder 
-				factory that accepts a <a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html" target="_blank">specification String.</a>
-				This is particularly useful for tuning. Changing Cache specs
-				established in code may be daunting which is why an OSGi
-				configuration factory allows for Cache instances to be created
-				with configurable specifications.
-			</p>
-			<p>
-				To add OSGi managed cache configurations, go to felix configuration
-				manager console (/system/console/configMgr) and locate
-				"ironsites - Simple Cache Configuration". Add configurations and
-				you can confirm the creation of Cache instances in the
-				cachemonitor CQ component.
-			</p>
-			<p>
-				For more details on interacting with Google Guava Cache, please
-				read the below resources.
-				<ul>
-					<li><a href="https://code.google.com/p/guava-libraries/wiki/CachesExplained" target="_blank">https://code.google.com/p/guava-libraries/wiki/CachesExplained</a></li>
-					<li><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/Cache.html" target="_blank">http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/Cache.html</a></li>
-					<li><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilder.html" target="_blank">http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilder.html</a></li>
-					<li><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html" target="_blank">http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html</a></li>
-				</ul>
-			</p>
+			<a href="https://github.com/steeleforge/ironsites/wiki/Simple-Cache">Usage</a>
 		</section>
 	</body>
 </document>

@@ -26,7 +26,10 @@
 	***************************************************************************
 	
 	ironsites - global include.
---%><%@include file="/libs/foundation/global.jsp"%><%
+	
+--%><%@page import="com.steeleforge.aem.ironsites.i18n.I18nUtil,
+                    org.apache.commons.lang.StringUtils"%><%
+%><%@include file="/libs/foundation/global.jsp"%><%
 %><%@taglib prefix="isx" uri="http://www.steeleforge.com/aem/ironsites/0.0.1/xss" %><%
 %><%@taglib prefix="ism" uri="http://www.steeleforge.com/aem/ironsites/0.0.1/mode" %><%
 %><%@taglib prefix="isi" uri="http://www.steeleforge.com/aem/ironsites/0.0.1/i18n" %>

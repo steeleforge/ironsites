@@ -68,46 +68,8 @@
 				<dd>Working on it...</dd>
 			</dl>
 		</section>
-		<section name="XSS JSTL functions">
-			<p>
-				This is fairly straight-forward, but XSSUtil has static method
-				wrappers around XSSAPI service. Note the pageContext parameter.
-				The below will result in equivalent output.
-				<br/>
-				<source>
-					<![CDATA[
-							...
-	<span><%=xssAPI.encodeForHTMLAttr("thanks & godbye")%></span>
-							...
-	<span>${xss:encodeForHTMLAttr("thanks & godbye", pageContext)}</span>
-							...
-						]]>
-				</source>
-			</p>
-		</section>
-		<section name="&lt;xss:filterHTML&gt;...&lt;/xss:filterHTML&gt;">
-			<p> The filterHTML tag will filter on markup in its body content based
-				on rules found in a given <a href="https://www.owasp.org/index.php/Category:OWASP_AntiSamy_Project#Stage_3_-_Tailoring_the_policy_file" target="_blank">anti-samy policy file</a>.
-				Developers should provide a policy file path in the <i>policy</i>
-				attribute of this tag. The policy path can be an absolute JCR 
-				path ora component-relative JCR path, and the XML extension
-				is not necessary. Other features include escaping markup
-				similar to the work XSSAPI#encodeForHTML might perform. Usage
-				is predicated on the taglib declaration found in
-				/apps/ironsites/common/global.jsp.
-				<br/>
-				<h4>/apps/ironsites/components/text/text.jsp</h4>
-				<source>
-					<![CDATA[
-							...
-<isx:filterHTML policy="${properties['xssPolicy']}"><cq:text property="text"/></isx:filterHtml>
-							...
-					]]>
-				</source>
-				The above excerpt from the ironsites extension of the CQ
-				foundation text component allows for a dialog configurable
-				anti-samy policy file.
-			</p>
+		<section name="XSS Helpers">
+			<a href="https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-(XSS)-Helpers">Usage</a>
 		</section>
 	</body>
 </document>

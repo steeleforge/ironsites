@@ -59,4 +59,14 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
+	<function>
+		<name>swap</name>
+		<function-class>com.steeleforge.aem.ironsites.i18n.I18nUtil</function-class>
+		<function-signature>java.lang.String swap(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>interpolate</name>
+		<function-class>com.steeleforge.aem.ironsites.i18n.I18nUtil</function-class>
+		<function-signature>java.lang.String interpolateValues(java.lang.String, java.lang.String, java.lang.Object[])</function-signature>
+	</function>
 </taglib>

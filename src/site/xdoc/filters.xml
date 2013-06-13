@@ -51,56 +51,8 @@
 				<dd>Working on it...</dd>
 			</dl>
 		</section>
-		<section name="List/And/Or Filters">
-			<p>
-				ListPageFilter is an abstract class which provides extensions 
-				management around aggregated Filters.
-			</p>
-			<p>
-				AndPageFilter extends ListPageFilter and will include a page if
-				<b>all</b> of the aggregate Filters include a page.
-			 </p>
-			<p>
-				OrPageFilter extends ListPageFilter and will include a page if
-				<b>any</b> of the aggregate Filters include a page.
-			 </p>
-		</section>
-		<section name="Property Equals Filters">
-			<p>
-				PropertyEqualsFilter is an abstract class which provides
-				structure to acquiring and checking equality for a property
-				value, and supporting negation as an option.
-			</p>
-			<p>
-				StringEqualsFilter extends PropertyEqualsFilter and will include a page if
-				a property value, coerced to String, is equal to another String.
-			 </p>
-			<p>
-				BooleanEqualsFilter extends PropertyEqualsFilter and will include a page if
-				a property value, coerced to a Boolean, is equal to another Boolean.
-			 </p>
-		</section>
-		<section name="Hide/Show/Invalid Filters">
-			<p>
-				The out-of-box PageFilter has an option to check if a Page
-				is invalid (Page#isInvalid), and InvalidPageFilter performs
-				similar work, but with other checks factored away.
-			</p>
-			<p>
-				HidePageFilter operates performs the work of the out-of-box 
-				PageFilter but does so as an AndPageFilter which composes 
-				InvalidPageFilter and BooleanEqualsFilter for an opt-out 
-				property to equal true; 'hideInNav' by default. A constant
-				instance with default behavior is available for use instead 
-				if the those assumptions are sufficient.
-			 </p>
-			<p>
-				ShowPageFilter is an opt-in version of the HidePageFilter where
-				a page is filtered out if it is invalid or it has a property
-				that does not equal true; 'showInNav' by default. A constant
-				instance with default behavior is available for use instead 
-				if the those assumptions are sufficient.
-			 </p>
+		<section name="Filters">
+			<a href="https://github.com/steeleforge/ironsites/wiki/Miscellaneous">Usage</a>
 		</section>
 	</body>
 </document>

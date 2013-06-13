@@ -30,6 +30,7 @@
 --%><%@page import="com.steeleforge.aem.ironsites.cache.service.SimpleCacheService,
                     com.google.common.cache.Cache,
                     org.apache.commons.lang.StringUtils,
+                    com.steeleforge.aem.ironsites.i18n.I18nUtil,
                     com.steeleforge.aem.ironsites.page.filter.HidePageFilter,
                     com.steeleforge.aem.ironsites.page.filter.ShowPageFilter"%><%
 %><%@include file="/apps/ironsites/common/global.jsp"%>
@@ -58,11 +59,10 @@
 <p>
 	<h3>i18n</h3>
 	<b>Interpolated Token Text:</b> 
-	<%=i.get(StringUtils.replaceEach(
-			m.get("tokentext","").toString(),
-			new String[]{"{name}", "{city}"}, new String[]{"{0}", "{1}"}),
-				null,
-				"David", "Detroit, MI") %>
+	<%=I18nUtil.interpolate(m.get("tokentext",""), 
+    	"{name}={0};{city}={1}", "David", "Detroit, MI")%>
+	<!-- ${isi:swap(m.tokentext, '{name}={0};{city}={1}')} -->
+	<!-- ${isi:swap(m.tokentext, '{name}=#{name};{city}=#{city}')} -->
 </p>
 
 <p>

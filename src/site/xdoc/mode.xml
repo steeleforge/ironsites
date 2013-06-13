@@ -55,56 +55,8 @@
 				<dd>Working on it...</dd>
 			</dl>
 		</section>
-		<section name="Mode Map">
-			<p>
-				ironsites provides a Map JSP variable and PageContext object
-				called "ismode" which contains a boolean value comparing a
-				key corresponding to each WCMMode and an equals comparison
-				against the current WCMMode.
-				Usage is predicated on the taglib declaration found in
-				/apps/ironsites/common/global.jsp.
-				<br/>
-				<h4>/apps/ironsites/components/cachemonitor/cachemonitor.jsp</h4>
-				<source>
-					<![CDATA[
-							...
-<ism:modeHelper/>
-<c:if test="${ismode.EDIT}">
-							...
-</if>
-						]]>
-				</source>
-				The above evaluates the JSTL if tag body if "ismode" has a
-				value given key "EDIT" which resolves to boolean true. The 
-				body content would not evaluate/display if the value is falsey.
-				This will also behave the same for "edit" lowercase. This means
-				the below is equivalent.
-				<source>
-					<![CDATA[
-							...
-<ism:modeHelper/>
-<c:if test="${true eq ismode.edit}">
-							...
-</if>
-						]]>
-				</source>
-			</p>
-		</section>
-		<section name="WCMMode">
-			<p>
-				ironsites exposes WCMMode JSP variable and PageContext object
-				called "wcmmode". Similar to the above example in the Mode Map
-				section, the below would behave the same but be case sensitive.
-				<source>
-					<![CDATA[
-							...
-<ism:modeHelper/>
-<c:if test="${'EDIT' eq wcmmode}">
-							...
-</if>
-						]]>
-				</source>
-			</p>
+		<section name="WCMMode Helper">
+			<a href="https://github.com/steeleforge/ironsites/wiki/WCMMode-Helpers">Usage</a>
 		</section>
 	</body>
 </document>

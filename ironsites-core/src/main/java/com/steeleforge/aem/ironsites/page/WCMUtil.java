@@ -26,6 +26,8 @@
  */
 package com.steeleforge.aem.ironsites.page;
 
+import java.util.Locale;
+
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -35,6 +37,7 @@ import org.apache.sling.api.scripting.SlingBindings;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.apache.sling.scripting.jsp.util.TagUtil;
 
+import com.day.cq.wcm.api.LanguageManager;
 import com.day.cq.wcm.api.Page;
 import com.google.common.base.Charsets;
 import com.google.common.hash.HashCode;
@@ -80,6 +83,17 @@ public enum WCMUtil {
 	}
 	
 	/**
+	 * Utility method to extract sling script helper from SlingHttpServletRequest
+	 * 
+	 * @param pageContext
+	 * @return SlingScriptHelper instance
+	 */
+	public static SlingScriptHelper getSlingScriptHelper(SlingHttpServletRequest request) {
+		SlingBindings bindings = (SlingBindings)request.getAttribute(SlingBindings.class.getName());
+		return bindings.getSling();
+	}
+	
+	/**
 	 * Utility method to extract sling script helper from JSP page context
 	 * 
 	 * @param pageContext
@@ -87,8 +101,7 @@ public enum WCMUtil {
 	 */
 	public static SlingScriptHelper getSlingScriptHelper(PageContext pageContext) {
 		SlingHttpServletRequest request = getSlingRequest(pageContext);
-		SlingBindings bindings = (SlingBindings)request.getAttribute(SlingBindings.class.getName());
-		return bindings.getSling();
+		return getSlingScriptHelper(request);
 	}
 	
 	/**
@@ -130,5 +143,21 @@ public enum WCMUtil {
 	 */
 	public static String getFastHash(String token) {
 		return getFastHash(token, 5);
+	}
+	
+
+	/**
+	 * Attempt to acquire a locale based on the requested resource.
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static Locale getLocale(SlingHttpServletRequest request) {
+		SlingScriptHelper scriptHelper = WCMUtil.getSlingScriptHelper(request);
+		LanguageManager languageManager = (LanguageManager)scriptHelper.getService(LanguageManager.class);
+		if (null == languageManager) {
+			return null;
+		}
+		return languageManager.getLanguage(request.getResource());
 	}
 }
