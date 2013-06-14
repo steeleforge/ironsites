@@ -56,8 +56,8 @@ import com.steeleforge.aem.ironsites.cache.service.SimpleCacheService;
  */
 @Service
 @Component(label = "ironsites - Simple Cache Service",
-description = "Acquire configured cache instances from this service.",
-immediate = true)
+	description = "Acquire configured cache instances from this service.",
+	immediate = true)
 @References({
 	@Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
 			policy = ReferencePolicy.DYNAMIC, 

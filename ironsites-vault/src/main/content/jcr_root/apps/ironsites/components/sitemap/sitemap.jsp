@@ -33,7 +33,6 @@
                     com.day.cq.wcm.api.PageManager"%><%
 %><%@include file="/apps/ironsites/common/global.jsp"%><%
 %><%@include file="init.jsp"%><%
-	
 %><c:if test="${not empty sitemap}">
 	<c:set var="level" value="0"/>
 	<ul class="level-${link.level}">
