@@ -56,7 +56,7 @@ To deploy to a local publish instance, qualify the environment.
 + ironsites Cache Monitor allows basic reporting on Simple Cache usage/access
 + ironsites Kitchen Sink is a demo component showcasing as much of the above features as reasonable for a developer that would like to build upon what is available
 
-### Misc. [[wiki]](https://github.com/steeleforge/ironsites/wiki/Misc)
+### Misc. [[wiki]](https://github.com/steeleforge/ironsites/wiki/Miscellaneous)
 + Composable, flexible, and configurable alternatives to [PageFilter](http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/wcm/api/PageFilter.html) which is commonly used to create navigation and sitemap components.
 
 ## Great projects that improve CQ development
