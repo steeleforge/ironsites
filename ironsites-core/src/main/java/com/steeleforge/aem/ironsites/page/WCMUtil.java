@@ -85,7 +85,7 @@ public enum WCMUtil {
 	/**
 	 * Utility method to extract sling script helper from SlingHttpServletRequest
 	 * 
-	 * @param pageContext
+	 * @param request
 	 * @return SlingScriptHelper instance
 	 */
 	public static SlingScriptHelper getSlingScriptHelper(SlingHttpServletRequest request) {
