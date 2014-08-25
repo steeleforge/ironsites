@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib xmlns="http://java.sun.com/XML/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/XML/ns/j2ee http://java.sun.com/XML/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+    <description>A tag library to wrap calls to Adobe XSSAPI and XSSFilter</description>
+    <tlib-version>0.0.1</tlib-version>
+    <short-name>xss</short-name>
+    <uri>http://www.steeleforge.com/aem/ironsites/0.0.1/xss</uri>
+    <tag>
+        <name>filterHTML</name>
+        <description>AntiSamy policy path</description>
+        <tag-class>com.steeleforge.aem.ironsites.xss.taglib.XSSFilterHTMLTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>policy</name>
+            <description>AntiSamy policy path</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>escape</name>
+            <description>Toggle to determine if markup is escaped.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <function>
+        <name>filterHTML</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String filterHTML(java.lang.String, java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>getValidInteger</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String getValidInteger(java.lang.String, java.lang.Integer, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>getValidHref</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String getValidHref(java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>getValidJSToken</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String getValidJSToken(java.lang.String, java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>encodeForHTML</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String encodeForHTML(java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>encodeForHTMLAttr</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String encodeForHTMLAttr(java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>encodeForXML</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String encodeForXML(java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>encodeForXMLAttr</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String encodeForXMLAttr(java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+    <function>
+        <name>encodeForJSString</name>
+        <function-class>com.steeleforge.aem.ironsites.xss.XSSUtil</function-class>
+        <function-signature>java.lang.String encodeForJSString(java.lang.String, javax.servlet.jsp.PageContext)</function-signature>
+    </function>
+</taglib>

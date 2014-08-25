@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:DiaLOG"
+    helpPath="en/cq/current/wcm/default_components.html#Text"
+    title="Kitchen Sink"
+    xtype="tabpanel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <tab1
+            jcr:primaryType="cq:Widget"
+            anchor="100%"
+            title="Kitchen Sink"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <text
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Basic Text"
+                    name="./basictext"
+                    xtype="textfield"/>
+                <tokentext
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Token Text"
+                    fieldDescription="e.g. Hello {name}, how is the weather in {city}?"
+                    name="./tokentext"
+                    xtype="textfield"/>
+                <richtext
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Rich Text"
+                    name="./richtext"
+                    xtype="richtext">
+                    <rtePlugins jcr:primaryType="nt:unstructured">
+                        <misctools jcr:primaryType="nt:unstructured" features="[*]"/>
+                        <links jcr:primaryType="nt:unstructured">
+                            <linkDiaLOGConfig
+                                jcr:primaryType="nt:unstructured"
+                                height="{Long}316">
+                                <linkAttributes jcr:primaryType="cq:WidgetCollection">
+                                    <linkAdvanced
+                                        jcr:primaryType="cq:Widget"
+                                        collapsed="{Boolean}true"
+                                        collapsible="{Boolean}true"
+                                        inputValue="advanced"
+                                        name="./linkdiaLOG/cq:adhocLinkTrackingTab"
+                                        title="Link tracking"
+                                        xtype="diaLOGfieldset">
+                                        <items jcr:primaryType="cq:WidgetCollection">
+                                            <enable
+                                                jcr:primaryType="nt:unstructured"
+                                                attribute="enabletracking"
+                                                fieldDescription="override analytics framework settings"
+                                                fieldLabel="Custom link tracking"
+                                                name="./linkdiaLOG/cq:adhocLinkTrackingEnableTracking"
+                                                xtype="checkbox">
+                                                <listeners
+                                                    jcr:primaryType="nt:unstructured"
+                                                    check="function(component){var dlg=component.findParentByType('rtelinkdiaLOG');dlg.enableSCFields(component.checked);}"/>
+                                            </enable>
+                                            <events
+                                                jcr:primaryType="nt:unstructured"
+                                                attribute="adhocevents"
+                                                fieldDescription="e.g.: event2, event7"
+                                                fieldLabel="Include SiteCatalyst events"
+                                                name="./linkdiaLOG/cq:adhocLinkTrackingEvents"
+                                                xtype="textfield"/>
+                                            <evars
+                                                jcr:primaryType="nt:unstructured"
+                                                attribute="adhocevars"
+                                                fieldDescription="e.g.: eVar1: pagedata.url, prop4: 'const'"
+                                                fieldLabel="Include SiteCatalyst variables"
+                                                name="./linkdiaLOG/cq:adhocLinkTrackingEvars"
+                                                xtype="textfield"/>
+                                        </items>
+                                    </linkAdvanced>
+                                </linkAttributes>
+                            </linkDiaLOGConfig>
+                        </links>
+                    </rtePlugins>
+                </richtext>
+                <isRichTextFlag
+                    jcr:primaryType="cq:Widget"
+                    ignoreData="{Boolean}true"
+                    name="./textIsRich"
+                    value="true"
+                    xtype="hidden"/>
+            </items>
+        </tab1>
+        <tab2
+            jcr:primaryType="cq:Widget"
+            anchor="100%"
+            title="XSS Policy"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <xssPolicy
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="AntiSamy policy"
+                    rootPath="/apps/ironsites/components/kitchensink/xss"
+                    name="./xssPolicy"
+                    xtype="pathfield"/>
+            </items>
+         </tab2>
+        <tab3
+            jcr:primaryType="cq:Widget"
+            anchor="100%"
+            title="Path"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <path
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Path"
+                    rootPath="/content"
+                    name="./path"
+                    xtype="pathfield"/>
+            </items>
+         </tab3>
+    </items>
+</jcr:root>
