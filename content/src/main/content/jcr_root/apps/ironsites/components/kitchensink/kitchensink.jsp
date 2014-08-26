@@ -116,10 +116,7 @@
     <h3>Filters</h3>
     <h5>Include <%=pg.getPath()%> in filter?</h5>
     <b>HidePageFilter "hideInNav":</b>
-    <%=(null != page)? HidePageFilter.HIDE_IN_NAVIGATION_FILTER.includes(pg):""%> 
-    <br/>
-    <b>ShowPageFilter "showInNav":</b>
-    <%=(null != page)? ShowPageFilter.SHOW_IN_NAVIGATION_FILTER.includes(pg):""%> 
+    <%=(null != page)? HidePageFilter.HIDE_IN_NAVIGATION_FILTER.includes(pg):""%>  
 </p>
 
 <h3>Cache Monitor</h3>

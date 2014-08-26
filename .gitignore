@@ -5,6 +5,7 @@ Icon?
 Thumbs.db
 
 # eclipse
+target/
 bin/
 .classpath
 .project
