@@ -57,7 +57,7 @@ public class SetModeTag extends BodyTagSupport {
                 this.wcmmode = WCMMode.fromRequest(WCMUtil.getSlingRequest(pageContext));
                 for (WCMMode candidate : WCMMode.values()) {
                     if (StringUtils.equalsIgnoreCase(getMode(), candidate.toString())) {
-                        candidate.toRequest(WCMUtil.getSlingRequest(pageContext));;
+                        candidate.toRequest(WCMUtil.getSlingRequest(pageContext));
                         break;
                     }
                 }
