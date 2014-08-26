@@ -64,7 +64,7 @@ To deploy to a local publish instance, qualify the environment.
 + [vltpack - vault package maven plugin](https://github.com/adamcin/vltpack-maven-plugin)
 + [net.adamcin.commons.jcr - batch JCR operations](https://github.com/adamcin/net.adamcin.commons.jcr)
 + [pyslinger - support utility for content migration](https://github.com/sevennineteen/pyslinger)
-+ [activecq - samples & patterns](https://github.com/activecq)
++ [AEM commons - additional utilities](https://github.com/Adobe-Consulting-Services/acs-aem-commons)
 
 ## Author
 [site](http://www.steeleforge.com) | [twitter](http://www.twitter.com/davidsteele) |  [gittip](https://www.gittip.com/steeleforge/)

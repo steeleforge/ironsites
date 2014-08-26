@@ -43,7 +43,7 @@
     c.put("token", m.get("tokentext", ""));
     c.put("rich", m.get("richtext", ""));
     
-    Page pg = pageManager.getPage(properties.get("path",""));
+    Page pg = pageManager.getPage(properties.get("path", currentPage.getPath()));
 %>
 <p>
     <h3>Setup</h3>
@@ -114,7 +114,8 @@
 
 <p>
     <h3>Filters</h3>
-    <b>HidePageFilter "hideInNav":</b> 
+    <h5>Include <%=pg.getPath()%> in filter?</h5>
+    <b>HidePageFilter "hideInNav":</b>
     <%=(null != page)? HidePageFilter.HIDE_IN_NAVIGATION_FILTER.includes(pg):""%> 
     <br/>
     <b>ShowPageFilter "showInNav":</b>

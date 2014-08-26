@@ -117,7 +117,7 @@ public class ModeHelperTag extends TagSupport {
             modeMap.put(PROPERTY_DESIGN, WCMMode.DESIGN.equals(mode));
             modeMap.put(PROPERTY_DESIGN.toLowerCase(), WCMMode.DESIGN.equals(mode));
             
-            pageContext.setAttribute(getMapName(), modeMap, PageContext.REQUEST_SCOPE);
+            pageContext.setAttribute(getMapName(), modeMap, PageContext.PAGE_SCOPE);
         }
     }
     

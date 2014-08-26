@@ -29,7 +29,6 @@ package com.steeleforge.aem.ironsites.wcm.taglib;
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
@@ -56,17 +55,12 @@ public class SetModeTag extends BodyTagSupport {
     	try {
 	    	if (StringUtils.isNotBlank(getMode())) {
 	    		this.wcmmode = WCMMode.fromRequest(WCMUtil.getSlingRequest(pageContext));
-	    		WCMMode targetMode = null;
 	    		for (WCMMode candidate : WCMMode.values()) {
 	    			if (StringUtils.equalsIgnoreCase(getMode(), candidate.toString())) {
-	    				targetMode = candidate;
+	    				candidate.toRequest(WCMUtil.getSlingRequest(pageContext));;
 	    				break;
 	    			}
 	    		}
-	    		if (null != targetMode) {
-	    			targetMode.toRequest(WCMUtil.getSlingRequest(pageContext));
-	    			this.wcmmode = targetMode;
-	    		}    		
 	    	}
     	} catch(RuntimeException re) {
     		LOG.debug(re.getMessage());
@@ -92,7 +86,7 @@ public class SetModeTag extends BodyTagSupport {
     @Override
     public int doEndTag() throws JspException {
     	try {
-	    	if (this.wcmmode != null) {
+	    	if (null != this.wcmmode) {
 	    		this.wcmmode.toRequest(WCMUtil.getSlingRequest(pageContext));
 	    	}
     	} catch(RuntimeException re) {

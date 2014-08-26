@@ -38,7 +38,6 @@ import org.osgi.service.component.ComponentContext;
 
 import com.google.common.cache.Cache;
 import com.steeleforge.aem.ironsites.cache.service.SimpleCacheConfiguration;
-import com.steeleforge.aem.ironsites.cache.service.SimpleCacheService;
 
 @Service
 @Component(label = "ironsites - Simple Cache Configuration",
