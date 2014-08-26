@@ -45,28 +45,28 @@ import com.steeleforge.aem.ironsites.wcm.WCMUtil;
  * @author David Steele
  */
 public class SetModeTag extends BodyTagSupport {
-	private static final long serialVersionUID = -3275369346344760726L;
+    private static final long serialVersionUID = -3275369346344760726L;
     private static final Logger LOG = LoggerFactory.getLogger(SetModeTag.class);
     private String mode = null;
     private WCMMode wcmmode = null;
 
     @Override
     public int doStartTag() throws JspException {
-    	try {
-	    	if (StringUtils.isNotBlank(getMode())) {
-	    		this.wcmmode = WCMMode.fromRequest(WCMUtil.getSlingRequest(pageContext));
-	    		for (WCMMode candidate : WCMMode.values()) {
-	    			if (StringUtils.equalsIgnoreCase(getMode(), candidate.toString())) {
-	    				candidate.toRequest(WCMUtil.getSlingRequest(pageContext));;
-	    				break;
-	    			}
-	    		}
-	    	}
-    	} catch(RuntimeException re) {
-    		LOG.debug(re.getMessage());
-    		throw new JspException(re);
-    	}
-    	return EVAL_BODY_BUFFERED;
+        try {
+            if (StringUtils.isNotBlank(getMode())) {
+                this.wcmmode = WCMMode.fromRequest(WCMUtil.getSlingRequest(pageContext));
+                for (WCMMode candidate : WCMMode.values()) {
+                    if (StringUtils.equalsIgnoreCase(getMode(), candidate.toString())) {
+                        candidate.toRequest(WCMUtil.getSlingRequest(pageContext));;
+                        break;
+                    }
+                }
+            }
+        } catch(RuntimeException re) {
+            LOG.debug(re.getMessage());
+            throw new JspException(re);
+        }
+        return EVAL_BODY_BUFFERED;
     }
     
     @Override
@@ -85,22 +85,22 @@ public class SetModeTag extends BodyTagSupport {
 
     @Override
     public int doEndTag() throws JspException {
-    	try {
-	    	if (null != this.wcmmode) {
-	    		this.wcmmode.toRequest(WCMUtil.getSlingRequest(pageContext));
-	    	}
-    	} catch(RuntimeException re) {
-    		LOG.debug(re.getMessage());
-    		throw new JspException(re);
-    	}
-    	return EVAL_PAGE;
+        try {
+            if (null != this.wcmmode) {
+                this.wcmmode.toRequest(WCMUtil.getSlingRequest(pageContext));
+            }
+        } catch(RuntimeException re) {
+            LOG.debug(re.getMessage());
+            throw new JspException(re);
+        }
+        return EVAL_PAGE;
     }
 
-	public String getMode() {
-		return mode;
-	}
+    public String getMode() {
+        return mode;
+    }
 
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
 }

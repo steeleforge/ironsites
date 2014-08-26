@@ -69,11 +69,11 @@ public class I18nHelperTag extends TagSupport {
             
             // make this resource bundle & i18n available as ValueMap for TEI
             pageContext.setAttribute(getMessagesName(),
-            		bundle.adaptTo(ValueMap.class), 
-            		PageContext.PAGE_SCOPE);
+                    bundle.adaptTo(ValueMap.class), 
+                    PageContext.PAGE_SCOPE);
             pageContext.setAttribute(getI18nName(), 
-            		new I18n(bundle), 
-            		PageContext.PAGE_SCOPE);
+                    new I18n(bundle), 
+                    PageContext.PAGE_SCOPE);
 
             // make this resource bundle available for fmt functions
             Config.set(pageContext, "javax.servlet.jsp.jstl.fmt.localizationContext", new LocalizationContext(bundle, getLocale(request)), 1);
@@ -209,10 +209,10 @@ public class I18nHelperTag extends TagSupport {
     public void setMessagesName(String messagesName) {
         this.messagesName = messagesName;
     }
-	/**
-	 * @return
-	 */
-	public String getI18nName() {
+    /**
+     * @return
+     */
+    public String getI18nName() {
         return i18nName;
     }
 

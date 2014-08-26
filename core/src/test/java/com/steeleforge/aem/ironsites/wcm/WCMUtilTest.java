@@ -69,27 +69,27 @@ public class WCMUtilTest {
     }
 
     
-	@Test
-	public void testGetSafePath() {
-		assertEquals("safe path", "/content/foo.html", 
-				WCMUtil.getSafePath("/content/foo"));
-	}
+    @Test
+    public void testGetSafePath() {
+        assertEquals("safe path", "/content/foo.html", 
+                WCMUtil.getSafePath("/content/foo"));
+    }
 
-	@Test
-	public void testGetURLEncoded() {
-		assertEquals("URL encoded", "foo+bar+baz", 
-				WCMUtil.getURLEncoded("foo bar baz"));
-	}
+    @Test
+    public void testGetURLEncoded() {
+        assertEquals("URL encoded", "foo+bar+baz", 
+                WCMUtil.getURLEncoded("foo bar baz"));
+    }
 
-	@Test
-	public void testGetLanguageRoot() {
-		assertEquals("Language Root", "/content/foo/en_us", 
-				WCMUtil.getLanguageRoot("/content/foo/en_us/test"));
-	}
+    @Test
+    public void testGetLanguageRoot() {
+        assertEquals("Language Root", "/content/foo/en_us", 
+                WCMUtil.getLanguageRoot("/content/foo/en_us/test"));
+    }
 
-	@Test
-	public void testGetLanguageRootLaunches() {
-		assertEquals("Launches Language Root", "/content/foo/en_us", 
-				WCMUtil.getLanguageRoot("/content/launches/launchname/content/foo/en_us/test"));
-	}
+    @Test
+    public void testGetLanguageRootLaunches() {
+        assertEquals("Launches Language Root", "/content/foo/en_us", 
+                WCMUtil.getLanguageRoot("/content/launches/launchname/content/foo/en_us/test"));
+    }
 }
