@@ -1,4 +1,4 @@
-# ![ironsites](//raw.githubusercontent.com/steeleforge/ironsites/master/src/site/resources/ironsites_32x32.png "ironsites") ironsites
+# ![ironsites](/src/site/resources/ironsites_32x32.png "ironsites") ironsites
 ##### AEM better
 
 ## Motivation
