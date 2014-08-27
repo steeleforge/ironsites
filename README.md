@@ -16,13 +16,16 @@ To view a maven generated site with javadocs run the following goal then open a 
 > mvn site:run
 
 To deploy to a local author instance can be performed by running the 'install' maven goal. 
-> mvn clean install
+> mvn clean install -P local-author
 
 To deploy to a local publish instance, qualify the environment.
-> mvn clean install -Denv=local-publish
+> mvn clean install -P local-publish
+
+For AEM 5.6.x specifically, a developmer must also include the profile flag for **aem5**. This is to address a dependency in the simple cache sub-module. AEM 6 includes com.google.commons found in guava v15 where previous versions do not. The pom is setup to export this dependency for previous AEM versions. The below is an example command:
+> mvn clean install -P local-author,aem5
 
 ## Dependencies
-+ Adobe Experience Management (CQ) 5.6
++ Adobe Experience Management (CQ) 5.6, 6
 + JDK 1.5/1.6
 + maven3
 + Patience required for exploring alpha-level software

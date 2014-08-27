@@ -133,8 +133,8 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>15.0</version>
-            <scope>compile</scope>
+			<version>${guava.version}</version>
+			<scope>${guava.scope}</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -194,7 +194,7 @@
                             ${project.groupId}.cache.service.impl
                         </Private-Package>
                         <Export-Package>
-                            com.google.common.*,
+                            ${guava.exports}
                             ${project.groupId}.*;version=${project.version}
                         </Export-Package>
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
@@ -220,4 +220,25 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>aem6</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <guava.scope>provided</guava.scope>
+                <guava.version>15.0</guava.version>
+                <guava.exports></guava.exports>
+            </properties>
+        </profile>
+        <profile>
+            <id>aem5</id>
+            <properties>
+                <guava.scope>compile</guava.scope>
+                <guava.version>15.0</guava.version>
+                <guava.exports>com.google.common.*,</guava.exports>
+            </properties>
+        </profile>
+    </profiles>
 </project>

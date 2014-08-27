@@ -1,7 +1,5 @@
 package com.steeleforge.aem.ironsites.i18n;
 
-import com.steeleforge.aem.ironsites.i18n.I18nResourceBundle;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +27,8 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.LoggerFactory;
 
 import com.day.cq.wcm.api.LanguageManager;
-import com.google.gson.Gson;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SlingServlet(label = "ironsites - I18n Resource JSON Servlet",
     description = "JSON serialization of sling:MessageEntry based on sling:esourceType",
@@ -48,7 +47,7 @@ public class I18nResourceJsonServlet extends SlingSafeMethodsServlet {
     private static final long serialVersionUID = -8837830903603951318L;
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(I18nResourceJsonServlet.class);
 
-    private Gson gson = null;
+    private ObjectMapper jacksonOM = null;
     private ComponentContext componentContext = null;
     private final Map<Object, ResourceBundleProvider> providers = new HashMap<Object, ResourceBundleProvider>();
     static final boolean DEFAULT_ENABLED = true;
@@ -83,7 +82,7 @@ public class I18nResourceJsonServlet extends SlingSafeMethodsServlet {
             // utilizing I18nResourceBundle wrapper for locale-specific bundle
             // this is for adaptTo(ValueMap) for serialization.
             // Gson#toJson against ResourceBundle causes stackoverflow.
-            String json = gson.toJson(i18nBundle.adaptTo(ValueMap.class));
+            String json = jacksonOM.writeValueAsString(i18nBundle.adaptTo(ValueMap.class));
 
             byte[] jsonBytes = json.getBytes("UTF-8");
 
@@ -99,7 +98,7 @@ public class I18nResourceJsonServlet extends SlingSafeMethodsServlet {
     @Activate
     protected void activate(ComponentContext context) {
         this.componentContext = context;
-        this.gson = new Gson();
+        this.jacksonOM = new ObjectMapper();
         this.enabled = PropertiesUtil.toBoolean(context.getProperties()
                 .get(PROPERTY_ENABLED), DEFAULT_ENABLED);
     }

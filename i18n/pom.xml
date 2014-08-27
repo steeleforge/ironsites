@@ -130,12 +130,12 @@
             <version>2.2.4</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.4</version>
-            <scope>compile</scope>
-        </dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.3.3</version>
+			<scope>compile</scope>
+		</dependency>
         <!-- ironsites -->
         <dependency>
             <groupId>com.steeleforge.aem</groupId>
@@ -186,6 +186,7 @@
                         </Import-Package>
                         <Private-Package></Private-Package>
                         <Export-Package>
+                            com.fasterxml.jackson.*,
                             ${project.groupId}.*;version=${project.version}
                         </Export-Package>
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
