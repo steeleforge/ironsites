@@ -87,7 +87,7 @@
     <br/>
     <b>Basic Text - getValidHref:</b> ${isx:getValidHref(m.basictext, pageContext)} 
     <br/>
-    <b>Basic Text - getValidInteger:</b> ${isx:getValidInteger(m.basictext, -1, pageContext)} (Invalid)
+    <b>Basic Text - getValidInteger:</b> ${isx:getValidInteger(m.basictext, -1, pageContext)} (Invalid if <i>${m.basictext}</i> is non-numeric; update in dialog)
     <br/>
     <b>Basic Text - getValidJSToken:</b> ${isx:getValidJSToken(m.basictext, "(Invalid)", pageContext)}   
 </p>
