@@ -9,68 +9,8 @@
             jcr:primaryType="cq:Widget"
             anchor="100%"
             title="Text"
-            xtype="panel">
-            <items jcr:primaryType="cq:WidgetCollection">
-                <text
-                    jcr:primaryType="cq:Widget"
-                    hideLabel="{Boolean}true"
-                    name="./text"
-                    xtype="richtext">
-                    <rtePlugins jcr:primaryType="nt:unstructured">
-                        <links jcr:primaryType="nt:unstructured">
-                            <linkDiaLOGConfig
-                                jcr:primaryType="nt:unstructured"
-                                height="{Long}316">
-                                <linkAttributes jcr:primaryType="cq:WidgetCollection">
-                                    <linkAdvanced
-                                        jcr:primaryType="cq:Widget"
-                                        collapsed="{Boolean}true"
-                                        collapsible="{Boolean}true"
-                                        inputValue="advanced"
-                                        name="./linkdiaLOG/cq:adhocLinkTrackingTab"
-                                        title="Link tracking"
-                                        xtype="diaLOGfieldset">
-                                        <items jcr:primaryType="cq:WidgetCollection">
-                                            <enable
-                                                jcr:primaryType="nt:unstructured"
-                                                attribute="enabletracking"
-                                                fieldDescription="override analytics framework settings"
-                                                fieldLabel="Custom link tracking"
-                                                name="./linkdiaLOG/cq:adhocLinkTrackingEnableTracking"
-                                                xtype="checkbox">
-                                                <listeners
-                                                    jcr:primaryType="nt:unstructured"
-                                                    check="function(component){var dlg=component.findParentByType('rtelinkdiaLOG');dlg.enableSCFields(component.checked);}"/>
-                                            </enable>
-                                            <events
-                                                jcr:primaryType="nt:unstructured"
-                                                attribute="adhocevents"
-                                                fieldDescription="e.g.: event2, event7"
-                                                fieldLabel="Include SiteCatalyst events"
-                                                name="./linkdiaLOG/cq:adhocLinkTrackingEvents"
-                                                xtype="textfield"/>
-                                            <evars
-                                                jcr:primaryType="nt:unstructured"
-                                                attribute="adhocevars"
-                                                fieldDescription="e.g.: eVar1: pagedata.url, prop4: 'const'"
-                                                fieldLabel="Include SiteCatalyst variables"
-                                                name="./linkdiaLOG/cq:adhocLinkTrackingEvars"
-                                                xtype="textfield"/>
-                                        </items>
-                                    </linkAdvanced>
-                                </linkAttributes>
-                            </linkDiaLOGConfig>
-                        </links>
-                    </rtePlugins>
-                </text>
-                <isRichTextFlag
-                    jcr:primaryType="cq:Widget"
-                    ignoreData="{Boolean}true"
-                    name="./textIsRich"
-                    value="true"
-                    xtype="hidden"/>
-            </items>
-        </tab1>
+            xtype="cqinclude"
+            path="/libs/foundation/components/text/dialog/items/tab1.infinity.json"/>
         <tab2
             jcr:primaryType="cq:Widget"
             xtype="componentstyles"/>
