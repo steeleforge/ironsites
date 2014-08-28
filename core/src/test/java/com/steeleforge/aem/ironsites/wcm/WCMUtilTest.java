@@ -68,12 +68,6 @@ public class WCMUtilTest {
     public void tearDown() throws Exception {
     }
 
-    
-    @Test
-    public void testGetSafePath() {
-        assertEquals("safe path", "/content/foo.html", 
-                WCMUtil.getSafePath("/content/foo"));
-    }
 
     @Test
     public void testGetURLEncoded() {

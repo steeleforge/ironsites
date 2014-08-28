@@ -39,6 +39,7 @@ import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.foundation.Sitemap;
 import com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter;
+import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 
 /**
@@ -157,15 +158,15 @@ public class IronSitemap extends Sitemap {
             Page page = pageManager.getPage(path);
             // prevent non-existent, invalid, and hidden pages
             if (getFilter().includes(page)) {
-                link = new Link(WCMUtil.getSafePath(page.getPath()), WCMUtil.getPageTitle(page), level);
+                link = new Link(WCMUtil.getExtensionURL(page.getPath(), WCMConstants.HTML), WCMUtil.getPageTitle(page), level);
             }
         } else {
             // support external links with URL=title format
             String[] parts = StringUtils.split(path, "=");
             if (parts.length > 1) {
-                link = new Link(WCMUtil.getSafePath(parts[0]), parts[1], level);
+                link = new Link(WCMUtil.getExtensionURL(parts[0], WCMConstants.HTML), parts[1], level);
             } else {
-                link = new Link(WCMUtil.getSafePath(parts[0]), parts[0], level);
+                link = new Link(WCMUtil.getExtensionURL(parts[0], WCMConstants.HTML), parts[0], level);
             }
         }
         return link;
