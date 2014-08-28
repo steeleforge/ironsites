@@ -30,6 +30,7 @@
 --%><%@page import="com.steeleforge.aem.ironsites.cache.service.SimpleCacheService,
                     com.google.common.cache.Cache,
                     org.apache.commons.lang.StringUtils,
+                    com.steeleforge.aem.ironsites.wcm.WCMUtil,
                     com.steeleforge.aem.ironsites.i18n.I18nUtil,
                     com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter,
                     com.steeleforge.aem.ironsites.wcm.page.filter.ShowPageFilter"%><%
@@ -43,7 +44,8 @@
     c.put("token", m.get("tokentext", ""));
     c.put("rich", m.get("richtext", ""));
     
-    Page pg = pageManager.getPage(properties.get("path", currentPage.getPath()));
+    String path = properties.get("path", currentPage.getPath());
+    Page pg = pageManager.getPage(path);
 %>
 <p>
     <h3>Setup</h3>
@@ -117,6 +119,25 @@
     <h5>Include <%=pg.getPath()%> in filter?</h5>
     <b>HidePageFilter "hideInNav":</b>
     <%=(null != page)? HidePageFilter.HIDE_IN_NAVIGATION_FILTER.includes(pg):""%>  
+</p>
+
+<p>
+    <h3>URL Helpers:</h3>
+    <b>Component i18n:</b>
+    <%=WCMUtil.getResourceURL(sling.getRequest(), resource.getPath(), "i18n", "json")%>
+    <br/>
+    <b>Fully-Qualified Component i18n:</b>
+    <%=WCMUtil.getExternalResourceURL(sling.getRequest(), resource.getPath(), null, "author", "i18n", "json")%>
+    <br/>
+    <b>Page (Internal)</b>
+    <%=WCMUtil.getPageURL(sling.getRequest(), path)%>
+    <br/>
+    <b>Page (External)</b>
+    <%=WCMUtil.getExternalPageURL(sling.getRequest(), path, null, "author")%>
+    <br/>
+    <b>Protocol Relative</b>
+    <%=WCMUtil.getProtocolRelativeURL(WCMUtil.getExternalPageURL(sling.getRequest(), path, null, "author"))%>
+    <br/>
 </p>
 
 <h3>Cache Monitor</h3>

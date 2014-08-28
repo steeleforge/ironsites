@@ -128,8 +128,9 @@ public enum WCMUtil {
      * @param token
      * @param encoding, default to UTF-8
      * @return URL encoded String
+     * @throws UnsupportedEncodingException 
      */
-    public static String getURLEncoded(String token, String encoding) {
+    public static String getURLEncoded(String token, String encoding) throws UnsupportedEncodingException {
         if (StringUtils.isNotEmpty(token)) {
             try {
                 if (StringUtils.isNotEmpty(encoding)) {
@@ -138,6 +139,7 @@ public enum WCMUtil {
                 return URLEncoder.encode(token, CharEncoding.UTF_8);
             } catch(UnsupportedEncodingException uee) {
                 LOG.debug(uee.getMessage());
+                throw uee;
             }
         }
         return token;
@@ -149,8 +151,9 @@ public enum WCMUtil {
      * 
      * @param token
      * @return URL encoded String
+     * @throws UnsupportedEncodingException 
      */
-    public static String getURLEncoded(String token) {
+    public static String getURLEncoded(String token) throws UnsupportedEncodingException {
         return getURLEncoded(token, CharEncoding.UTF_8);
     }
     
@@ -256,38 +259,48 @@ public enum WCMUtil {
     }
     
     /**
-     * JCR Manlged path (i.e. jcr:content to _jcr:contnet)
+     * JCR Manlged path (i.e. jcr:content to _jcr_content)
      * 
      * @param path
      * @return
      */
-    private static String getMangledURL(String path) {
-    	if (StringUtils.isBlank(path)) {
-    		return path;
-    	}
-    	return path.replaceAll("\\/(\\w+):(\\w+)", "/_$1_$2");
+    private static String getMangledPath(String path) {
+        if (StringUtils.isBlank(path)) {
+            return path;
+        }
+        return path.replaceAll("\\/(\\w+):(\\w+)", "/_$1_$2");
     }
     
     /**
-     * Append an extension to a path 
+     * Avoids repeat delimiters
      * 
-     * @param path
-     * @param extension
+     * @param token
+     * @param delimiter
      * @return
      */
-    public static String getExtensionURL(String path, String extension) {
-    	if (StringUtils.isBlank(path)) {
-    		return path;
-    	}
-        String ext = (StringUtils.isNotBlank(extension)) ? extension
-                : WCMConstants.HTML;
-        if (!StringUtils.startsWith(extension, WCMConstants.DELIMITER_EXTENSION)) {
-            ext = WCMConstants.DELIMITER_EXTENSION + ext;
+    private static String getDelimitered(String token, String delimiter) {
+        if (StringUtils.isNotBlank(token) && !StringUtils.startsWith(token, delimiter)) {
+            return delimiter + token;
         }
-        return path + ext;
+        return token;
     }
     
     
+    /**
+     * Given a relative path, this method can resolve mappings, append suffix
+     * mangle JCR paths, XSS cleanse, append selectors, and apply extension(s).
+     * 
+     * @param request
+     * @param path
+     * @param selectors
+     * @param extension
+     * @param suffix
+     * @param extensionSuffix
+     * @param jcrMangle
+     * @param resolverMap
+     * @param sanitize
+     * @return
+     */
     public static String getRelativeURL(SlingHttpServletRequest request, 
             String path,
             String selectors, 
@@ -298,45 +311,40 @@ public enum WCMUtil {
             boolean resolverMap,
             boolean sanitize) {
         String href = path;
-        SlingScriptHelper sling = getSlingScriptHelper(request);
+        SlingScriptHelper sling = WCMUtil.getSlingScriptHelper(request);
         ResourceResolver resolver = request.getResourceResolver();
         
-        // fail fast if path input doesn't appear to be relative
+         // fail fast if path input doesn't appear to be relative
         // nor internal
         if (!StringUtils.startsWith(path, "/") || null == resolver.resolve(path)) {
-        	return href;
+            return href;
         }
         
-        StringBuilder sb = new StringBuilder();
         // check for resolver mapping if requested as parameter
-        String mapped = (resolverMap) ? resolver.map(path) : path;
-        // mangle sling resource paths if necessary (e.g. jcr:content -> _jcr:content)
+        href = (resolverMap) ? resolver.map(path) : path;
+        // mangle sling resource paths if necessary (e.g. jcr:content -> _jcr:content))
         if (jcrMangle) {
-            sb.append(getMangledURL(sb.toString()));
-        } else {
-            sb.append(mapped);
+            href = getMangledPath(href);
         }
-
+        StringBuilder sb = new StringBuilder(href);
+                
+        // selectors, if provided
+        if (StringUtils.isNotBlank(selectors)) {
+            sb.append(getDelimitered(selectors, WCMConstants.DELIMITER_SELECTOR));
+        }
+        
         // base resource path extension is presumably ".html" by default
         String ext = (StringUtils.isNotBlank(extension)) ? extension
                 : WCMConstants.HTML;
-        sb.append(getExtensionURL(sb.toString(), ext));
-        // selectors, if provided
-        if (StringUtils.isNotBlank(selectors)) {
-            if (!StringUtils.startsWith(selectors, WCMConstants.DELIMITER_SELECTOR)) {
-                sb.append(WCMConstants.DELIMITER_SELECTOR);
-            }
-            sb.append(selectors);
-        }
-        sb.append(ext);
-
+        sb.append(getDelimitered(ext, 
+                WCMConstants.DELIMITER_EXTENSION));
+        
         // suffix (and extension) if provided
         if (StringUtils.isNotBlank(suffix)) {
-            if (!StringUtils.startsWith(suffix, WCMConstants.DELIMITER_SUFFIX)) {
-                sb.append(WCMConstants.DELIMITER_SUFFIX);
+            sb.append(getDelimitered(suffix, WCMConstants.DELIMITER_SUFFIX));
+            if (extensionSuffix) {
+                sb.append(ext);
             }
-            sb.append(suffix);
-            sb.append(ext);
         }
         href = sb.toString();
         if (sanitize) {
@@ -352,35 +360,32 @@ public enum WCMUtil {
      * including protocol specification and environment specific domains
      * 
      * @param request
+     * @param path relative path
      * @param protocol http/https
      * @param domain domain or Externalizer profile
-     * @param path relative path
      * @param sanitize with XSS API
      * @return fully qualified URL
      */
     public static String getExternalURL(SlingHttpServletRequest request,
-    		String protocol,
-    		String domain,
-    		String path,
-    		boolean sanitize) {
-    	String href = StringUtils.substringAfter(path, WCMConstants.DELIMITER_PATH);
-    	
+            String relativePath,
+            String protocol,
+            String domain,
+            boolean sanitize) {
+        String href = relativePath;
         SlingScriptHelper sling = getSlingScriptHelper(request);
         ResourceResolver resolver = request.getResourceResolver();
         
         Externalizer externalizer = sling.getService(Externalizer.class);
-        if (StringUtils.isNotBlank(domain)) {
-        	if (StringUtils.startsWith(domain, WCMConstants.HTTP)) {
-        		href = externalizer.externalLink(resolver, protocol, domain, href);
-        	} else {
-        		href = externalizer.externalLink(resolver, domain, href);
-        	}
+        if (StringUtils.isNotBlank(protocol)) {
+            href = externalizer.externalLink(resolver, domain, protocol, relativePath);
+        } else {
+            href = externalizer.externalLink(resolver, domain, relativePath);
         }
         // relative path may already be sanitized through xss
         if (sanitize) {
             XSSAPI xss = (XSSAPI) sling.getService(XSSAPI.class);
             xss = xss.getRequestSpecificAPI(request);
-        	return xss.getValidHref(href);
+            return xss.getValidHref(href);
         }
         return href;
     }
@@ -390,16 +395,16 @@ public enum WCMUtil {
      * including protocol specification and environment specific domains
      * 
      * @param request
+     * @param path relative path
      * @param protocol http/https
      * @param domain domain:port or Externalizer profile, both with port
-     * @param path relative path
      * @return fully qualified URL
      */
     public static String getExternalURL(SlingHttpServletRequest request,
-    		String protocol,
-    		String domain,
-    		String path) {
-    	return getExternalURL(request, protocol, domain, path, true);
+            String relativePath,
+            String protocol,
+            String domain) {
+        return getExternalURL(request, relativePath, protocol, domain, true);
     }
 
     
@@ -417,29 +422,30 @@ public enum WCMUtil {
             String path,
             String selectors, 
             String extension) {
-    	return getRelativeURL(request, path, selectors, extension, null, true, true, true, true);
+        return getRelativeURL(request, path, selectors, extension, null, true, true, true, true);
     }
     
     /**
      * Utility for common case for externalized resource paths
      * 
      * @param request
+     * 
      * @param protocol
      * @param domain
      * @param path
      * @return
      */
     public static String getExternalResourceURL(SlingHttpServletRequest request, 
-            String protocol,
-            String domain, 
             String path,
+            String protocol,
+            String domain,
             String selectors,
             String extension) {
-    	return getExternalURL(request, 
-    			protocol, 
-    			domain, 
-    			getResourceURL(request, path, selectors, extension), 
-    			true);
+        return getExternalURL(request, 
+                getResourceURL(request, path, selectors, extension), 
+                protocol, 
+                domain, 
+                true);
     }
     
     /**
@@ -454,13 +460,13 @@ public enum WCMUtil {
      */
     public static String getPageURL(SlingHttpServletRequest request, 
             String path) {
-    	Page page = getPage(request, path);
-    	if (null == page) {
-    		return path;
-    	}
-    	return getRelativeURL(request, 
-    			page.getPath(), 
-    			null, WCMConstants.HTML, null, true, true, true, true);
+        Page page = getPage(request, path);
+        if (null == page) {
+            return path;
+        }
+        return getRelativeURL(request, 
+                page.getPath(), 
+                null, WCMConstants.HTML, null, true, true, true, true);
     }
     
     /**
@@ -473,14 +479,14 @@ public enum WCMUtil {
      * @return
      */
     public static String getExternalPageURL(SlingHttpServletRequest request, 
+            String path,
             String protocol,
-            String domain,
-            String path) {
-    	return getExternalURL(request, 
-    			protocol, 
-    			domain, 
-    			getPageURL(request, path), 
-    			true);
+            String domain) {
+        return getExternalURL(request, 
+                getPageURL(request, path), 
+                protocol, 
+                domain, 
+                true);
     }
 
     /**
@@ -490,11 +496,11 @@ public enum WCMUtil {
      * @return
      */
     public static String getSecureURL(String fullyQualifiedURL) {
-    	if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.HTTPS)) {
-    		return WCMConstants.HTTPS + WCMConstants.DELIMITER_PORT + 
-    				StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
-    	}
-    	return fullyQualifiedURL;
+        if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.HTTPS)) {
+            return WCMConstants.HTTPS + WCMConstants.DELIMITER_PORT + 
+                    StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
+        }
+        return fullyQualifiedURL;
     }
     
     /**
@@ -504,9 +510,9 @@ public enum WCMUtil {
      * @return
      */
     public static String getProtocolRelativeURL(String fullyQualifiedURL) {
-    	if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE)) {
-    		return WCMConstants.PROTOCOL_RELATIVE + StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
-    	}
-    	return fullyQualifiedURL;
+        if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE)) {
+            return WCMConstants.PROTOCOL_RELATIVE + StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
+        }
+        return fullyQualifiedURL;
     }
 }

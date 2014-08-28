@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-	This is free and unencumbered software released into the public domain.
-	
-	Anyone is free to copy, modify, publish, use, compile, sell, or
-	distribute this software, either in source code form or as a compiled
-	binary, for any purpose, commercial or non-commercial, and by any
-	means.
-	
-	In jurisdictions that recognize copyright laws, the author or authors
-	of this software dedicate any and all copyright interest in the
-	software to the public domain. We make this dedication for the benefit
-	of the public at large and to the detriment of our heirs and
-	successors. We intend this dedication to be an overt act of
-	relinquishment in perpetuity of all present and future rights to this
-	software under copyright law.
-	
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-	IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-	OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-	OTHER DEALINGS IN THE SOFTWARE.
-	
-	For more information, please refer to <http://unlicense.org/>
+    This is free and unencumbered software released into the public domain.
+    
+    Anyone is free to copy, modify, publish, use, compile, sell, or
+    distribute this software, either in source code form or as a compiled
+    binary, for any purpose, commercial or non-commercial, and by any
+    means.
+    
+    In jurisdictions that recognize copyright laws, the author or authors
+    of this software dedicate any and all copyright interest in the
+    software to the public domain. We make this dedication for the benefit
+    of the public at large and to the detriment of our heirs and
+    successors. We intend this dedication to be an overt act of
+    relinquishment in perpetuity of all present and future rights to this
+    software under copyright law.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+    
+    For more information, please refer to <http://unlicense.org/>
  -->
 <document>
-	<properties>
-		<title>Usage - XSS Helpers</title>
-	</properties>
-	<body>
-		<section name="What/Why?">
-			<dl>
-				<dt>What is the motivation for these features?</dt>
-				<dd>In my professional work, I've had to parse/filter HTML
-					in all sorts of one-off situations. Sometimes it is to
-					prevent extra-clever authors from breaking a page/component
-					or even just enforcing consistency. The other scenario
-					is to prevent malicious behavior / attack vectors. Luckily,
-					<a href="http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html" target="_blank">XSSAPI</a>
-					and <a href="http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSFilter.html" target="_blank">XSSFilter</a>
-					do this work for us in CQ 5.5+. The features below are
-					wrappers/conveniences around these objects/services.
-				</dd>
-				
-				<dt>What does this provide that isn't out-of-box?</dt>
-				<dd>ironsites provides an idiom to utilize CQs XSSFilter
-					to filter HTML based on rules in anti-samy policy XML files
-					which can be managed in the JCR. Additionally, 
-					&lt;cq:defineObjects&gt; provides access to an instance
-					<a href="http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html" target="_blank">XSSAPI</a> 
-					as a variable named xssAPI by default which can be used
-					in JSP scriptlets. The ironsites XSS taglib exposes the 
-					very same methods as static EL functions with the minor 
-					concession of providing pageContext as the last parameter.
-					Scriptlet vs EL is a matter of preference and developers
-					deserve to compose functions in ways that make sense to
-					their problem -- sometimes this means EL functions.</dd>
-				
-				<dt>What are some limitations?</dt>
-				<dd>CQ does appear to cache anti-samy policy files but the system
-					impact of having hundreds or more policy files is untested.
-					XSSFilter assumes sane markup and is less forgiving than a
-					browser would be for unclosed tags and similar mistakes.</dd>
-					
-				<dt>Where are the tests?</dt>
-				<dd>Working on it...</dd>
-			</dl>
-		</section>
-		<section name="XSS Helpers">
-			<a href="https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-(XSS)-Helpers">Usage</a>
-		</section>
-	</body>
+    <properties>
+        <title>Usage - XSS Helpers</title>
+    </properties>
+    <body>
+        <section name="What/Why?">
+            <dl>
+                <dt>What is the motivation for these features?</dt>
+                <dd>In my professional work, I've had to parse/filter HTML
+                    in all sorts of one-off situations. Sometimes it is to
+                    prevent extra-clever authors from breaking a page/component
+                    or even just enforcing consistency. The other scenario
+                    is to prevent malicious behavior / attack vectors. Luckily,
+                    <a href="http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html" target="_blank">XSSAPI</a>
+                    and <a href="http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSFilter.html" target="_blank">XSSFilter</a>
+                    do this work for us in CQ 5.5+. The features below are
+                    wrappers/conveniences around these objects/services.
+                </dd>
+                
+                <dt>What does this provide that isn't out-of-box?</dt>
+                <dd>ironsites provides an idiom to utilize CQs XSSFilter
+                    to filter HTML based on rules in anti-samy policy XML files
+                    which can be managed in the JCR. Additionally, 
+                    &lt;cq:defineObjects&gt; provides access to an instance
+                    <a href="http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html" target="_blank">XSSAPI</a> 
+                    as a variable named xssAPI by default which can be used
+                    in JSP scriptlets. The ironsites XSS taglib exposes the 
+                    very same methods as static EL functions with the minor 
+                    concession of providing pageContext as the last parameter.
+                    Scriptlet vs EL is a matter of preference and developers
+                    deserve to compose functions in ways that make sense to
+                    their problem -- sometimes this means EL functions.</dd>
+                
+                <dt>What are some limitations?</dt>
+                <dd>CQ does appear to cache anti-samy policy files but the system
+                    impact of having hundreds or more policy files is untested.
+                    XSSFilter assumes sane markup and is less forgiving than a
+                    browser would be for unclosed tags and similar mistakes.</dd>
+                    
+                <dt>Where are the tests?</dt>
+                <dd>Working on it...</dd>
+            </dl>
+        </section>
+        <section name="XSS Helpers">
+            <a href="https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-(XSS)-Helpers">Usage</a>
+        </section>
+    </body>
 </document>

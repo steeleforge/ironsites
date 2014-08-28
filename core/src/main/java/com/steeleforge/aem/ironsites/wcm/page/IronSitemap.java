@@ -33,14 +33,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.sling.api.SlingHttpServletRequest;
 
 import com.day.cq.commons.Filter;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.foundation.Sitemap;
-import com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter;
-import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
+import com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter;
 
 /**
  * IronSitemap builds on the Sitemap pattern and can be used to generate
@@ -51,6 +51,7 @@ import com.steeleforge.aem.ironsites.wcm.WCMUtil;
  * @author David Steele
  */
 public class IronSitemap extends Sitemap {
+    private SlingHttpServletRequest request = null;
     private Map<Integer, List<String>> paths = null;
     private List<String> inclusions = null;
     private List<String> exclusions = null;
@@ -58,15 +59,18 @@ public class IronSitemap extends Sitemap {
     private static final int ROOT_LEVEL = 0;
 
     /**
-     * Constructor takes a root, page filter, included paths, excluded paths
+     * Constructor takes a sling request, root, page filter, included paths, 
+     * and excluded paths
      * 
+     * @param request
      * @param root
      * @param filter
      * @param inclusions
      * @param exclusions
      */
-    public IronSitemap(Page root, Filter<Page> filter, List<String> inclusions, List<String> exclusions) {
+    public IronSitemap(SlingHttpServletRequest request, Page root, Filter<Page> filter, List<String> inclusions, List<String> exclusions) {
         super(null);
+        this.request = request;
         this.filter = filter;
         this.inclusions = inclusions;
         this.exclusions = exclusions;
@@ -80,11 +84,12 @@ public class IronSitemap extends Sitemap {
     /**
      * This is not the preferred constructor but should be supported.
      * Lazy accessors make this relatively null-safe
+     * Do.Not.Use.
      * 
      * @param root
      */
     public IronSitemap(Page root) {
-        this(root, null, null, null);
+        this(null, root, null, null, null);
     }
 
     /**
@@ -158,15 +163,15 @@ public class IronSitemap extends Sitemap {
             Page page = pageManager.getPage(path);
             // prevent non-existent, invalid, and hidden pages
             if (getFilter().includes(page)) {
-                link = new Link(WCMUtil.getExtensionURL(page.getPath(), WCMConstants.HTML), WCMUtil.getPageTitle(page), level);
+                link = new Link(WCMUtil.getPageURL(request, page.getPath()), WCMUtil.getPageTitle(page), level);
             }
         } else {
             // support external links with URL=title format
             String[] parts = StringUtils.split(path, "=");
             if (parts.length > 1) {
-                link = new Link(WCMUtil.getExtensionURL(parts[0], WCMConstants.HTML), parts[1], level);
+                link = new Link(WCMUtil.getExternalURL(request, parts[0], null, null), parts[1], level);
             } else {
-                link = new Link(WCMUtil.getExtensionURL(parts[0], WCMConstants.HTML), parts[0], level);
+                link = new Link(WCMUtil.getExternalURL(request, parts[0], null, null), parts[0], level);
             }
         }
         return link;

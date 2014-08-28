@@ -108,12 +108,6 @@
         </dependency>
         <dependency>
             <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.jmx</artifactId>
-            <version>0.1.6</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite</groupId>
             <artifactId>com.adobe.granite.xssprotection</artifactId>
             <version>5.5.22</version>
             <scope>provided</scope>
@@ -145,14 +139,8 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>15.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.4</version>
-            <scope>compile</scope>
+            <version>${guava.version}</version>
+            <scope>${guava.scope}</scope>
         </dependency>
     </dependencies>
 
@@ -221,4 +209,25 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>aem6</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <guava.scope>provided</guava.scope>
+                <guava.version>15.0</guava.version>
+                <guava.exports></guava.exports>
+            </properties>
+        </profile>
+        <profile>
+            <id>aem5</id>
+            <properties>
+                <guava.scope>compile</guava.scope>
+                <guava.version>15.0</guava.version>
+                <guava.exports>com.google.common.*,</guava.exports>
+            </properties>
+        </profile>
+    </profiles>
 </project>

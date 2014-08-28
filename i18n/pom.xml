@@ -102,12 +102,6 @@
         </dependency>
         <dependency>
             <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.xssprotection</artifactId>
-            <version>5.5.22</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite</groupId>
             <artifactId>com.adobe.granite.i18n</artifactId>
             <version>5.5.8</version>
             <scope>provided</scope>
@@ -130,12 +124,12 @@
             <version>2.2.4</version>
             <scope>provided</scope>
         </dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.3.3</version>
-			<scope>compile</scope>
-		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.3.3</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- ironsites -->
         <dependency>
             <groupId>com.steeleforge.aem</groupId>

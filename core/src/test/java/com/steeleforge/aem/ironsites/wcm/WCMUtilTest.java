@@ -28,6 +28,8 @@ package com.steeleforge.aem.ironsites.wcm;
 
 import static org.junit.Assert.*;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -70,7 +72,7 @@ public class WCMUtilTest {
 
 
     @Test
-    public void testGetURLEncoded() {
+    public void testGetURLEncoded() throws UnsupportedEncodingException {
         assertEquals("URL encoded", "foo+bar+baz", 
                 WCMUtil.getURLEncoded("foo bar baz"));
     }

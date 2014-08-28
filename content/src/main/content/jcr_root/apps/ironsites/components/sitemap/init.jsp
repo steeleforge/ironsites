@@ -44,7 +44,8 @@
     }
     
     Page root = slingRequest.getResourceResolver().adaptTo(PageManager.class).getPage(path);
-    IronSitemap sitemap = new IronSitemap(root, 
+    IronSitemap sitemap = new IronSitemap(slingRequest,
+    		root, 
             new HidePageFilter(hide), 
             Arrays.asList(inclusions), 
             Arrays.asList(exclusions));

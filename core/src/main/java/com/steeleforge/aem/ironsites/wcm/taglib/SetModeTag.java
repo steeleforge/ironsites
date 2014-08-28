@@ -53,13 +53,14 @@ public class SetModeTag extends BodyTagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
-            if (StringUtils.isNotBlank(getMode())) {
-                this.wcmmode = WCMMode.fromRequest(WCMUtil.getSlingRequest(pageContext));
-                for (WCMMode candidate : WCMMode.values()) {
-                    if (StringUtils.equalsIgnoreCase(getMode(), candidate.toString())) {
-                        candidate.toRequest(WCMUtil.getSlingRequest(pageContext));
-                        break;
-                    }
+            if (StringUtils.isBlank(getMode())) {
+                return EVAL_BODY_BUFFERED;
+            }
+            this.wcmmode = WCMMode.fromRequest(WCMUtil.getSlingRequest(pageContext));
+            for (WCMMode candidate : WCMMode.values()) {
+                if (StringUtils.equalsIgnoreCase(getMode(), candidate.toString())) {
+                    candidate.toRequest(WCMUtil.getSlingRequest(pageContext));
+                    break;
                 }
             }
         } catch(RuntimeException re) {

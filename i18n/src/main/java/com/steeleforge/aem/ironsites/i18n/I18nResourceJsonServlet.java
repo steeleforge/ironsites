@@ -25,6 +25,7 @@ import org.apache.sling.commons.osgi.ServiceUtil;
 import org.apache.sling.i18n.ResourceBundleProvider;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import com.day.cq.wcm.api.LanguageManager;
 
@@ -45,7 +46,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class I18nResourceJsonServlet extends SlingSafeMethodsServlet {
 
     private static final long serialVersionUID = -8837830903603951318L;
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(I18nResourceJsonServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(I18nResourceJsonServlet.class);
 
     private ObjectMapper jacksonOM = null;
     private ComponentContext componentContext = null;
