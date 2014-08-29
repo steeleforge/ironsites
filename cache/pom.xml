@@ -104,6 +104,12 @@
             <version>${guava.version}</version>
             <scope>${guava.scope}</scope>
         </dependency>
+        <dependency>
+            <groupId>com.adobe.granite</groupId>
+            <artifactId>com.adobe.granite.jmx</artifactId>
+            <version>0.2.14</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- ironsites -->
         <dependency>
             <groupId>com.steeleforge.aem</groupId>

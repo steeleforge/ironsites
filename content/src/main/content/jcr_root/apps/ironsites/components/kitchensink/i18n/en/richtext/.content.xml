@@ -2,4 +2,4 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
     jcr:primaryType="sling:MessageEntry"
     sling:key="richtext"
-    sling:message="Hello {name}, how is the weather in {city}?"/>
+    sling:message="Hello &lt;b&gt;{name}&lt;/b&gt;, how is the weather in &lt;b&gt;{city}&lt;/b&gt;?"/>

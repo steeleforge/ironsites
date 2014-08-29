@@ -202,12 +202,6 @@
                 <scope>provided</scope>
                 <version>2.5-0001</version>
             </dependency>
-            <dependency>
-                <groupId>com.day.cq</groupId>
-                <artifactId>cq-commons</artifactId>
-                <scope>provided</scope>
-                <version>5.6.2</version>
-            </dependency>
             <dependency><!-- fixes junit slf4j transitive issue -->
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
