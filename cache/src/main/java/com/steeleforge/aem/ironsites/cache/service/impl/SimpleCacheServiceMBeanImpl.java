@@ -70,7 +70,7 @@ public class SimpleCacheServiceMBeanImpl extends AnnotatedStandardMBean implemen
     
     @Override
     public void clearCache(String cacheName) {
-        cacheService.getCache(cacheName).invalidateAll();
+        cacheService.clearCache(cacheName);
     }
 
 }

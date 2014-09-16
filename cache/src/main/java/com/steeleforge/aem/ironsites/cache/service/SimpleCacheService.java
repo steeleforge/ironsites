@@ -83,4 +83,11 @@ public interface SimpleCacheService {
      * @see <a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheStats.html">CacheStats</a>
      */
     public CacheStats getStats(String name);
+    
+    /**
+     * Invalidate and destroy cache by name.
+     * 
+     * @param name
+     */
+    public void clearCache(String name);
 }

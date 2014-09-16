@@ -51,6 +51,8 @@ public class SimpleCacheConfigurationImpl implements SimpleCacheConfiguration {
     Cache<Object, Object> cache = null;
 
     static final String DEFAULT_CACHE_NAME = "Cache_";
+    public static final String DEFAULT_CACHE_SPECFICIATIONS = "";
+    public static final boolean DEFAULT_CACHE_STATS_ENABLED = true;
     
     @Property(label = "Cache Name", description = "Name of cache")
     static final String PROPERTY_CACHE_NAME = "name";
@@ -63,7 +65,7 @@ public class SimpleCacheConfigurationImpl implements SimpleCacheConfiguration {
 
     @Property(label = "Enable Cache Statistics", 
             description = "Enable statistics",
-            boolValue = SimpleCacheServiceImpl.DEFAULT_CACHE_STATS_ENABLED)
+            boolValue = DEFAULT_CACHE_STATS_ENABLED)
     static final String PROPERTY_CACHE_STATS_ENABLED = "statsEnabled";
     protected Boolean statsEnabled;
     
@@ -71,8 +73,8 @@ public class SimpleCacheConfigurationImpl implements SimpleCacheConfiguration {
     protected void activate(ComponentContext ctx) {
         Dictionary<?,?> props = ctx.getProperties();
         this.name = PropertiesUtil.toString(props.get(PROPERTY_CACHE_NAME), DEFAULT_CACHE_NAME + ctx.getComponentInstance().toString());
-        this.specs = PropertiesUtil.toString(props.get(PROPERTY_CACHE_SPECFICIATIONS), SimpleCacheServiceImpl.DEFAULT_CACHE_SPECFICIATIONS);
-        this.statsEnabled = PropertiesUtil.toBoolean(props.get(PROPERTY_CACHE_STATS_ENABLED), SimpleCacheServiceImpl.DEFAULT_CACHE_STATS_ENABLED);
+        this.specs = PropertiesUtil.toString(props.get(PROPERTY_CACHE_SPECFICIATIONS), DEFAULT_CACHE_SPECFICIATIONS);
+        this.statsEnabled = PropertiesUtil.toBoolean(props.get(PROPERTY_CACHE_STATS_ENABLED), DEFAULT_CACHE_STATS_ENABLED);
         this.componentContext = ctx;
     }
 
@@ -81,10 +83,16 @@ public class SimpleCacheConfigurationImpl implements SimpleCacheConfiguration {
     }
 
     public String getSpecs() {
+        if (null == this.specs) {
+            return DEFAULT_CACHE_SPECFICIATIONS;
+        }
         return this.specs;
     }
 
     public Boolean isRecordStats() {
+        if (null == this.statsEnabled) {
+            return DEFAULT_CACHE_STATS_ENABLED;
+        }
         return this.statsEnabled;
     }
 }

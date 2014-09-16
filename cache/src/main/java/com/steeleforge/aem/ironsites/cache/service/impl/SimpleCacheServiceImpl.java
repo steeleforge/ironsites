@@ -28,6 +28,7 @@ package com.steeleforge.aem.ironsites.cache.service.impl;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
@@ -69,14 +70,25 @@ import com.steeleforge.aem.ironsites.cache.service.SimpleCacheService;
 public class SimpleCacheServiceImpl implements SimpleCacheService {
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger(SimpleCacheServiceImpl.class);
-    public static final String DEFAULT_CACHE_SPECFICIATIONS = "";
-    public static final boolean DEFAULT_CACHE_STATS_ENABLED = true;
 
     ComponentContext componentContext;
     private Cache<String, Cache<Object, Object>> caches;
+    private Map<String, SimpleCacheConfiguration> configs;
 
     public Cache<Object, Object> getCache(String name) {
-        return getCache(name, StringUtils.EMPTY, DEFAULT_CACHE_STATS_ENABLED);
+        if (StringUtils.isBlank(name)) {
+            return null;
+        }
+        Cache<Object, Object> cache = caches.getIfPresent(name);
+        if (null == cache) {
+            if (configs.containsKey(name)) {
+                cache = getCache(name, configs.get(name).getSpecs(), configs.get(name).isRecordStats());
+            } else {
+                cache = getCache(name, SimpleCacheConfigurationImpl.DEFAULT_CACHE_SPECFICIATIONS, 
+                        SimpleCacheConfigurationImpl.DEFAULT_CACHE_STATS_ENABLED);
+            }
+        }
+        return cache;
     }
 
     public Cache<Object, Object> getCache(String name, String spec, boolean stats) {
@@ -87,7 +99,7 @@ public class SimpleCacheServiceImpl implements SimpleCacheService {
         if (null != cache) {
             return cache;
         }
-        cache = buildCache(spec, stats);
+        cache = buildCache(spec, stats);   
         caches.put(name, cache);
         return cache;
     }
@@ -103,7 +115,15 @@ public class SimpleCacheServiceImpl implements SimpleCacheService {
     public Set<String> getCaches() {
         return caches.asMap().keySet();
     }
-
+    
+    public void clearCache(String name) {
+        Cache<Object, Object> cache = caches.getIfPresent(name);
+        if (null != cache) {
+            cache.invalidateAll();
+            caches.invalidate(name);
+        }
+    }
+    
     private Cache<Object, Object> buildCache(String spec, boolean stats) {
         CacheBuilder<Object, Object> builder = CacheBuilder.from(spec);
         if (stats) {
@@ -116,6 +136,7 @@ public class SimpleCacheServiceImpl implements SimpleCacheService {
     protected void activate(ComponentContext ctx) {
         this.componentContext = ctx;
         this.caches = CacheBuilder.newBuilder().build();
+        this.configs = new ConcurrentHashMap<String, SimpleCacheConfiguration>();
     }
 
     @Deactivate
@@ -130,6 +151,7 @@ public class SimpleCacheServiceImpl implements SimpleCacheService {
         SimpleCacheConfiguration config;
         if (svc instanceof SimpleCacheConfiguration) {
             config = (SimpleCacheConfiguration)svc;
+            configs.put(config.getName(), config);
             caches.put(config.getName(), buildCache(config.getSpecs(), config.isRecordStats()));
         }
     }
