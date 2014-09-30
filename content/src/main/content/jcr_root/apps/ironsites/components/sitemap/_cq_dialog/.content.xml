@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Ironsites Sitemap"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/container">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <path
+                        jcr:primaryType="nt:unstructured"
+                        fieldLabel="Root Path"
+                        name="./path"
+                        rootPath="/content"
+                        sling:resourceType="granite/ui/components/foundation/form/pathbrowser"/>
+                    <inclusions
+                        jcr:primaryType="nt:unstructured"
+                        fieldDescription="Click the '+' to add a new page &lt;br/&gt; (supports {url}={title} format for external links)"
+                        fieldLabel="Inclusions"
+                        class="full-width"
+                        sling:resourceType="granite/ui/components/foundation/form/multifield">
+                        <field
+                            jcr:primaryType="nt:unstructured"                           
+                            name="./inclusions"
+                            rootPath="/content"
+                            sling:resourceType="granite/ui/components/foundation/form/pathbrowser"/>
+                    </inclusions>
+                    <exclusions
+                        jcr:primaryType="nt:unstructured"
+                        fieldDescription="Click the '+' to add a new page &lt;br/&gt; (takes precedence over inclusions)."
+                        fieldLabel="Exclusions"
+                        class="full-width"
+                        sling:resourceType="granite/ui/components/foundation/form/multifield">
+                        <field
+                            jcr:primaryType="nt:unstructured"                            
+                            name="./exclusions"
+                            rootPath="/content"
+                            sling:resourceType="granite/ui/components/foundation/form/pathbrowser"/>
+                    </exclusions>
+                    <target
+                        jcr:primaryType="nt:unstructured"
+                        fieldLabel="Link Target"
+                        fieldDescription="(e.g. _blank)"
+                        name="./target"
+                        sling:resourceType="granite/ui/components/foundation/form/textfield"/>
+                    <hideProperty
+                        jcr:primaryType="nt:unstructured"
+                        fieldLabel="'Hide' Page Property"
+                        fieldDescription="Default page property used to hide pages from Sitemap (e.g. hideInNav)"
+                        name="./hideProperty"
+                        sling:resourceType="granite/ui/components/foundation/form/textfield"/>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>

@@ -1,4 +1,4 @@
-<%--
+<!--/*
     This is free and unencumbered software released into the public domain.
     
     Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -27,16 +27,9 @@
     
     ironsites Sitemap variation of General Sitemap
     
---%><%@page import="com.steeleforge.aem.ironsites.wcm.page.IronSitemap,
-                    com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter,
-                    com.day.cq.wcm.api.Page,
-                    com.day.cq.wcm.api.PageManager"%><%
-%><%@include file="/apps/ironsites/common/global.jsp"%><%
-%><%@include file="init.jsp"%><%
-%><c:if test="${not empty sitemap}">
-    <ul>
-    <c:forEach var="link" items="${sitemap.links}">
-        <li><a href="${link.path}" target="${properties['target']}">${link.title}</a></li>
-    </c:forEach>
-    </ul>
-</c:if>
+*/-->
+<div data-sly-use.sitemap="com.steeleforge.aem.ironsites.wcm.page.IronSitemapUse">
+	<ul data-sly-test="${sitemap}" data-sly-list="${sitemap.links}">
+	   <li><a href="${item.path}" target="${properties.target}">${item.title}</a></li>
+	</ul>
+</div>

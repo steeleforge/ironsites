@@ -32,19 +32,16 @@
     <body>
         <section name="Dependencies">
             <ul>
-                <li>AEM (a.k.a. Adobe CQ) 5.6 or 6</li>
+                <li>AEM (a.k.a. Adobe CQ) 6</li>
                 <li>maven3</li>
             </ul>
-            Minor modifications to version numbers in the POM should make most
-            if-not-all features available in CQ 5.5. However, let's try to keep
-            moving forward. 5.6 and 6 are out and ready to party.
+            AEM 5.6.1 support is found in 1.0-SNAPSHOT
         </section>
         <section name="AEM Interop">
-            As mentioned in the README, there are AEM6 and AEM5 specific maven profiles 
-            which correct some dependency and bundle exports. Some libraries not found
-            in AEM 5 are provided out-of-box in AEM 6.
-            <blockquote>mvn clean install -P local-author,aem5</blockquote>
-            The above should be used for a localhost author instance of CQ 5.6 running on 4502. 
+            As mentioned in the README, there are AEM6 is supported and AEM5  is not due 
+            to AEM6/sightly support. However, the profile will remain to deploy to 5.6
+            but the bundle is not likely to start correctly due to missing provided deps.
+            <blockquote>mvn clean install -P author,aem5</blockquote>
             AEM 6 is the default active profile assumption.           
         </section>
         <section name="Motivation">

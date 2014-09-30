@@ -46,7 +46,6 @@ import com.adobe.cq.wcm.launches.utils.LaunchUtils;
 import com.adobe.granite.xss.XSSAPI;
 import com.day.cq.commons.Externalizer;
 import com.day.cq.commons.LanguageUtil;
-import com.day.cq.wcm.api.LanguageManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.google.common.base.Charsets;
@@ -250,12 +249,12 @@ public enum WCMUtil {
      * @return
      */
     public static Locale getLocale(SlingHttpServletRequest request) {
-        SlingScriptHelper scriptHelper = WCMUtil.getSlingScriptHelper(request);
-        LanguageManager languageManager = (LanguageManager)scriptHelper.getService(LanguageManager.class);
-        if (null == languageManager) {
-            return null;
+        PageManager pageManager = (PageManager)request.getResourceResolver().adaptTo(PageManager.class);
+        if (null == pageManager) {
+            return Locale.getDefault();
         }
-        return languageManager.getLanguage(request.getResource());
+        Page page = pageManager.getContainingPage(request.getResource());
+        return page.getLanguage(false);
     }
     
     /**

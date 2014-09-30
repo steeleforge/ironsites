@@ -1,4 +1,4 @@
-<%--
+<!--/*
     This is free and unencumbered software released into the public domain.
     
     Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -25,18 +25,16 @@
     For more information, please refer to <http://unlicense.org/>
     ***************************************************************************
     
-    ironsites Sitemap variation of General Sitemap
-    
---%><%@page import="com.steeleforge.aem.ironsites.wcm.page.IronSitemap,
-                    com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter,
-                    com.day.cq.wcm.api.Page,
-                    com.day.cq.wcm.api.PageManager"%><%
-%><%@include file="/apps/ironsites/common/global.jsp"%><%
-%><%@include file="init.jsp"%><%
-%><c:if test="${not empty sitemap}">
-    <ul>
-    <c:forEach var="link" items="${sitemap.links}">
-        <li><a href="${link.path}" target="${properties['target']}">${link.title}</a></li>
-    </c:forEach>
-    </ul>
-</c:if>
+    ironsites Sightly i18n Example
+*/-->
+<p>
+    <h3>i18n</h3>
+    <b>Basic Text:</b>
+    <span data-sly-element="${properties.basictext}">${properties.basictext}</span>
+    <br/>
+    <b>Rich Text:</b>
+    <span 
+        data-sly-use.text="/libs/wcm/foundation/components/text/text.js" 
+        class="${properties.cssClass}" 
+        data-emptytext="">${properties.text @ context='html'}</span>
+</p>

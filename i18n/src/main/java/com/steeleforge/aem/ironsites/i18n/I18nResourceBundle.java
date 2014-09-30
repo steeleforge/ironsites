@@ -41,6 +41,8 @@ import org.apache.sling.api.wrappers.ValueMapDecorator;
 /**
  * I18nResourceBundle will return local content or a fallback ResourceBundle
  * which should be based sling:basename.
+ * 
+ * @author David Steele
  */
 public class I18nResourceBundle extends ResourceBundle implements Adaptable {
     private final ValueMap content;
