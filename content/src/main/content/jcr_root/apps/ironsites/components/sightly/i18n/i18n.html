@@ -30,11 +30,12 @@
 <p>
     <h3>i18n</h3>
     <b>Basic Text:</b>
-    <span data-sly-element="${properties.basictext}">${properties.basictext}</span>
+    <span data-sly-text="${properties.basictext}">${properties.basictext}</span>
     <br/>
     <b>Rich Text:</b>
     <span 
         data-sly-use.text="/libs/wcm/foundation/components/text/text.js" 
         class="${properties.cssClass}" 
-        data-emptytext="">${properties.text @ context='html'}</span>
+        data-emptytext=""
+        data-sly-text.${properties.path}>${properties.text @ context='html'}</span>
 </p>
