@@ -33,7 +33,6 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
-import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -149,45 +148,7 @@ public enum XSSUtil {
     public static String encodeForJSString(String source, PageContext pageContext) {
         return getXSSAPI(pageContext).encodeForJSString(getSafeString(source));
     }
-    
-    /**
-     * Given an anti-samy file path (component relative or absolute), an optional 
-     * protection context, and JSP page context, the input source is run 
-     * through the XSSFilter which applies the antisamy policy to source.
-     * 
-     * @param policy policy name/path
-     * @param context protection context name
-     * @param source source string
-     * @param pageContext JSP page context
-     * @return scrubbed source, or empty string if markup is malformed
-     * @see XSSFilter#filter(ProtectionContext, String, String)
-     */
-    public static String filterHTML(String policy, String context, String source, PageContext pageContext) {
-        String output = StringUtils.EMPTY;
-        ProtectionContext pc = getProtectionContext(context);
-        String policyPath = findPolicyPath(pageContext, policy);
-        XSSFilter xss = getXSSFilter(pageContext);
-        try {
-            output = xss.filter(pc, source, policyPath);
-        } catch (RuntimeException re) {
-            LOG.error("Parsing/Filtering error: {}", source, re.getMessage());
-        }
-        return output;
-    }
-    
-    /**
-     * Overloaded method for {@link XSSUtil#filterHTML(String, String, String, PageContext)}
-     * 
-     * @param policy policy name/path
-     * @param source source string
-     * @param pageContext JSP page context
-     * @return scrubbed source, or empty string if markup is malformed
-     * @see XSSUtil#filterHTML(String, String, String, PageContext)
-     */
-    public static String filterHTML(String policy, String source, PageContext pageContext) {
-        return filterHTML(policy, null, source, pageContext);
-    }
-    
+            
     /**
      * @param context
      * @return ProtectionContext
@@ -205,56 +166,113 @@ public enum XSSUtil {
             return XSSFilter.DEFAULT_CONTEXT;
         }
         return protectionContext;
-    }
-    
+    }    
+
     /**
-     * @param pageContext
+     * @param request
      * @param policy
      * @return anti-samy policy path
      */
-    private static String findPolicyPath(PageContext pageContext, String policy) {
+    private static String findPolicyPath(SlingHttpServletRequest request, String policy) {
         String path = null;
-    
         if (StringUtils.isBlank(policy)) {
-            return path;
+        return path;
         }
-        
-        SlingHttpServletRequest request = WCMUtil.getSlingRequest(pageContext);
         ResourceResolver resolver = request.getResourceResolver();
         Resource resource = request.getResource();
         String resourceType = resource.getResourceType();
-        
-        if (StringUtils.startsWith(policy,"/")) {
-            path = policy;
+        if (StringUtils.startsWith(policy, "/")) {
+        path = policy;
         } else {
-            if (StringUtils.startsWith(resourceType,"./") || StringUtils.startsWith(resourceType,"../")) {
-                resourceType = ResourceUtil.normalize(resource.getResourceType() + "/" + resourceType);
-            }
-            path = resourceType + "/" + policy;
+        if ((StringUtils.startsWith(resourceType, "./")) || (StringUtils.startsWith(resourceType, "../"))) {
+            resourceType = ResourceUtil.normalize(resource.getResourceType() + "/" + resourceType);
+        }
+        path = resourceType + "/" + policy;
         }
         path = ResourceUtil.normalize(path);
-        
         if (!StringUtils.endsWith(path, ".xml")) {
-            path += ".xml";
+        path = path + ".xml";
         }
-    
         if (null == resolver.getResource(path)) {
-            LOG.debug("Could not find XSS policy at {}", path);
-            path = null;
+        LOG.debug("Could not find XSS policy at {}", path);
+        path = null;
         }
-        
         return path;
     }
 
     /**
-     * Acquire XSSFilter from JSP PageContext
-     * 
+     * @param policy
+     * @param context
+     * @param source
      * @param pageContext
+     * @return
+     */
+    public static String filterHTML(String policy, String context, String source, PageContext pageContext) {
+        return filterHTML(policy, context, source, WCMUtil.getSlingRequest(pageContext));
+    }
+    
+    /**
+     * Given an anti-samy file path (component relative or absolute), an optional 
+     * protection context, and JSP page context, the input source is run 
+     * through the XSSFilter which applies the antisamy policy to source.
+     * 
+     * @param policy policy name/path
+     * @param context protection context name
+     * @param source source string
+     * @param request sling request
+     * @return scrubbed source, or empty string if markup is malformed
+     * @see XSSFilter#filter(ProtectionContext, String, String)
+     */
+    public static String filterHTML(String policy, String context, String source, SlingHttpServletRequest request) {
+        String output = "";
+        ProtectionContext pc = getProtectionContext(context);
+        String policyPath = findPolicyPath(request, policy);
+        XSSFilter xss = getXSSFilter(request);
+        try {
+        output = xss.filter(pc, source, policyPath);
+        } catch (RuntimeException re) {
+        LOG.error("Parsing/Filtering error: {}", source, re.getMessage());
+        }
+        return output;
+    }
+
+    /**
+     * Overloaded method for {@link XSSUtil#filterHTML(String, String, String, PageContext)}
+     * 
+     * @param policy policy name/path
+     * @param source source string
+     * @param pageContext JSP page context
+     * @return scrubbed source, or empty string if markup is malformed
+     * @see XSSUtil#filterHTML(String, String, String, PageContext)
+     */
+    public static String filterHTML(String policy, String source, PageContext pageContext) {
+        return filterHTML(policy, null, source, WCMUtil.getSlingRequest(pageContext));
+    }
+    
+    /**
+     * Given an anti-samy file path (component relative or absolute), an optional 
+     * protection context, and JSP page context, the input source is run 
+     * through the XSSFilter which applies the antisamy policy to source.
+     * 
+     * @param policy policy name/path
+     * @param context protection context name
+     * @param source source string
+     * @param request Sling request
+     * @return scrubbed source, or empty string if markup is malformed
+     * @see XSSFilter#filter(ProtectionContext, String, String)
+     */
+    public static String filterHTML(String policy, String source, SlingHttpServletRequest request) {
+        return filterHTML(policy, null, source, request);
+    }
+    
+    /**
+     * Acquire XSSFilter from Sling Request
+     * 
+     * @param request
      * @return XSSFilter service
      */
-    private static XSSFilter getXSSFilter(PageContext pageContext) {
-        SlingScriptHelper slingScriptHelper = WCMUtil.getSlingScriptHelper(pageContext);
-        return (XSSFilter)slingScriptHelper.getService(XSSFilter.class);
+    private static XSSFilter getXSSFilter(SlingHttpServletRequest request) {
+        return (XSSFilter)request.adaptTo(XSSFilter.class);
     }
     
     /**
@@ -264,13 +282,18 @@ public enum XSSUtil {
      * @return XSSAPI service
      */
     private static XSSAPI getXSSAPI(PageContext pageContext) {
-        SlingScriptHelper slingScriptHelper = WCMUtil.getSlingScriptHelper(pageContext);
         SlingHttpServletRequest slingRequest = WCMUtil.getSlingRequest(pageContext);
         
-        XSSAPI xssAPI = (XSSAPI)slingScriptHelper.getService(XSSAPI.class);
-        xssAPI = xssAPI.getRequestSpecificAPI(slingRequest);
-        
-        return xssAPI;
+        return getXSSAPI(slingRequest);
+    }
+    
+    /**
+     * Acquire XSSAPI from Sling Request
+     * @param request
+     * @return
+     */
+    private static XSSAPI getXSSAPI(SlingHttpServletRequest request) {
+        return (XSSAPI)request.adaptTo(XSSAPI.class);
     }
     
     /**
@@ -284,5 +307,5 @@ public enum XSSUtil {
             return StringUtils.EMPTY;
         }
         return source;
-    }    
+    }
 }
