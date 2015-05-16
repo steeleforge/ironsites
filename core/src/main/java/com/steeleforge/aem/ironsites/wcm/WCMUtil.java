@@ -200,7 +200,9 @@ public enum WCMUtil {
     public static String getPageTitle(Page page) {
         String title = null;
         if (null != page) {
-            if (null != page.getTitle()) {
+            if (null != page.getPageTitle()) {
+                title = page.getPageTitle();
+            } else if (null != page.getTitle()) {
                 title = page.getTitle();
             } else if (null != page.getNavigationTitle()) {
                 title = page.getNavigationTitle();
@@ -222,11 +224,8 @@ public enum WCMUtil {
         if (null != page) {
             if (null != page.getNavigationTitle()) {
                 title = page.getNavigationTitle();
-            } else if (null != page.getTitle()) {
-                title = page.getTitle();
-            } else {
-                title = page.getName();
             }
+            title = getPageTitle(page);
         }
         return title;
     }
@@ -263,7 +262,7 @@ public enum WCMUtil {
      * @param path
      * @return
      */
-    private static String getMangledPath(String path) {
+    public static String getMangledPath(String path) {
         if (StringUtils.isBlank(path)) {
             return path;
         }
@@ -277,7 +276,7 @@ public enum WCMUtil {
      * @param delimiter
      * @return
      */
-    private static String getDelimitered(String token, String delimiter) {
+    public static String getDelimitered(String token, String delimiter) {
         if (StringUtils.isNotBlank(token) && !StringUtils.startsWith(token, delimiter)) {
             return delimiter + token;
         }
@@ -513,5 +512,19 @@ public enum WCMUtil {
             return WCMConstants.PROTOCOL_RELATIVE + StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
         }
         return fullyQualifiedURL;
+    }
+    
+    /** 
+     * Generate mangled path based identifier replacing "/" for "__"
+     * 
+     * @param path
+     * @return identifier
+     */
+    public static String getPathBasedIdentifier(String path) {
+       String mangled = getMangledPath(path);
+        if (StringUtils.isBlank(mangled)) {
+            return mangled;
+        }
+        return StringUtils.replace(mangled, WCMConstants.DELIMITER_PATH, WCMConstants.DELIMITER_PATH_IDENTIFIER);       
     }
 }
