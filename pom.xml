@@ -7,7 +7,7 @@
 
     <groupId>com.steeleforge.aem</groupId>
     <artifactId>ironsites</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>ironsites</name>
@@ -21,23 +21,19 @@
     <!-- P R O P E R T I E S -->
     <!-- ====================================================================== -->
     <properties>
-        <crx.host>localhost</crx.host>
-        <crx.port>4502</crx.port>
-        <crx.username>admin</crx.username>
-        <crx.password>admin</crx.password>
-        <publish.crx.host>localhost</publish.crx.host>
-        <publish.crx.port>4503</publish.crx.port>
-        <publish.crx.username>admin</publish.crx.username>
-        <publish.crx.password>admin</publish.crx.password>
+        <aem.host>localhost</aem.host>
+        <aem.port>4502</aem.port>
+        <aem.username>admin</aem.username>
+        <aem.password>admin</aem.password>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>            
         <!-- ironsites -->
         <slf4j.version>1.6.4</slf4j.version>
         <junit.version>4.8.2</junit.version>
-        <scr.annotations.version>1.7.0</scr.annotations.version>
+        <scr.annotations.version>1.9.6</scr.annotations.version>
         <scr.generator.version>1.3.0</scr.generator.version>
-        <maven.bundle.version>2.3.7</maven.bundle.version>
-        <maven.scr.version>1.9.0</maven.scr.version>
+        <maven.bundle.version>2.5.3</maven.bundle.version>
+        <maven.scr.version>1.20.0</maven.scr.version>
         <maven.sling.version>2.1.0</maven.sling.version>
         <powermock.version>1.5</powermock.version>
     </properties>
@@ -293,8 +289,8 @@
                     <artifactId>maven-sling-plugin</artifactId>
                     <version>${maven.sling.version}</version>
                     <configuration>
-                        <username>${crx.username}</username>
-                        <password>${crx.password}</password>
+                        <username>${aem.username}</username>
+                        <password>${aem.password}</password>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -304,8 +300,8 @@
                     <extensions>true</extensions>
                     <configuration>
                         <failOnError>true</failOnError>
-                        <username>${crx.username}</username>
-                        <password>${crx.password}</password>
+                        <username>${aem.username}</username>
+                        <password>${aem.password}</password>
                     </configuration>
                 </plugin>
                 <!--This plugin's configuration is used to store Eclipse
@@ -378,10 +374,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <crx.host>localhost</crx.host>
-                <crx.port>4502</crx.port>
-                <crx.username>admin</crx.username>
-                <crx.password>admin</crx.password>
+                <aem.host>localhost</aem.host>
+                <aem.port>4502</aem.port>
+                <aem.username>admin</aem.username>
+                <aem.password>admin</aem.password>
             </properties>
             <build>
                 <plugins>
@@ -406,10 +402,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <crx.host>localhost</crx.host>
-                <crx.port>4503</crx.port>
-                <crx.username>admin</crx.username>
-                <crx.password>admin</crx.password>
+                <aem.host>localhost</aem.host>
+                <aem.port>4503</aem.port>
+                <aem.username>admin</aem.username>
+                <aem.password>admin</aem.password>
             </properties>
             <build>
                 <plugins>

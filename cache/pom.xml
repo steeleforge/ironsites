@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.steeleforge.aem</groupId>
         <artifactId>ironsites</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
     <!-- ====================================================================== -->
@@ -114,7 +114,7 @@
         <dependency>
             <groupId>com.steeleforge.aem</groupId>
             <artifactId>ironsites-core</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -173,7 +173,7 @@
                 <groupId>org.apache.sling</groupId>
                 <artifactId>maven-sling-plugin</artifactId>
                 <configuration>
-                    <slingUrl>http://${crx.host}:${crx.port}/apps/ironsites/install</slingUrl>
+                    <slingUrl>http://${aem.host}:${aem.port}/apps/ironsites/install</slingUrl>
                     <usePut>true</usePut>
                 </configuration>
             </plugin>

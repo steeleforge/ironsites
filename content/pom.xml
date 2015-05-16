@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.steeleforge.aem</groupId>
         <artifactId>ironsites</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
 
     <!-- ====================================================================== -->
@@ -91,7 +91,7 @@
                             <target>/apps/ironsites/install</target>
                         </embedded>
                     </embeddeds>
-                    <targetURL>http://${crx.host}:${crx.port}/crx/packmgr/service.jsp</targetURL>
+                    <targetURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</targetURL>
                 </configuration>
             </plugin>
         </plugins>
@@ -132,9 +132,9 @@
                                     <goal>install</goal>
                                 </goals>
                                 <configuration>
-                                    <targetURL>http://${publish.crx.host}:${publish.crx.port}/crx/packmgr/service.jsp</targetURL>
-                                    <username>${publish.crx.username}</username>
-                                    <password>${publish.crx.password}</password>
+                                    <targetURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</targetURL>
+                                    <username>${aem.username}</username>
+                                    <password>${aem.password}</password>
                                 </configuration>
                             </execution>
                         </executions>
