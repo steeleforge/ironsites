@@ -127,9 +127,8 @@ public enum WCMUtil {
      * @param token
      * @param encoding, default to UTF-8
      * @return URL encoded String
-     * @throws UnsupportedEncodingException 
      */
-    public static String getURLEncoded(String token, String encoding) throws UnsupportedEncodingException {
+    public static String getURLEncoded(String token, String encoding) {
         if (StringUtils.isNotEmpty(token)) {
             try {
                 if (StringUtils.isNotEmpty(encoding)) {
@@ -138,7 +137,6 @@ public enum WCMUtil {
                 return URLEncoder.encode(token, CharEncoding.UTF_8);
             } catch(UnsupportedEncodingException uee) {
                 LOG.debug(uee.getMessage());
-                throw uee;
             }
         }
         return token;
@@ -150,9 +148,8 @@ public enum WCMUtil {
      * 
      * @param token
      * @return URL encoded String
-     * @throws UnsupportedEncodingException 
      */
-    public static String getURLEncoded(String token) throws UnsupportedEncodingException {
+    public static String getURLEncoded(String token) {
         return getURLEncoded(token, CharEncoding.UTF_8);
     }
     

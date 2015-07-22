@@ -3,7 +3,7 @@ package com.steeleforge.aem.ironsites.wcm;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 
-public class WCMUrl {
+public class WCMUrlBuilder {
     private SlingHttpServletRequest request;
     private String url = StringUtils.EMPTY;
     private String path;
@@ -13,13 +13,14 @@ public class WCMUrl {
     private String domain;
     private String protocol;
     private String fragment;
+    private String query;
     private boolean extensionSuffix = true;
     private boolean jcrMangle = true;
     private boolean resolverMap = true;
     private boolean sanitize = false;
     private boolean protocolRelative = false;
     
-    public WCMUrl(SlingHttpServletRequest request) {
+    public WCMUrlBuilder(SlingHttpServletRequest request) {
         super();
         this.request = request;
     }
@@ -54,6 +55,10 @@ public class WCMUrl {
             }
             this.url += fragment;
         }
+
+        if (StringUtils.isNotBlank(this.query)) {
+            this.url += WCMConstants.DELIMITER_QUERY + WCMUtil.getURLEncoded(query);
+        }
         return this.url;
     }
 
@@ -67,7 +72,7 @@ public class WCMUrl {
     /**
      * @param path the path to set
      */
-    public WCMUrl setPath(String path) {
+    public WCMUrlBuilder setPath(String path) {
         this.path = path;
         return this;
     }
@@ -82,7 +87,7 @@ public class WCMUrl {
     /**
      * @param selectors the selectors to set
      */
-    public WCMUrl setSelectors(String selectors) {
+    public WCMUrlBuilder setSelectors(String selectors) {
         this.selectors = selectors;
         return this;
     }
@@ -97,7 +102,7 @@ public class WCMUrl {
     /**
      * @param extension the extension to set
      */
-    public WCMUrl setExtension(String extension) {
+    public WCMUrlBuilder setExtension(String extension) {
         this.extension = extension;
         return this;
     }
@@ -112,7 +117,7 @@ public class WCMUrl {
     /**
      * @param suffix the suffix to set
      */
-    public WCMUrl setSuffix(String suffix) {
+    public WCMUrlBuilder setSuffix(String suffix) {
         this.suffix = suffix;
         return this;
     }
@@ -127,7 +132,7 @@ public class WCMUrl {
     /**
      * @param domain the domain to set
      */
-    public WCMUrl setDomain(String domain) {
+    public WCMUrlBuilder setDomain(String domain) {
         this.domain = domain;
         return this;
     }
@@ -156,8 +161,23 @@ public class WCMUrl {
     /**
      * @param fragment the fragment to set
      */
-    public WCMUrl setFragment(String fragment) {
+    public WCMUrlBuilder setFragment(String fragment) {
         this.fragment = fragment;
+        return this;
+    }
+
+    /**
+     * @return the query string
+     */
+    public String getQuery() {
+        return query;
+    }
+
+    /**
+     * @param query the querystring to set
+     */
+    public WCMUrlBuilder setQuery(String query) {
+        this.query = query;
         return this;
     }
 
@@ -171,7 +191,7 @@ public class WCMUrl {
     /**
      * @param extensionSuffix the extensionSuffix to set
      */
-    public WCMUrl setExtensionSuffix(boolean extensionSuffix) {
+    public WCMUrlBuilder setExtensionSuffix(boolean extensionSuffix) {
         this.extensionSuffix = extensionSuffix;
         return this;
     }
@@ -179,7 +199,7 @@ public class WCMUrl {
     /**
      * @param extensionSuffix the extensionSuffix to set
      */
-    public WCMUrl isExtensionSuffix(boolean extensionSuffix) {
+    public WCMUrlBuilder isExtensionSuffix(boolean extensionSuffix) {
         return setExtensionSuffix(extensionSuffix);
     }
 
@@ -193,7 +213,7 @@ public class WCMUrl {
     /**
      * @param jcrMangle the jcrMangle to set
      */
-    public WCMUrl setJcrMangle(boolean jcrMangle) {
+    public WCMUrlBuilder setJcrMangle(boolean jcrMangle) {
         this.jcrMangle = jcrMangle;
         return this;
     }
@@ -201,7 +221,7 @@ public class WCMUrl {
     /**
      * @param jcrMangle the jcrMangle to set
      */
-    public WCMUrl isJcrMangle(boolean jcrMangle) {
+    public WCMUrlBuilder isJcrMangle(boolean jcrMangle) {
         return setJcrMangle(jcrMangle);
     }
 
@@ -215,7 +235,7 @@ public class WCMUrl {
     /**
      * @param resolverMap the resolverMap to set
      */
-    public WCMUrl setResolverMap(boolean resolverMap) {
+    public WCMUrlBuilder setResolverMap(boolean resolverMap) {
         this.resolverMap = resolverMap;
         return this;
     }
@@ -223,7 +243,7 @@ public class WCMUrl {
     /**
      * @param resolverMap the resolverMap to set
      */
-    public WCMUrl isResolverMap(boolean resolverMap) {
+    public WCMUrlBuilder isResolverMap(boolean resolverMap) {
         return setResolverMap(resolverMap);
     }
 
@@ -238,7 +258,7 @@ public class WCMUrl {
     /**
      * @param sanitize the sanitize to set
      */
-    public WCMUrl setSanitize(boolean sanitize) {
+    public WCMUrlBuilder setSanitize(boolean sanitize) {
         this.sanitize = sanitize;
         return this;
     }
@@ -246,7 +266,7 @@ public class WCMUrl {
     /**
      * @param sanitize the sanitize to set
      */
-    public WCMUrl isSanitize(boolean sanitize) {
+    public WCMUrlBuilder isSanitize(boolean sanitize) {
         return setSanitize(sanitize);
     }
     
@@ -260,7 +280,7 @@ public class WCMUrl {
     /**
      * @param domain the externalizer domain to set
      */
-    public WCMUrl isExternal(String domain) {
+    public WCMUrlBuilder isExternal(String domain) {
         this.domain = domain;
         return this;
     }
@@ -275,7 +295,7 @@ public class WCMUrl {
     /**
      * @param protocolRelative the protocolRelative to set
      */
-    public WCMUrl setProtocolRelative(boolean protocolRelative) {
+    public WCMUrlBuilder setProtocolRelative(boolean protocolRelative) {
         this.protocolRelative = protocolRelative;
         return this;
     }
@@ -283,7 +303,7 @@ public class WCMUrl {
     /**
      * @param protocolRelative the protocolRelative to set
      */
-    public WCMUrl isProtocolRelative(boolean protocolRelative) {
+    public WCMUrlBuilder isProtocolRelative(boolean protocolRelative) {
         return isProtocolRelative(protocolRelative);
     }
 }

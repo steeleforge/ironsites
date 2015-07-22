@@ -35,6 +35,7 @@ public enum WCMConstants {
     public static final String HTTP = "http";
     public static final String HTTPS = "https";
     public static final String PROTOCOL_RELATIVE = "//";
+    public static final String DELIMITER_QUERY = "?";
     public static final String DELIMITER_FRAGMENT = "#";
     public static final String DELIMITER_PORT = ":";
     public static final String DELIMITER_PATH = "/";
