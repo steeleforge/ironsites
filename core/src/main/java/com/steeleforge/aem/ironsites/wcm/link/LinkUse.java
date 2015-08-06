@@ -21,8 +21,8 @@ public class LinkUse extends WCMUse {
     private String path;
     private Link link;
     private Page page;
-    private Boolean navTitle;
-    private Boolean hideInNav;
+    private Boolean navTitle = false;
+    private Boolean hideInNav = true;
     
     private String id;
     private String href;
@@ -42,9 +42,9 @@ public class LinkUse extends WCMUse {
         path = get(PN_PATH, String.class);
         if (null == path) path = getProperties().get(PN_PATH, String.class);
         page = WCMUtil.getPage(getRequest(), path);
-        navTitle = get(PN_NAVTITLE, null);
+        navTitle = get(PN_NAVTITLE, Boolean.class);
         navTitle = (null == navTitle)? false : true;
-        hideInNav = get(PN_HIDEINNAV, null);
+        hideInNav = get(PN_HIDEINNAV, Boolean.class);
         hideInNav = (null == hideInNav)? true : false;
         path = new WCMURLBuilder(getRequest()).setPath(path).build();
         
@@ -65,7 +65,7 @@ public class LinkUse extends WCMUse {
     }
     
     private Link setLink() {
-        link = (null != page)? new Link(page) : new Link();
+        link = (null != page)? new Link(getRequest(), page) : new Link();
         if (null != page) {
             if (navTitle) {
                 link.setText(WCMUtil.getPageNavigationTitle(page));
@@ -101,7 +101,7 @@ public class LinkUse extends WCMUse {
                        page.listChildren(HidePageFilter.HIDE_IN_NAVIGATION_FILTER)
                        : page.listChildren(InvalidPageFilter.INVALID_PAGE_FILTER);
             while(children.hasNext()) {
-                links.add(new Link(children.next()));
+                links.add(new Link(getRequest(), children.next()));
             }
             return links;
         }

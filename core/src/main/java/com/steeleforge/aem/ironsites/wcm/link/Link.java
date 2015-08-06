@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.sling.api.SlingHttpServletRequest;
 
 import com.day.cq.wcm.api.Page;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
@@ -45,8 +46,9 @@ public class Link {
         super();
     }
     
-    public Link(final Page page) {
+    public Link(final SlingHttpServletRequest request, final Page page) {
         if (null != page) {
+            setHref(WCMUtil.getPageURL(request, page.getPath()));
             setText(WCMUtil.getPageTitle(page));
             setHreflang(page.getLanguage(false).toString());
         }
