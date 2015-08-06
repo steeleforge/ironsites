@@ -54,10 +54,6 @@
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.jcr.api</artifactId>
         </dependency>
         <!-- common libraries/API -->
@@ -70,14 +66,6 @@
             <artifactId>org.osgi.core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.jsp</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
@@ -87,22 +75,10 @@
         </dependency>
         <!-- extended libraries -->
         <dependency>
-            <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.jmx</artifactId>
-            <version>0.1.6</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.commons.osgi</artifactId>
             <version>2.2.0</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-            <scope>${guava.scope}</scope>
         </dependency>
         <dependency>
             <groupId>com.adobe.granite</groupId>
@@ -110,12 +86,26 @@
             <version>0.2.14</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>aem-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.granite</groupId>
+            <artifactId>com.adobe.granite.jmx</artifactId>
+            <version>0.2.14</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- ironsites -->
         <dependency>
             <groupId>com.steeleforge.aem</groupId>
             <artifactId>ironsites-core</artifactId>
             <version>1.2-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -162,7 +152,6 @@
                             ${project.groupId}.cache.service.impl
                         </Private-Package>
                         <Export-Package>
-                            ${guava.exports}
                             ${project.groupId}.*;version=${project.version}
                         </Export-Package>
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
@@ -178,6 +167,13 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>maven-sling-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                  <configuration>
@@ -190,23 +186,21 @@
     </build>
     <profiles>
         <profile>
-            <id>aem6</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <guava.scope>provided</guava.scope>
-                <guava.version>15.0</guava.version>
-                <guava.exports></guava.exports>
-            </properties>
-        </profile>
-        <profile>
-            <id>aem5</id>
-            <properties>
-                <guava.scope>compile</guava.scope>
-                <guava.version>15.0</guava.version>
-                <guava.exports>com.google.common.*,</guava.exports>
-            </properties>
+            <id>bundle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>maven-sling-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <slingUrl>http://${aem.host}:${aem.port}/apps/ironsites/install</slingUrl>
+                            <usePut>true</usePut>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
+
 </project>

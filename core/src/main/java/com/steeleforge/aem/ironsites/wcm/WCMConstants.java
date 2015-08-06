@@ -28,7 +28,6 @@ package com.steeleforge.aem.ironsites.wcm;
 
 /**
  * Common constants for WCM Utilities
- *
  */
 public enum WCMConstants {
     INSTANCE;
@@ -39,9 +38,14 @@ public enum WCMConstants {
     public static final String DELIMITER_FRAGMENT = "#";
     public static final String DELIMITER_PORT = ":";
     public static final String DELIMITER_PATH = "/";
-    public static final String DELIMITER_PATH_IDENTIFIER = "__";
+    public static final String DELIMITER_PATH_IDENTIFIER = "--";
     public static final String DELIMITER_SUFFIX = DELIMITER_PATH;
     public static final String DELIMITER_EXTENSION = ".";
     public static final String DELIMITER_SELECTOR = DELIMITER_EXTENSION;
+    public static final String DELIMITER_KEYWORD = ",";
+    public static final String DELIMITER_CATEGORY = ",";
+    public static final String DELIMITER_MULTIFIELD = "|";
+    public static final String PATH_FAVICON = "/favicon.ico";
     public static final String HTML = "html";
+    public static final String HEADER_LOCATION = "Location";
 }

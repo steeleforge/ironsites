@@ -74,10 +74,6 @@
             <artifactId>org.apache.sling.api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.jsp</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
@@ -139,8 +135,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-            <scope>${guava.scope}</scope>
         </dependency>
         <dependency>
             <groupId>com.adobe.aem</groupId>
@@ -213,25 +207,4 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>aem6</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <guava.scope>provided</guava.scope>
-                <guava.version>15.0</guava.version>
-                <guava.exports></guava.exports>
-            </properties>
-        </profile>
-        <profile>
-            <id>aem5</id>
-            <properties>
-                <guava.scope>compile</guava.scope>
-                <guava.version>15.0</guava.version>
-                <guava.exports>com.google.common.*,</guava.exports>
-            </properties>
-        </profile>
-    </profiles>
 </project>

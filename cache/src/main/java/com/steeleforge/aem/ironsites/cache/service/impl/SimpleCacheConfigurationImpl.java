@@ -36,7 +36,6 @@ import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.osgi.service.component.ComponentContext;
 
-import com.google.common.cache.Cache;
 import com.steeleforge.aem.ironsites.cache.service.SimpleCacheConfiguration;
 
 @Service
@@ -47,34 +46,33 @@ import com.steeleforge.aem.ironsites.cache.service.SimpleCacheConfiguration;
     metatype = true, 
     policy = ConfigurationPolicy.REQUIRE)
 public class SimpleCacheConfigurationImpl implements SimpleCacheConfiguration {
-    ComponentContext componentContext = null;
-    Cache<Object, Object> cache = null;
+    private ComponentContext componentContext = null;
 
     static final String DEFAULT_CACHE_NAME = "Cache_";
     public static final String DEFAULT_CACHE_SPECFICIATIONS = "";
     public static final boolean DEFAULT_CACHE_STATS_ENABLED = true;
     
     @Property(label = "Cache Name", description = "Name of cache")
-    static final String PROPERTY_CACHE_NAME = "name";
+    static final String PN_CACHE_NAME = "name";
     protected String name;
     
     @Property(label = "Cache Specfications", value = "", 
             description = "http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/cache/CacheBuilderSpec.html")
-    static final String PROPERTY_CACHE_SPECFICIATIONS = "specs";
+    static final String PN_CACHE_SPECIFICATIONS = "specs";
     protected String specs;
 
     @Property(label = "Enable Cache Statistics", 
             description = "Enable statistics",
             boolValue = DEFAULT_CACHE_STATS_ENABLED)
-    static final String PROPERTY_CACHE_STATS_ENABLED = "statsEnabled";
+    static final String PN_CACHE_STATS_ENABLED = "statsEnabled";
     protected Boolean statsEnabled;
     
     @Activate
     protected void activate(ComponentContext ctx) {
         Dictionary<?,?> props = ctx.getProperties();
-        this.name = PropertiesUtil.toString(props.get(PROPERTY_CACHE_NAME), DEFAULT_CACHE_NAME + ctx.getComponentInstance().toString());
-        this.specs = PropertiesUtil.toString(props.get(PROPERTY_CACHE_SPECFICIATIONS), DEFAULT_CACHE_SPECFICIATIONS);
-        this.statsEnabled = PropertiesUtil.toBoolean(props.get(PROPERTY_CACHE_STATS_ENABLED), DEFAULT_CACHE_STATS_ENABLED);
+        this.name = PropertiesUtil.toString(props.get(PN_CACHE_NAME), DEFAULT_CACHE_NAME + ctx.getComponentInstance().toString());
+        this.specs = PropertiesUtil.toString(props.get(PN_CACHE_SPECIFICATIONS), DEFAULT_CACHE_SPECFICIATIONS);
+        this.statsEnabled = PropertiesUtil.toBoolean(props.get(PN_CACHE_STATS_ENABLED), DEFAULT_CACHE_STATS_ENABLED);
         this.componentContext = ctx;
     }
 

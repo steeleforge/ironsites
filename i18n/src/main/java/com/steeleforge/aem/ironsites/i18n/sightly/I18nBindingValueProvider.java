@@ -36,14 +36,10 @@ import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ValueMap;
-
+import org.apache.sling.scripting.api.BindingsValuesProvider;
 import org.osgi.framework.Constants;
 
-import com.adobe.cq.sightly.WCMUse;
 import com.adobe.cq.sightly.WCMBindings;
-
-import org.apache.sling.scripting.api.BindingsValuesProvider;
-
 import com.steeleforge.aem.ironsites.i18n.I18nResourceBundle;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 
@@ -62,7 +58,7 @@ public class I18nBindingValueProvider implements BindingsValuesProvider {
     
     public void addBindings(Bindings bindings) {
         SlingHttpServletRequest request = (SlingHttpServletRequest)bindings.get(BINDING_REQUEST);
-        if (null != request) {
+        if (null != request && null != bindings) {
             // get valuemap from bindings, or fall back on Resource#adaptTo(ValueMap)
             ValueMap properties = (bindings.containsKey(WCMBindings.PROPERTIES))?
                     (ValueMap)bindings.get(WCMBindings.PROPERTIES) : 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Link List"
+    xtype="panel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <path
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Root Path"
+            name="./path"
+            xtype="pathfield"/>
+        <target
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Link Target"
+            fieldDescription="(e.g. _blank)"
+            name="./target"
+            xtype="textfield"/>
+    </items>
+</jcr:root>

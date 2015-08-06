@@ -512,7 +512,7 @@ public enum WCMUtil {
     }
     
     /** 
-     * Generate mangled path based identifier replacing "/" for "__"
+     * Generate mangled path based identifier replacing "/" for WCMConstants.DELIMITER_PATH_IDENTIFIER
      * 
      * @param path
      * @return identifier

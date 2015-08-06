@@ -163,7 +163,9 @@ public class IronSitemap extends Sitemap {
             Page page = pageManager.getPage(path);
             // prevent non-existent, invalid, and hidden pages
             if (getFilter().includes(page)) {
-                link = new Link(WCMUtil.getPageURL(request, page.getPath()), WCMUtil.getPageTitle(page), level);
+                link = new Link(WCMUtil.getPageURL(request, page.getPath()), 
+                        WCMUtil.getPageTitle(page), 
+                        level);
             }
         } else {
             // support external links with URL=title format

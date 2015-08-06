@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    cq:showOnCreate="{Boolean}true"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Extended"
+    sling:resourceType="granite/ui/components/foundation/section">
+    <layout
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"
+        margin="{Boolean}false"/>
+    <items jcr:primaryType="nt:unstructured">
+        <column
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <site
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Redirect"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <redirectType
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="redirectType"
+                            name="./redirectType"
+                            text="Permanent Redirect"
+                            renderReadOnly="{Boolean}true"
+                            value="{Long}301"/>
+                        <redirectTypeHint
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/hidden"
+                            name="./redirectType@TypeHint"
+                            value="Long"/>
+                    </items>
+                </site>
+                <redirect
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Redirect"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <site
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="site"
+                            fieldLabel="Site/Domain"
+                            fieldDescription="(e.g. example.com)"
+                            name="./site"
+                            renderReadOnly="{Boolean}true"/>
+                    </items>
+                </redirect>
+                <metaicons
+                    cq:showOnCreate="{Boolean}false"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Meta &amp; Icons"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <meta
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Meta Tags"
+                            fieldDescription="(name)|(content)"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="meta"
+                            renderReadOnly="{Boolean}true">
+	                        <field
+	                            jcr:primaryType="nt:unstructured"
+	                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+	                            name="./meta"/>
+                        </meta>
+                        <favicon
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="favicon"
+                            fieldLabel="Favicon"
+                            name="./favicon"
+                            rootPath="/content/dam"
+                            renderReadOnly="{Boolean}true"/>
+                        <icons
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Touch Icons"
+                            fieldDescription="(rel)|(sizes)|(href)|(type)"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="icons"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="./icons"/>
+                        </icons>
+                    </items>
+                </metaicons>
+                <style
+                    cq:showOnCreate="{Boolean}false"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Style Extensions"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <categories
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Client Library Categories"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="categories"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="categories"/>
+                        </categories>
+                        <js
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Javascript Includes"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="js"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="./js"/>
+                        </js>
+                        <css
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="CSS Includes"
+                            allowBulkEdit="true"
+                            cq-msm-lockable="css"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="./css"/>
+                        </css>
+                    </items>
+                </style>
+            </items>
+        </column>
+    </items>
+</jcr:root>

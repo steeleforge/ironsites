@@ -52,14 +52,6 @@
             <groupId>javax.jcr</groupId>
             <artifactId>jcr</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.jcr.api</artifactId>
-        </dependency>
         <!-- common libraries/API -->
         <dependency>
             <groupId>org.apache.felix</groupId>
@@ -68,14 +60,6 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.jsp</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -123,7 +107,7 @@
             <groupId>com.steeleforge.aem</groupId>
             <artifactId>ironsites-core</artifactId>
             <version>1.2-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -178,8 +162,7 @@
                 <groupId>org.apache.sling</groupId>
                 <artifactId>maven-sling-plugin</artifactId>
                 <configuration>
-                    <slingUrl>http://${aem.host}:${aem.port}/apps/ironsites/install</slingUrl>
-                    <usePut>true</usePut>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
@@ -193,4 +176,22 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>bundle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>maven-sling-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <slingUrl>http://${aem.host}:${aem.port}/apps/ironsites/install</slingUrl>
+                            <usePut>true</usePut>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
