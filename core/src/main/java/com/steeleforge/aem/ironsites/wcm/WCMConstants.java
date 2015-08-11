@@ -42,8 +42,8 @@ public enum WCMConstants {
     public static final String DELIMITER_SUFFIX = DELIMITER_PATH;
     public static final String DELIMITER_EXTENSION = ".";
     public static final String DELIMITER_SELECTOR = DELIMITER_EXTENSION;
-    public static final String DELIMITER_KEYWORD = ",";
-    public static final String DELIMITER_CATEGORY = ",";
+    public static final String DELIMITER_COMMA = ",";
+    public static final String DELIMITER_COMMA_SPACED = ",";
     public static final String DELIMITER_MULTIFIELD = "|";
     public static final String PATH_FAVICON = "/favicon.ico";
     public static final String HTML = "html";

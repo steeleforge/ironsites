@@ -28,8 +28,9 @@
     ironsites - global include.
     
 --%><%@page import="com.steeleforge.aem.ironsites.i18n.I18nUtil,
+                    com.steeleforge.aem.ironsites.wcm.XSSUtil,
+                    com.steeleforge.aem.ironsites.wcm.WCMUtil,
                     org.apache.commons.lang.StringUtils"%><%
 %><%@include file="/libs/foundation/global.jsp"%><%
-%><%@taglib prefix="isx" uri="http://www.steeleforge.com/aem/ironsites/0.0.1/xss" %><%
 %><%@taglib prefix="isw" uri="http://www.steeleforge.com/aem/ironsites/0.0.1/wcm" %><%
 %><%@taglib prefix="isi" uri="http://www.steeleforge.com/aem/ironsites/0.0.1/i18n" %>

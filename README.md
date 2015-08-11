@@ -24,17 +24,16 @@ To deploy to a local publish instance, qualify the environment.
 
 ## Dependencies
 + Adobe Experience Management (CQ) 6
-+ JDK 1.5/1.6
++ JDK 1.7+
 + maven3
 + Patience required for exploring alpha-level software
 
 ## AEM Interoperability
 
-The 1.1-SNAPSHOT does not support versions prior to AEM 6.0; for 5.6.1 use 1.0 branch.
+The 1.2-SNAPSHOT only supports AEM 6.0 -- no 6.1 support yet
 
 ## Features
 + [Internationalization (i18n) Helpers](https://github.com/steeleforge/ironsites/wiki/Internationalization-Helpers)
-+ [Cross-Site Scripting (XSS) Helpers](https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-Helpers)
 + [WCMMode Helpers](https://github.com/steeleforge/ironsites/wiki/WCMMode-Helpers)
 + [Simple Cache](https://github.com/steeleforge/ironsites/wiki/Simple-Cache)
 + [Components](https://github.com/steeleforge/ironsites/wiki/Components)
@@ -46,8 +45,7 @@ The 1.1-SNAPSHOT does not support versions prior to AEM 6.0; for 5.6.1 use 1.0 b
 + Optional selector servlet to provide JSON serialzation of sling messages associated to a component/resourceType (e.g. /content/path/to/sling/resource.i18n.json) for usage with Javascript libraries
 
 ### XSS Helpers [[wiki]](https://github.com/steeleforge/ironsites/wiki/Cross-Site-Scripting-Helpers)
-+ taglib functions for [XSSAPI](http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSAPI.html) such as encoding for XML/Javasscript/HTML.  
-+ Filtering markup based on [XSSFilter](http://dev.day.com/docs/en/cq/current/javadoc/com/adobe/granite/xss/XSSFilter.html) and [AntiSamy policy files](https://www.owasp.org/index.php/Category:OWASP_AntiSamy_Project#Stage_3_-_Tailoring_the_policy_file) which can be managed in the JCR/CRX.
++ XSS Utility methods as part of the core utility methods
 
 ### WCMMode Helpers [[wiki]](https://github.com/steeleforge/ironsites/wiki/WCMMode-Helpers)
 + Elimination of scriptlet boilerplate for driving component display behavior based on WCMMode.
@@ -55,12 +53,6 @@ The 1.1-SNAPSHOT does not support versions prior to AEM 6.0; for 5.6.1 use 1.0 b
 
 ### Simple Cache [[wiki]](https://github.com/steeleforge/ironsites/wiki/Simple-Cache)
 + Basic application-level caching somewhere between a heavy Enterprise library and a basic ConcurrentHashMap.
-
-### Components [[wiki]](https://github.com/steeleforge/ironsites/wiki/Components)
-+ ironsites Sitemap is a drop-in replacement for the CQ foundation Sitemap
-+ ironsites Text component provides an example of HTML filtering utilizing XSS Helpers
-+ ironsites Cache Monitor allows basic reporting on Simple Cache usage/access
-+ ironsites Kitchen Sink is a demo component showcasing as much of the above features as reasonable for a developer that would like to build upon what is available
 
 ### Misc. [[wiki]](https://github.com/steeleforge/ironsites/wiki/Miscellaneous)
 + Composable, flexible, and configurable alternatives to [PageFilter](http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/wcm/api/PageFilter.html) which is commonly used to create navigation and sitemap components.

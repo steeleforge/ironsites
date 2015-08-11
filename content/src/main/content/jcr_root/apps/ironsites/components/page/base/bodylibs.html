@@ -30,6 +30,6 @@
 */--><sly data-sly-use.page="com.steeleforge.aem.ironsites.wcm.page.PageUse" data-sly-unwrap>
     <sly data-sly-test="${page.categories}" data-sly-call="${clientLib.js @ categories=page.categories}" data-sly-unwrap />
     <sly data-sly-list="${page.js}" data-sly-unwrap>
-    <script src="${item}" type="text/javascript"></script>
+    <script src="${item @ context='uri'}" type="text/javascript"></script>
     </sly>
 </sly>

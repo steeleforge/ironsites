@@ -27,4 +27,7 @@
     
     ironsites API includes
     
-*/--><script data-sly-use.page="${'com.steeleforge.aem.ironsites.wcm.page.PageUse' @ api=properties.service}"  data-sly-test="${page.api}" type="text/javascript" src="${page.api}"></script>
+*/--><sly data-sly-use.page="${'com.steeleforge.aem.ironsites.wcm.page.PageUse' @ api = properties.service}" data-sly-unwrap>
+<script  data-sly-test="${page.api}" type="text/javascript" src="${page.api  @ context = 'uri'}"></script>
+<strong data-sly-test="${page.api && wcmmode.edit}">API ${page.api @ context = 'uri'} for ${page.site @ context='text'}</strong>
+</sly>

@@ -28,11 +28,11 @@
     body tag
     
 */--><body data-sly-use.page="com.steeleforge.aem.ironsites.wcm.page.PageUse"
-      data-sly-use.util="com.steeleforge.aem.ironsites.wcm.UtilityUse"
+      data-sly-use.util="com.steeleforge.aem.ironsites.wcm.components.UtilityUse"
       class="${util.hashId} ${page.name} ${page.template}">
 	<sly data-sly-include="header.html" data-sly-unwrap/>
 	<sly data-sly-include="main.html" data-sly-unwrap />
 	<sly data-sly-include="footer.html" data-sly-unwrap/>
 	<sly data-sly-resource="${'cloudservices' @ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}" data-sly-unwrap />
-	<sly data-sly-include="bodylibs.html" />
+	<sly data-sly-include="bodylibs.html" data-sly-unwrap />
 </body>

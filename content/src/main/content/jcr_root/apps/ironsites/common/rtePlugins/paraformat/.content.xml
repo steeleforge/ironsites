@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured" 
+    features="*">
+    <formats jcr:primaryType="cq:WidgetCollection">
+        <paragraph
+            jcr:primaryType="cq:Widget"
+            tag="p"
+            description="Paragraph"/>
+        <heading1
+            jcr:primaryType="cq:Widget"
+            tag="h1"
+            description="Heading 1"/>
+        <heading2
+            jcr:primaryType="cq:Widget"
+            tag="h2"
+            description="Heading 2"/>
+        <heading3
+            jcr:primaryType="cq:Widget"
+            tag="h3"
+            description="Heading 3"/>
+        <heading4
+            jcr:primaryType="cq:Widget"
+            tag="h4"
+            description="Heading 4"/>
+        <heading5
+            jcr:primaryType="cq:Widget"
+            tag="h5"
+            description="Heading 5"/>
+        <heading6
+            jcr:primaryType="cq:Widget"
+            tag="h6"
+            description="Heading 6"/>
+        <blockquote
+            jcr:primaryType="cq:Widget"
+            tag="blockquote"
+            description="Blockquote"/>
+    </formats>
+</jcr:root>

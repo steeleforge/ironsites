@@ -15,5 +15,11 @@
             fieldDescription="(e.g. _blank)"
             name="./target"
             xtype="textfield"/>
+        <style
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Style"
+            fieldDescription="Tags representing CSS styles"
+            name="./style"
+            xtype="tags"/>
     </items>
 </jcr:root>

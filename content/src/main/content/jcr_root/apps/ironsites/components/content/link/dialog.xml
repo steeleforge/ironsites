@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Link"
+    xtype="panel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <path
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Link Path"
+            name="./path"
+            xtype="pathfield"/>
+        <text
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Link Text"
+            fieldDescription="Overrides page title"
+            name="./text"
+            xtype="textfield"/>
+        <target
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Link Target"
+            fieldDescription="(e.g. _blank)"
+            name="./target"
+            xtype="textfield"/>
+        <style
+            jcr:primaryType="cq:Widget"
+            fieldLabel="Style"
+            fieldDescription="Tags representing CSS styles"
+            name="./style"
+            xtype="tags"/>
+    </items>
+</jcr:root>

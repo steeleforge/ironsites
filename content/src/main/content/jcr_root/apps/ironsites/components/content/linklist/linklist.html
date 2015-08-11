@@ -27,7 +27,14 @@
     
     ironsites Link List
     
-*/--><ul data-sly-use.l="${'com.steeleforge.aem.ironsites.wcm.link.LinkUse' @ path=properties.path}" 
+*/--><ul 
+    data-sly-use.l="${'com.steeleforge.aem.ironsites.wcm.components.LinkUse' @ path=properties.path}"
+    data-sly-use.s="${'com.steeleforge.aem.ironsites.wcm.components.StyleUse'}" 
+    class="${s.styles @ context = 'styleToken'}"
     data-sly-test="${l.links}" data-sly-list.link="${l.links}">
-	<li><a href="${link.href @ context='uri'}" hreflang="${link.hreflang @ context='attribute'}" target="${properties.target @ context='attribute'}">${link.text @ context='text'}</a></li>
+	<li class="${l.current? 'active' : '' @ context='attribute'}">
+	   <a href="${link.href @ context='uri'}" hreflang="${link.hreflang @ context='attribute'}" target="${properties.target @ context='attribute'}" class=" ${wcmmode.edit? properties.target : '' @ context='attribute'}">
+	       ${link.text @ context='text'}
+	   </a>
+    </li>
 </ul>

@@ -1,3 +1,29 @@
+/** 
+ * This is free and unencumbered software released into the public domain.
+ * 
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
+ * 
+ * In jurisdictions that recognize copyright laws, the author or authors
+ * of this software dedicate any and all copyright interest in the
+ * software to the public domain. We make this dedication for the benefit
+ * of the public at large and to the detriment of our heirs and
+ * successors. We intend this dedication to be an overt act of
+ * relinquishment in perpetuity of all present and future rights to this
+ * software under copyright law.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * For more information, please refer to <http://unlicense.org/>
+ */
 package com.steeleforge.aem.ironsites.wcm.page;
 
 import java.util.ArrayList;
@@ -9,9 +35,9 @@ import org.apache.commons.lang.StringUtils;
 
 import com.adobe.cq.sightly.WCMUse;
 import com.day.cq.tagging.Tag;
-import com.steeleforge.aem.ironsites.service.ApiService;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
+import com.steeleforge.aem.ironsites.wcm.api.ApiService;
 import com.steeleforge.aem.ironsites.wcm.page.head.Icon;
 import com.steeleforge.aem.ironsites.wcm.page.head.Meta;
 
@@ -34,9 +60,8 @@ public class PageUse extends WCMUse {
     private String designPath = null;
     private String canonical = null;
     private String favicon = null;
-    private String categories = null;
     private String site = null;
-    private String api = null;
+    private List<String> categories = null;
     private List<String> js = null;
     private List<String> css = null;
     private List<Icon> icons = null;
@@ -73,7 +98,7 @@ public class PageUse extends WCMUse {
             StringBuilder titles = new StringBuilder();
             // append comma delimited tag titles
             for(Tag tag : tags) {
-                if (titles.length() > 0) titles.append(WCMConstants.DELIMITER_KEYWORD);
+                if (titles.length() > 0) titles.append(WCMConstants.DELIMITER_COMMA);
                 titles.append(tag.getTitle(getCurrentPage().getLanguage(false)));
             }
             if (titles.length() > 0) keywords = titles.toString();
@@ -154,18 +179,14 @@ public class PageUse extends WCMUse {
     /**
      * @return inherited categories
      */
-    public String getCategories() {
+    public List<String> getCategories() {
         if (null != categories) return categories;
         final String[] inherited = getInheritedProperties().get(PN_CATEGORIES, String[].class);
-        // loop through inherited categories
         if (ArrayUtils.getLength(inherited) > 0) {
-            StringBuilder builder = new StringBuilder();
-            // append comma delimited category names
-            for(String category : inherited) {
-                if (builder.length() > 0) builder.append(WCMConstants.DELIMITER_CATEGORY);
-                builder.append(category);
+            categories = new ArrayList<String>();
+            for(String item : inherited) {
+                if (StringUtils.isNotBlank(item)) categories.add(item);
             }
-            if (builder.length() > 0) categories = builder.toString();
         }
         return categories;
     }

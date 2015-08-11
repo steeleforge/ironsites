@@ -24,7 +24,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>ironsites-core</artifactId>
             <version>${project.version}</version>
-        </dependency><!-- 
+        </dependency> 
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ironsites-i18n</artifactId>
@@ -32,15 +32,10 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>ironsites-xss</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>ironsites-cache</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+<!--         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ironsites-syndicate</artifactId>
             <version>${project.version}</version>

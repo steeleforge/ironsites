@@ -8,7 +8,9 @@
             jcr:primaryType="cq:Widget"
             fieldLabel="API Service"
             fieldDescription="Configured service identifier"
-            name="./api"
-            xtype="textfield"/>
+            name="./service"
+            xtype="selection"
+            type="select"
+            options="$PATH.services.json"/>
     </items>
 </jcr:root>

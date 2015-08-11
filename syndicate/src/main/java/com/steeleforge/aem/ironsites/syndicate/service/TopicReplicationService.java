@@ -58,7 +58,7 @@ import com.day.cq.replication.ReplicationOptions;
 import com.day.cq.replication.ReplicationStatus;
 import com.day.cq.replication.Replicator;
 import com.google.common.collect.Maps;
-import com.steeleforge.aem.ironsites.service.ResourceResolverSubservice;
+import com.steeleforge.aem.ironsites.wcm.ResourceResolverSubservice;
 
 /**
  * OSGi service used to replicate a content path based on a specific topic

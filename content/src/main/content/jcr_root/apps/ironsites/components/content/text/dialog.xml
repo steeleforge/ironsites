@@ -9,24 +9,44 @@
             jcr:primaryType="cq:Widget"
             anchor="100%"
             title="Text"
-            xtype="cqinclude"
-            path="/libs/foundation/components/text/dialog/items/tab1.infinity.json"/>
-        <tab2
-            jcr:primaryType="cq:Widget"
-            xtype="componentstyles"/>
-        <tab3
-            jcr:primaryType="cq:Widget"
-            anchor="100%"
-            title="Advanced"
             xtype="panel">
             <items jcr:primaryType="cq:WidgetCollection">
-                <xssPolicy
+                <text
                     jcr:primaryType="cq:Widget"
-                    fieldLabel="AntiSamy policy"
-                    rootPath="/apps/ironsites/components/content/text/xss"
-                    name="./xssPolicy"
-                    xtype="pathfield"/>
+                    hideLabel="{Boolean}true"
+                    name="./text"
+                    externalStyleSheets="[]"
+                    xtype="richtext">
+                    <rtePlugins 
+                        jcr:primaryType="nt:unstructured">
+					    <edit           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/edit.infinity.json"/>
+					    <findreplace    jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/findreplace.infinity.json"/>
+					    <format         jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/format.infinity.json"/>
+					    <image          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/image.infinity.json"/>
+					    <justify        jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/image.infinity.json"/>
+					    <keys           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/justify.infinity.json"/>
+					    <links          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/links.infinity.json"/>
+					    <lists          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/lists.infinity.json"/>
+					    <misctools      jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/misctools.infinity.json"/>
+					    <paraformat     jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/paraformat.infinity.json"/>
+					    <subsuperscript jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/subsuperscript.infinity.json"/>
+					    <table          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/table.infinity.json"/>
+					    <undo           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/undo.infinity.json"/>
+                        <styles         jcr:primaryType="nt:unstructured" features="*">
+                            <styles
+                                jcr:primaryType="cq:Widget"
+                                path="/bin/options/tag.json?path=/etc/tags/ironsites/styles/components/text"
+                                xtype="cqinclude"/>
+	                   </styles>
+	               </rtePlugins>
+                </text>
+                <isRichTextFlag
+                    jcr:primaryType="cq:Widget"
+                    ignoreData="{Boolean}true"
+                    name="./textIsRich"
+                    value="true"
+                    xtype="hidden"/>
             </items>
-         </tab3>
+        </tab1>
     </items>
 </jcr:root>

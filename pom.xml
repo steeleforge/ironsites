@@ -436,7 +436,6 @@
     <module>cache</module>
     <module>i18n</module>
     <module>syndicate</module>
-    <module>xss</module>
     <module>content</module>
   </modules>
 </project>

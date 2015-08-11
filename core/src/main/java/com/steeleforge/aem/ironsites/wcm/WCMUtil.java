@@ -68,7 +68,7 @@ public enum WCMUtil {
      * @param pageContext
      * @return SlingHttpServletRequest instance
      */
-    public static SlingHttpServletRequest getSlingRequest(PageContext pageContext) {
+    public static SlingHttpServletRequest getSlingRequest(final PageContext pageContext) {
         return TagUtil.getRequest(pageContext);
     }
     
@@ -78,7 +78,7 @@ public enum WCMUtil {
      * @param request
      * @return SlingScriptHelper instance
      */
-    public static SlingScriptHelper getSlingScriptHelper(SlingHttpServletRequest request) {
+    public static SlingScriptHelper getSlingScriptHelper(final SlingHttpServletRequest request) {
         SlingBindings bindings = (SlingBindings)request.getAttribute(SlingBindings.class.getName());
         return bindings.getSling();
     }
@@ -89,9 +89,29 @@ public enum WCMUtil {
      * @param pageContext
      * @return SlingScriptHelper instance
      */
-    public static SlingScriptHelper getSlingScriptHelper(PageContext pageContext) {
+    public static SlingScriptHelper getSlingScriptHelper(final PageContext pageContext) {
         SlingHttpServletRequest request = getSlingRequest(pageContext);
         return getSlingScriptHelper(request);
+    }
+
+    /**
+     * Given a class and sling request, return an OSGi service
+     * @param request
+     * @param clazz
+     * @return
+     */
+    public static <T> T getService(final SlingHttpServletRequest request, final Class<T> clazz) {
+        return getSlingScriptHelper(request).getService(clazz);
+    }
+    
+    /**
+     * Given a class and PageContext, return an OSGi service
+     * @param pageContext
+     * @param clazz
+     * @return
+     */
+    public static <T> T getService(final PageContext pageContext, final Class<T> clazz) {
+        return getService(getSlingRequest(pageContext), clazz);
     }
     
     /**
@@ -102,7 +122,7 @@ public enum WCMUtil {
      * @return hashed value
      * @see <a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/hash/HashCode.html">HashCode</a>
      */
-    public static String getFastHash(String token, int minimumLength) {
+    public static String getFastHash(final String token, final int minimumLength) {
         HashFunction hf = Hashing.goodFastHash(minimumLength);
         HashCode hc = hf.newHasher()
            .putString(token, Charsets.UTF_8)
@@ -117,7 +137,7 @@ public enum WCMUtil {
      * @param token String to hash
      * @see WCMUtil#getFastHash(String, int)
      */
-    public static String getFastHash(String token) {
+    public static String getFastHash(final String token) {
         return getFastHash(token, 5);
     }
     
@@ -128,7 +148,7 @@ public enum WCMUtil {
      * @param encoding, default to UTF-8
      * @return URL encoded String
      */
-    public static String getURLEncoded(String token, String encoding) {
+    public static String getURLEncoded(final String token, final String encoding) {
         if (StringUtils.isNotEmpty(token)) {
             try {
                 if (StringUtils.isNotEmpty(encoding)) {
@@ -149,7 +169,7 @@ public enum WCMUtil {
      * @param token
      * @return URL encoded String
      */
-    public static String getURLEncoded(String token) {
+    public static String getURLEncoded(final String token) {
         return getURLEncoded(token, CharEncoding.UTF_8);
     }
     
@@ -160,7 +180,7 @@ public enum WCMUtil {
      * @param path
      * @return Page, null if request or path are empty, or if path doesn't resolve
      */
-    public static Page getPage(SlingHttpServletRequest request, String path) {
+    public static Page getPage(final SlingHttpServletRequest request, final String path) {
         Page page = null;
         if (null == request) {
            return page;
@@ -180,7 +200,7 @@ public enum WCMUtil {
      * @param request
      * @return Page, null if request is null
      */
-    public static Page getPage(SlingHttpServletRequest request) {
+    public static Page getPage(final SlingHttpServletRequest request) {
         Page page = null;
         if (null != request) {
            page = getPage(request, request.getResource().getPath());
@@ -194,7 +214,7 @@ public enum WCMUtil {
      * @param page
      * @return page title, nav title, or null
      */
-    public static String getPageTitle(Page page) {
+    public static String getPageTitle(final Page page) {
         String title = null;
         if (null != page) {
             if (null != page.getPageTitle()) {
@@ -216,7 +236,7 @@ public enum WCMUtil {
      * @param page
      * @return nav title, page title, or null
      */
-    public static String getPageNavigationTitle(Page page) {
+    public static String getPageNavigationTitle(final Page page) {
         String title = null;
         if (null != page) {
             if (null != page.getNavigationTitle()) {
@@ -234,7 +254,7 @@ public enum WCMUtil {
      * @param path
      * @return locale level resource path
      */
-    public static String getLanguageRoot(String path) {
+    public static String getLanguageRoot(final String path) {
         return LaunchUtils.getProductionResourcePath(LanguageUtil
                 .getLanguageRoot(path));
     }
@@ -244,7 +264,7 @@ public enum WCMUtil {
      * @param request
      * @return
      */
-    public static Locale getLocale(SlingHttpServletRequest request) {
+    public static Locale getLocale(final SlingHttpServletRequest request) {
         PageManager pageManager = (PageManager)request.getResourceResolver().adaptTo(PageManager.class);
         if (null == pageManager) {
             return Locale.getDefault();
@@ -259,7 +279,7 @@ public enum WCMUtil {
      * @param path
      * @return
      */
-    public static String getMangledPath(String path) {
+    public static String getMangledPath(final String path) {
         if (StringUtils.isBlank(path)) {
             return path;
         }
@@ -273,7 +293,7 @@ public enum WCMUtil {
      * @param delimiter
      * @return
      */
-    public static String getDelimitered(String token, String delimiter) {
+    public static String getDelimitered(final String token, final String delimiter) {
         if (StringUtils.isNotBlank(token) && !StringUtils.startsWith(token, delimiter)) {
             return delimiter + token;
         }
@@ -296,15 +316,15 @@ public enum WCMUtil {
      * @param sanitize
      * @return
      */
-    public static String getRelativeURL(SlingHttpServletRequest request, 
-            String path,
-            String selectors, 
-            String extension, 
-            String suffix,
-            boolean extensionSuffix,
-            boolean jcrMangle, 
-            boolean resolverMap,
-            boolean sanitize) {
+    public static String getRelativeURL(final SlingHttpServletRequest request, 
+            final String path,
+            final String selectors, 
+            final String extension, 
+            final String suffix,
+            final boolean extensionSuffix,
+            final boolean jcrMangle, 
+            final boolean resolverMap,
+            final boolean sanitize) {
         String href = path;
         SlingScriptHelper sling = WCMUtil.getSlingScriptHelper(request);
         ResourceResolver resolver = request.getResourceResolver();
@@ -361,11 +381,11 @@ public enum WCMUtil {
      * @param sanitize with XSS API
      * @return fully qualified URL
      */
-    public static String getExternalURL(SlingHttpServletRequest request,
-            String relativePath,
-            String protocol,
-            String domain,
-            boolean sanitize) {
+    public static String getExternalURL(final SlingHttpServletRequest request,
+            final String relativePath,
+            final String protocol,
+            final String domain,
+            final boolean sanitize) {
         String href = relativePath;
         SlingScriptHelper sling = getSlingScriptHelper(request);
         ResourceResolver resolver = request.getResourceResolver();
@@ -395,10 +415,10 @@ public enum WCMUtil {
      * @param domain domain:port or Externalizer profile, both with port
      * @return fully qualified URL
      */
-    public static String getExternalURL(SlingHttpServletRequest request,
-            String relativePath,
-            String protocol,
-            String domain) {
+    public static String getExternalURL(final SlingHttpServletRequest request,
+            final String relativePath,
+            final String protocol,
+            final String domain) {
         return getExternalURL(request, relativePath, protocol, domain, true);
     }
 
@@ -413,10 +433,10 @@ public enum WCMUtil {
      * @param extension
      * @return
      */
-    public static String getResourceURL(SlingHttpServletRequest request, 
-            String path,
-            String selectors, 
-            String extension) {
+    public static String getResourceURL(final SlingHttpServletRequest request, 
+            final String path,
+            final String selectors, 
+            final String extension) {
         return getRelativeURL(request, path, selectors, extension, null, true, true, true, true);
     }
     
@@ -430,12 +450,12 @@ public enum WCMUtil {
      * @param path
      * @return
      */
-    public static String getExternalResourceURL(SlingHttpServletRequest request, 
-            String path,
-            String protocol,
-            String domain,
-            String selectors,
-            String extension) {
+    public static String getExternalResourceURL(final SlingHttpServletRequest request, 
+            final String path,
+            final String protocol,
+            final String domain,
+            final String selectors,
+            final String extension) {
         return getExternalURL(request, 
                 getResourceURL(request, path, selectors, extension), 
                 protocol, 
@@ -453,8 +473,8 @@ public enum WCMUtil {
      * @param extension
      * @return
      */
-    public static String getPageURL(SlingHttpServletRequest request, 
-            String path) {
+    public static String getPageURL(final SlingHttpServletRequest request, 
+            final String path) {
         Page page = getPage(request, path);
         if (null == page) {
             return path;
@@ -473,10 +493,10 @@ public enum WCMUtil {
      * @param path
      * @return
      */
-    public static String getExternalPageURL(SlingHttpServletRequest request, 
-            String path,
-            String protocol,
-            String domain) {
+    public static String getExternalPageURL(final SlingHttpServletRequest request, 
+            final String path,
+            final String protocol,
+            final String domain) {
         return getExternalURL(request, 
                 getPageURL(request, path), 
                 protocol, 
@@ -490,7 +510,7 @@ public enum WCMUtil {
      * @param fullyQualifiedURL
      * @return
      */
-    public static String getSecureURL(String fullyQualifiedURL) {
+    public static String getSecureURL(final String fullyQualifiedURL) {
         if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.HTTPS)) {
             return WCMConstants.HTTPS + WCMConstants.DELIMITER_PORT + 
                     StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
@@ -504,7 +524,7 @@ public enum WCMUtil {
      * @param fullyQualifiedURL
      * @return
      */
-    public static String getProtocolRelativeURL(String fullyQualifiedURL) {
+    public static String getProtocolRelativeURL(final String fullyQualifiedURL) {
         if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE)) {
             return WCMConstants.PROTOCOL_RELATIVE + StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
         }
@@ -517,7 +537,7 @@ public enum WCMUtil {
      * @param path
      * @return identifier
      */
-    public static String getPathBasedIdentifier(String path) {
+    public static String getPathBasedIdentifier(final String path) {
        String mangled = getMangledPath(path);
         if (StringUtils.isBlank(mangled)) {
             return mangled;
