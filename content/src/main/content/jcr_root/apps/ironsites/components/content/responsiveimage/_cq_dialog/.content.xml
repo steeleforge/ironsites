@@ -12,9 +12,9 @@
             sling:resourceType="granite/ui/components/foundation/layouts/tabs"
             type="nav"/>
         <items jcr:primaryType="nt:unstructured">
-            <image
+            <images
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Image"
+                jcr:title="Images"
                 sling:resourceType="granite/ui/components/foundation/section">
                 <layout
                     jcr:primaryType="nt:unstructured"
@@ -24,19 +24,42 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
-                            <file
+                            <imageLarge
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/form/fileupload"
-                                autoStart="{Boolean}false"
-                                class="cq-droptarget"
-                                fieldLabel="Image asset"
-                                fileNameParameter="./image/fileName"
-                                mimeTypes="[image]"
-                                multiple="{Boolean}false"
-                                name="./image/file"
-                                title="Upload Image Asset"
-                                uploadUrl="${suffix.path}"
-                                useHTML5="{Boolean}true"/>
+                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                fieldLabel="Link to"
+                                name="./image/fileReference"
+                                rootPath="/content/dam"/>
+                            <resTypeLarge
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/hidden"
+                                name="./image/sling:resourceType"
+                                value="wcm/components/foundation/image"
+                                ignoreData="{Boolean}true" />
+                            <imageMedium
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                fieldLabel="Link to"
+                                name="./image/fileReference"
+                                rootPath="/content/dam"/>
+                            <resTypeMedium
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/hidden"
+                                name="./imageMedium/sling:resourceType"
+                                value="wcm/components/foundation/image"
+                                ignoreData="{Boolean}true" />
+                            <imageSmall
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                fieldLabel="Link to"
+                                name="./imageSmall/fileReference"
+                                rootPath="/content/dam"/>
+                            <resTypeSmall
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/hidden"
+                                name="./imageSmall/sling:resourceType"
+                                value="wcm/components/foundation/image"
+                                ignoreData="{Boolean}true" />
                             <title
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/textfield"
@@ -65,12 +88,6 @@
                                 sling:resourceType="granite/ui/components/foundation/form/textarea"
                                 fieldLabel="Description"
                                 name="./image/jcr:description"/>
-                            <resType
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/form/hidden"
-                                name="./image/sling:resourceType"
-                                value="wcm/components/foundation/image"
-                                ignoreData="{Boolean}true" />
                             
                         </items>
                     </column>

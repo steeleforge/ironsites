@@ -1,0 +1,80 @@
+<!--/*
+    This is free and unencumbered software released into the public domain.
+    
+    Anyone is free to copy, modify, publish, use, compile, sell, or
+    distribute this software, either in source code form or as a compiled
+    binary, for any purpose, commercial or non-commercial, and by any
+    means.
+    
+    In jurisdictions that recognize copyright laws, the author or authors
+    of this software dedicate any and all copyright interest in the
+    software to the public domain. We make this dedication for the benefit
+    of the public at large and to the detriment of our heirs and
+    successors. We intend this dedication to be an overt act of
+    relinquishment in perpetuity of all present and future rights to this
+    software under copyright law.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+    
+    For more information, please refer to <http://unlicense.org/>
+    ***************************************************************************
+    
+    ironsites responsive image - for disrcete breakpoints
+    
+*/--><sly data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}" data-sly-call="${clientLib.all @ categories='picturefill.2.3.1'}" data-sly-unwrap />
+<figure data-sly-use.large="${'com.steeleforge.aem.ironsites.wcm.components.ImageUse' @ image='/image'}" data-sly-test="${!large.image.empty}"s>
+    <a  data-sly-use.lu="${'com.steeleforge.aem.ironsites.wcm.components.LinkUse' @ path=large.image.link}"
+        data-sly-unwrap="${!lu.link.href}" class="${wcmmode.edit ? large.image.target : '' @ context='attribute'}"
+        href="${lu.link.href}"
+        onclick="CQ_Analytics.record({event: 'imageClick', values: { imageLink: '${lu.link.href @ context='scriptString'}', imageAsset: '${large.image.fileReference @ context='scriptString'}', imageTitle: '${large.image.fileName @ context='scriptString'}' }, collect: false, options: { obj: this }, componentPath: '${large.image.resource.resourceType @ context='scriptString'}'})">
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <!--/* LARGE */-->
+            <source
+                srcset="${large.fullSource @ context='uri'}" 
+                media="(min-width: 1200px)" />
+            <!--/* /LARGE */-->
+            <!--/* MEDIUM */-->
+            <sly
+                data-sly-use.medium="${'com.steeleforge.aem.ironsites.wcm.components.ImageUse' @ image='/imageMedium', widths=[768]}"  
+                data-sly-list.src="${medium.sources}" data-sly-unwrap><source
+                srcset="${src.srcset @ context='uri'}" 
+                media="(min-width: 768px)" /></sly>            
+            <!--/* /MEDIUM */-->
+            <!--/* SMALL */-->
+            <sly 
+                data-sly-use.small="${'com.steeleforge.aem.ironsites.wcm.components.ImageUse' @ image='/imageSmall', widths=[480]}" 
+                data-sly-list.src="${small.sources}" data-sly-unwrap><source
+                srcset="${src.srcset @ context='uri'}" 
+                media="(min-width: 1px)" /></sly>
+            <!--/* /SMALL */-->
+            <img 
+               srcset="${large.fullSource @ context='uri'}" 
+               alt="${large.image.alt  @ context='attribute'}" 
+               title="${large.image.title @ context='attribute'}" 
+               data-emptytext="${wcmmode.edit? 'Image' : ''}"
+               usemap="#${large.image.hash @ context='attribute'}" />
+            <!--[if IE 9]></video><![endif]-->
+            <noscript>
+                <img
+                    srcset="${large.fullSource @ context='uri'}" 
+                    alt="${large.image.alt  @ context='attribute'}" 
+                    title="${large.image.title @ context='attribute'}" 
+                    data-emptytext="${wcmmode.edit? 'Image' : ''}"
+                    usemap="#${large.image.hash @ context='attribute'}" />
+            </noscript>
+        </picture>
+    </a>
+    <figcaption data-sly-test="${iu.image.description}">${iu.image.description @ context='html'}</figcaption>
+</figure>
+<sly
+    data-sly-use.large="${'com.steeleforge.aem.ironsites.wcm.components.ImageUse' @ path='/image',widths=[1200]}" 
+    data-sly-test="${wcmmode.edit && large.image.empty}" data-sly-unwrap>
+    <img class="cq-placeholder file cq-image-placeholder" src="/etc/designs/default/0.gif" />
+</sly>

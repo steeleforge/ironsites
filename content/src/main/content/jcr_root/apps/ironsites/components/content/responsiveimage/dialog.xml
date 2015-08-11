@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    activeTab="{Long}0"
+    helpPath="en/cq/current/wcm/default_components.html#Image"
+    xtype="tabpanel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <images
+            jcr:primaryType="cq:Widget"
+            title="Images"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <imageLarge
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Desktop (1200px+)"
+                    fieldLabel="Large Image"
+                    name="./image/fileReference"
+                    allowBlank="{Boolean}false"
+                    rootPath="/content/dam"
+                    xtype="pathfield"/>
+                <resTypeLarge
+                    jcr:primaryType="cq:Widget"
+                    xtype="hidden"
+                    name="./image/sling:resourceType"
+                    value="wcm/components/foundation/image"
+                    ignoreData="{Boolean}true" />
+                <imageMedium
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Tablet Portrait, Smartphone Landscape (768px+)"
+                    fieldLabel="Medium Image"
+                    name="./imageMedium/fileReference"
+                    allowBlank="{Boolean}false"
+                    rootPath="/content/dam"
+                    xtype="pathfield"/>
+                <resTypeMedium
+                    jcr:primaryType="cq:Widget"
+                    xtype="hidden"
+                    name="./imageMedium/sling:resourceType"
+                    value="wcm/components/foundation/image"
+                    ignoreData="{Boolean}true" />
+                <imageSmall
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Mobile Portrait (480+)"
+                    fieldLabel="Small Image"
+                    name="./imageSmall/fileReference"
+                    allowBlank="{Boolean}false"
+                    rootPath="/content/dam"
+                    xtype="pathfield" />
+                <resTypeSmall
+                    jcr:primaryType="cq:Widget"
+                    xtype="hidden"
+                    name="./imageSmall/sling:resourceType"
+                    value="wcm/components/foundation/image"
+                    ignoreData="{Boolean}true"/>
+            </items>
+        </images>
+        <advanced
+            jcr:primaryType="cq:Widget"
+            title="Advanced"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <title
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Title"
+                    name="./image/jcr:title"
+                    xtype="textfield"/>
+                <alt
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="(leave empty to use the title defined above)"
+                    fieldLabel="Alt Text"
+                    name="./image/alt"
+                    xtype="textfield"/>
+                <linkURL
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Drop files or pages from the Content Finder"
+                    fieldLabel="Link to"
+                    name="./image/linkURL"
+                    xtype="pathfield"/>
+		        <linkTarget
+		            jcr:primaryType="cq:Widget"
+		            fieldLabel="Link Target"
+		            fieldDescription="(e.g. _blank)"
+		            name="./image/target"
+		            xtype="textfield"/>
+                <description
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Description"
+                    name="./image/jcr:description"
+                    xtype="textarea"/>
+            </items>
+        </advanced>
+    </items>
+</jcr:root>

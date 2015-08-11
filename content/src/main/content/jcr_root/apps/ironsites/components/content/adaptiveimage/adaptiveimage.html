@@ -43,20 +43,22 @@
                alt="${iu.image.alt  @ context='attribute'}" 
                title="${iu.image.title @ context='attribute'}" 
                data-emptytext="${wcmmode.edit? 'Image' : ''}"
-               usemap="${iu.image.hash @ context='attribute'}" />
+               usemap="#${iu.image.hash @ context='attribute'}" />
             <!--[if IE 9]></video><![endif]-->
             <noscript>
                 <img
                     srcset="${iu.fullSource @ context='uri'}" 
                     alt="${iu.image.alt  @ context='attribute'}" 
                     title="${iu.image.title @ context='attribute'}" 
-                    data-emptytext="Image"
-                       usemap="#${iu.image.hash @ context='attribute'}" />
+                    data-emptytext="${wcmmode.edit? 'Image' : ''}"
+                    usemap="#${iu.image.hash @ context='attribute'}" />
             </noscript>
         </picture>
     </a>
     <figcaption data-sly-test="${iu.image.description}">${iu.image.description @ context='html'}</figcaption>
 </figure>
-<sly data-sly-test="${wcmmode.edit && iu.image.empty}" data-sly-unwrap>
+<sly
+    data-sly-use.iu="${'com.steeleforge.aem.ironsites.wcm.components.ImageUse'}"  
+    data-sly-test="${wcmmode.edit && iu.image.empty}" data-sly-unwrap>
     <img class="cq-placeholder file cq-image-placeholder" src="/etc/designs/default/0.gif" />
 </sly>
