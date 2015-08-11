@@ -30,7 +30,7 @@
 */--><sly 
     data-sly-use.page="com.steeleforge.aem.ironsites.wcm.page.PageUse"
     data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}" data-sly-unwrap>
-	<sly data-sly-test="${page.categories}" data-sly-call="${clientLib.css @ categories=page.categories}" data-sly-unwrap />
+	<sly data-sly-test="${page.categories}" data-sly-call="${clientLib.css @ categories=page.namedCategories}" data-sly-unwrap />
 	<sly data-sly-list="${page.css}" data-sly-unwrap>
     <link href="${item}" rel="stylesheet" type="text/css" />
 	</sly>

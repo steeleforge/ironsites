@@ -21,7 +21,6 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adobe.granite.xss.XSSAPI;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 
@@ -36,9 +35,9 @@ public class TagOptionsServlet extends SlingSafeMethodsServlet implements Opting
     private static final Logger LOG = LoggerFactory.getLogger(TagOptionsServlet.class);    
     // statics
     private static final boolean DEFAULT_ENABLED = true;
-    private static final String PN_ROOT = "root";
-    private static final String PN_TEXT = "text";
-    private static final String PN_VALUE = "value";
+    private static final String PN_PATH = "path";
+    private static final String PN_KEY = "text";
+    private static final String PN_VALUE = "cssName";
 
     @Property(label = "Enable", 
             description = "Enable Servlet",
@@ -49,11 +48,8 @@ public class TagOptionsServlet extends SlingSafeMethodsServlet implements Opting
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
-        String root = request.getParameter(PN_ROOT);
+        String root = request.getParameter(PN_PATH);
         if (StringUtils.isNotBlank(root)) {
-            XSSAPI xssapi = request.adaptTo(XSSAPI.class);
-            // escape root path
-            root = xssapi.encodeForJSString(root);
             TagManager tagManager = request.getResourceResolver().adaptTo(TagManager.class);
             Tag rootTag = tagManager.resolve(root);
             // cannot resolve root tag
@@ -68,7 +64,7 @@ public class TagOptionsServlet extends SlingSafeMethodsServlet implements Opting
                     child = children.next();
                     try {
                         items.put((Object)new JSONObject()
-                                .put(PN_TEXT, child.getTitle())
+                                .put(PN_KEY, child.getTitle())
                                 .put(PN_VALUE, child.getDescription()));
                     } catch (JSONException e) {
                         LOG.debug(e.getMessage());
@@ -90,7 +86,7 @@ public class TagOptionsServlet extends SlingSafeMethodsServlet implements Opting
     
     @Override
     public boolean accepts(SlingHttpServletRequest request) {
-        if (enabled && null != request.getParameter(PN_ROOT)) {
+        if (enabled && null != request.getParameter(PN_PATH)) {
             return true;
         }
         return false;

@@ -192,6 +192,13 @@ public class PageUse extends WCMUse {
     }
     
     /**
+     * @return delimited category names
+     */
+    public String getNamedCategories() {
+        return StringUtils.join(getCategories(), WCMConstants.DELIMITER_COMMA);
+    }
+    
+    /**
      * @return current page name
      */
     public String getName() {
