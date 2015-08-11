@@ -19,26 +19,26 @@
                     xtype="richtext">
                     <rtePlugins 
                         jcr:primaryType="nt:unstructured">
-					    <edit           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/edit.infinity.json"/>
-					    <findreplace    jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/findreplace.infinity.json"/>
-					    <format         jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/format.infinity.json"/>
-					    <image          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/image.infinity.json"/>
-					    <justify        jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/image.infinity.json"/>
-					    <keys           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/justify.infinity.json"/>
-					    <links          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/links.infinity.json"/>
-					    <lists          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/lists.infinity.json"/>
-					    <misctools      jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/misctools.infinity.json"/>
-					    <paraformat     jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/paraformat.infinity.json"/>
-					    <subsuperscript jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/subsuperscript.infinity.json"/>
-					    <table          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/table.infinity.json"/>
-					    <undo           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/undo.infinity.json"/>
+                        <edit           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/edit.infinity.json"/>
+                        <findreplace    jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/findreplace.infinity.json"/>
+                        <format         jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/format.infinity.json"/>
+                        <image          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/image.infinity.json"/>
+                        <justify        jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/image.infinity.json"/>
+                        <keys           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/justify.infinity.json"/>
+                        <links          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/links.infinity.json"/>
+                        <lists          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/lists.infinity.json"/>
+                        <misctools      jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/misctools.infinity.json"/>
+                        <paraformat     jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/paraformat.infinity.json"/>
+                        <subsuperscript jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/subsuperscript.infinity.json"/>
+                        <table          jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/table.infinity.json"/>
+                        <undo           jcr:primaryType="cq:Widget" xtype="cqinclude" path="/apps/ironsites/common/rtePlugins/undo.infinity.json"/>
                         <styles         jcr:primaryType="nt:unstructured" features="*">
                             <styles
                                 jcr:primaryType="cq:Widget"
                                 path="/bin/options/tag.json?path=/etc/tags/ironsites/styles/components/text"
                                 xtype="cqinclude"/>
-	                   </styles>
-	               </rtePlugins>
+                       </styles>
+                   </rtePlugins>
                 </text>
                 <isRichTextFlag
                     jcr:primaryType="cq:Widget"

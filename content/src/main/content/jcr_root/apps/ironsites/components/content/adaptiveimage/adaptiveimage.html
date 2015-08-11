@@ -56,17 +56,6 @@
         </picture>
     </a>
     <figcaption data-sly-test="${iu.image.description}">${iu.image.description @ context='html'}</figcaption>
-    <map
-        data-sly-list="${image.imageMaps.maps}"
-        name="${image.imageMaps.name}">
-        <area
-            shape="${item.type}"
-            coords="${item.coords}"
-            href="${item.href}"
-            target="${item.target}"
-            alt="${item.alt}" 
-            title="${item.title}"/>
-    </map>
 </figure>
 <sly data-sly-test="${wcmmode.edit && iu.image.empty}" data-sly-unwrap>
     <img class="cq-placeholder file cq-image-placeholder" src="/etc/designs/default/0.gif" />
