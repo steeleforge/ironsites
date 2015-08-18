@@ -265,7 +265,7 @@ public class PageUse extends WCMUse {
      * @return set of configured APIs for a given site
      */
     public Set<String> getApis() {
-        final ApiService api = getSlingScriptHelper().getService(ApiService.class);
+        ApiService api = getSlingScriptHelper().getService(ApiService.class);
         return api.getServices(getSite());        
     }
     
@@ -276,7 +276,7 @@ public class PageUse extends WCMUse {
      * @return
      */
     public String getApi() {
-        final ApiService api = getSlingScriptHelper().getService(ApiService.class);
+        ApiService api = getSlingScriptHelper().getService(ApiService.class);
         if (null != api) {
             return api.getApi(getSite(), get(PN_API, String.class));
         }
