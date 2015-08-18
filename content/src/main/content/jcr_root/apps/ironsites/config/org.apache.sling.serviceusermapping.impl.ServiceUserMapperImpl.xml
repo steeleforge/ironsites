@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
     jcr:primaryType="sling:OsgiConfig"
-    user.mapping="[com.adobe.granite.oauth.server=oauthservice,com.adobe.granite.oauth.server:authentication-handler=admin,com.day.cq.cq-search-suggest=suggestionservice,com.steeleforge.aem.ironsites.service:ApiService=admin,com.steeleforge.aem.ironsites.syndicate.service:TopicReplicationService=admin]"/>
+    user.mapping="[com.adobe.granite.oauth.server=oauthservice,com.adobe.granite.oauth.server:authentication-handler=admin,com.day.cq.cq-search-suggest=suggestionservice,com.steeleforge.aem.ironsites-core:ApiService=admin,com.steeleforge.aem.ironsites-syndicate:TopicReplicationService=admin]"/>

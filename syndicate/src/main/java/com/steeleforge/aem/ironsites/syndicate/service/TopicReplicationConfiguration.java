@@ -53,7 +53,9 @@ import com.google.common.collect.Sets;
     metatype = true, 
     policy = ConfigurationPolicy.REQUIRE)
 public class TopicReplicationConfiguration {
+    @SuppressWarnings("unused")
     private ComponentContext componentContext = null;
+    public static final String REFERENCE = "TopicReplicationConfiguration";
     
     @Property(label = "Topic", description = "Topic name/descriptor")
     static final String PN_TOPIC = "topicreplication.configuration.topic";

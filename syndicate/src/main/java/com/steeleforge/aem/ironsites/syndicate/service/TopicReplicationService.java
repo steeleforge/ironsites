@@ -289,7 +289,7 @@ public class TopicReplicationService extends ResourceResolverSubservice {
     }
     
     protected void bindConfigurations(ServiceReference ref) {
-        Object svc = this.componentContext.locateService("TopicReplicationConfiguration", ref);
+        Object svc = this.componentContext.locateService(TopicReplicationConfiguration.REFERENCE, ref);
         TopicReplicationConfiguration config;
         if (svc instanceof TopicReplicationConfiguration) {
             config = (TopicReplicationConfiguration)svc;

@@ -35,11 +35,11 @@
             <artifactId>ironsites-cache</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!--         <dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ironsites-syndicate</artifactId>
             <version>${project.version}</version>
-        </dependency> -->
+        </dependency>
         <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>aem-api</artifactId>
@@ -86,17 +86,17 @@
                         </embedded>
                         <embedded>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>ironsites-xss</artifactId>
-                            <target>/apps/ironsites/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>${project.groupId}</groupId>
                             <artifactId>ironsites-cache</artifactId>
                             <target>/apps/ironsites/install</target>
                         </embedded>
                         <embedded>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>ironsites-syndicate</artifactId>
+                            <target>/apps/ironsites/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>ironsites-xss</artifactId>
                             <target>/apps/ironsites/install</target>
                         </embedded>
                     </embeddeds>

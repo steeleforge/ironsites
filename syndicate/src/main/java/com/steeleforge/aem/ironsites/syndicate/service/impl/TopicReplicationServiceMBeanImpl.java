@@ -26,8 +26,6 @@
  */
 package com.steeleforge.aem.ironsites.syndicate.service.impl;
 
-import java.util.Set;
-
 import javax.management.DynamicMBean;
 import javax.management.NotCompliantMBeanException;
 
@@ -37,10 +35,8 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 
 import com.adobe.granite.jmx.annotation.AnnotatedStandardMBean;
-
-import com.day.cq.replication.ReplicationStatus;
 import com.day.cq.replication.ReplicationActionType;
-
+import com.day.cq.replication.ReplicationStatus;
 import com.steeleforge.aem.ironsites.syndicate.service.TopicReplicationService;
 import com.steeleforge.aem.ironsites.syndicate.service.TopicReplicationServiceMBean;
 
