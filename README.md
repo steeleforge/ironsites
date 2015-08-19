@@ -23,21 +23,25 @@ To deploy to a local publish instance, qualify the environment.
 
 
 ## Dependencies
-+ Adobe Experience Management (CQ) 6
++ Adobe Experience Management 6.1
 + JDK 1.7+
 + maven3
 + Patience required for exploring alpha-level software
 
 ## AEM Interoperability
 
-The 1.2-SNAPSHOT only supports AEM 6.0 -- no 6.1 support yet
+The 1.3-SNAPSHOT only supports AEM 6.1 -- 6.0 due to a variety of dependency issues, also there is some API deprecation to consider. For AEM 6.0, look to 1.2-SNAPSHOT release and cherry pick specific commits/features from 1.3-SNAPSHOT which suit your problem domain.
 
 ## Features
++ [Topic Syndication/Replication](https://github.com/steeleforge/ironsites/wiki/)
 + [Internationalization (i18n) Helpers](https://github.com/steeleforge/ironsites/wiki/Internationalization-Helpers)
 + [WCMMode Helpers](https://github.com/steeleforge/ironsites/wiki/WCMMode-Helpers)
 + [Simple Cache](https://github.com/steeleforge/ironsites/wiki/Simple-Cache)
 + [Components](https://github.com/steeleforge/ironsites/wiki/Components)
 + [Misc.](https://github.com/steeleforge/ironsites/wiki/Miscellaneous)
+
+### Topic Syndication/Replication [[wiki]](https://github.com/steeleforge/ironsites/wiki/)
++ TopicReplicationService performs the coordination of collecting the configurations and providing an interface for actually replicating content given a path and the topic. The appropriate agentIdFilter(s) per topic configuration could replicate content to zero or more instances based on the configuration of the replication agent on the system in question. NOTE: This assumes a non-clustered topology.
 
 ### Internationalization (i18n) Helpers [[wiki]](https://github.com/steeleforge/ironsites/wiki/Internationalization-Helpers)
 + Sane patterns for content-managed i18n copy in AEM components with reasonable Sling supported fallbacks as well as low-effort access to the CQ out-of-box [i18n translation helper]( http://dev.day.com/docs/en/cq/current/javadoc/com/day/cq/i18n/I18n.html).
