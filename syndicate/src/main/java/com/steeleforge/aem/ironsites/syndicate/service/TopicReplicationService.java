@@ -44,6 +44,8 @@ import org.apache.felix.scr.annotations.References;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.commons.osgi.PropertiesUtil;
+import org.apache.sling.discovery.TopologyEvent;
+import org.apache.sling.discovery.TopologyEventListener;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
@@ -68,7 +70,7 @@ import com.steeleforge.aem.ironsites.wcm.ResourceResolverSubservice;
  * 
  * @author David Steele
  */
-@Service(value = TopicReplicationService.class)
+@Service(value = { TopicReplicationService.class, TopologyEventListener.class })
 @Component(label = "ironsites - Topic Replication Service",
     description = "Replicate resource through given agentIds per topic",
     immediate = true)
@@ -80,7 +82,7 @@ import com.steeleforge.aem.ironsites.wcm.ResourceResolverSubservice;
             bind = "bindConfigurations",
             unbind = "unbindConfigurations")
 })
-public class TopicReplicationService extends ResourceResolverSubservice {
+public class TopicReplicationService extends ResourceResolverSubservice implements TopologyEventListener {
     private static final Logger LOG = LoggerFactory.getLogger(TopicReplicationService.class);
 
     // OSGi managed services
@@ -100,6 +102,7 @@ public class TopicReplicationService extends ResourceResolverSubservice {
     // locals
     private Map<String,Set<String>> agentsByTopic;
     protected ComponentContext componentContext;
+    private boolean isLeader = false;
 
     // properties
     @Property(label = "Replicate Synchronously", 
@@ -119,6 +122,16 @@ public class TopicReplicationService extends ResourceResolverSubservice {
     @Deactivate
     protected void deactivate(ComponentContext context) {
         this.agentsByTopic.clear();
+    }
+    
+    /* (non-Javadoc)
+     * @see org.apache.sling.discovery.TopologyEventListener#handleTopologyEvent(org.apache.sling.discovery.TopologyEvent)
+     */
+    public void handleTopologyEvent(final TopologyEvent event) {
+        if (TopologyEvent.Type.TOPOLOGY_CHANGED == event.getType() || 
+                TopologyEvent.Type.TOPOLOGY_INIT == event.getType()) {
+            this.isLeader = event.getNewView().getLocalInstance().isLeader();
+        }
     }
     
     /**
@@ -225,6 +238,10 @@ public class TopicReplicationService extends ResourceResolverSubservice {
     private boolean meetsReplicationPreconditions(final ReplicationActionType type, 
             final String path,
             final String topic) {
+        if (false == this.isLeader) {
+            LOG.debug("instance is not cluster leader");
+            return false;
+        }
         if (null == type) {
             // no replication type
             LOG.trace("no replication type provided");
