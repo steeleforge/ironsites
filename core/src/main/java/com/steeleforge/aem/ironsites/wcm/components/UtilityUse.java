@@ -28,16 +28,20 @@ package com.steeleforge.aem.ironsites.wcm.components;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.commons.jcr.JcrConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 
-public class UtilityUse extends WCMUse {
+public class UtilityUse extends WCMUsePojo {
     private static final String PN_VALUE = "value";
     private String value = null;
     
-    @Override
+    public UtilityUse() {
+        super();
+    }
+
+    @Override    
     public void activate() throws Exception {
          value = get(PN_VALUE, String.class);
          if (StringUtils.isBlank(value)) {

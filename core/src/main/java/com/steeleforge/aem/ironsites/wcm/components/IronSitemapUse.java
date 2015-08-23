@@ -30,20 +30,24 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.foundation.Sitemap.Link;
 import com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter;
 
 /**
- * IronSitemapUse leverages sightly WCMUse API to populate IronSitemap
+ * IronSitemapUse leverages sightly WCMUsePojo API to populate IronSitemap
  *
  * @author David Steele
  */
-public class IronSitemapUse extends WCMUse {
+public class IronSitemapUse extends WCMUsePojo {
     private IronSitemap sitemap = null;
     
-    @Override
+    public IronSitemapUse() {
+        super();
+    }
+
+    @Override    
     public void activate() throws Exception {
         String path = getProperties().get("path", "");
         String hide = getProperties().get("hideProperty", "hideInNav");
@@ -63,7 +67,7 @@ public class IronSitemapUse extends WCMUse {
     }
     
     /**
-     * WCMUse accessor method
+     * WCMUsePojo accessor method
      * 
      * @return Sitemap#getLinks() or empty list
      */

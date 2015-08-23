@@ -33,17 +33,21 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 
-public class StyleUse extends WCMUse {
+public class StyleUse extends WCMUsePojo {
     private static final String PN_STYLE = "style";
     
     private String[] style = null;
     
-    @Override
+    public StyleUse() {
+        super();
+    }
+
+    @Override    
     public void activate() throws Exception {
         // if style is not provided to options, acquire from component
         style = get(PN_STYLE, String[].class);

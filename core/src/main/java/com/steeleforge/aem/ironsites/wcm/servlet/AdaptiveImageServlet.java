@@ -48,6 +48,10 @@ public class AdaptiveImageServlet extends AbstractImageServlet {
     
     // locals
     private Image image = null;
+    
+    public AdaptiveImageServlet() {
+        super();
+    }
 
     @Activate
     protected void activate(ComponentContext componentContext) {

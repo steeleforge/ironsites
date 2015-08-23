@@ -38,10 +38,10 @@ import javax.jcr.RepositoryException;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.sling.api.resource.Resource;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.steeleforge.aem.ironsites.wcm.servlet.AdaptiveImageConfig;
 
-public class ImageUse extends WCMUse {
+public class ImageUse extends WCMUsePojo {
     // statics
     private static final String PN_PATH_IMAGE = "image";
     private static final String PN_WIDTHS_IMAGE = "widths";
@@ -55,8 +55,11 @@ public class ImageUse extends WCMUse {
     private List<Integer> widths = null;
     private IronImage image = null;
     private List<Map<String, String>> sources = null;
+    
+    public ImageUse() {
+        super();
+    }
 
-    @Override
     public void activate() throws Exception {
         final AdaptiveImageConfig config = getSlingScriptHelper().getService(AdaptiveImageConfig.class);
         image = setImage();

@@ -62,10 +62,6 @@
             <artifactId>org.apache.felix.scr</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
@@ -92,13 +88,10 @@
         </dependency>
         <dependency>
             <groupId>com.adobe.aem</groupId>
-            <artifactId>aem-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.jmx</artifactId>
-            <version>0.2.14</version>
-            <scope>compile</scope>
+            <artifactId>uber-jar</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
+            <classifier>obfuscated-apis</classifier>
         </dependency>
         <!-- ironsites -->
         <dependency>
@@ -114,6 +107,14 @@
     <!-- ====================================================================== -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
@@ -164,12 +165,6 @@
                 <configuration>
                     <slingUrl>http://${aem.host}:${aem.port}/apps/ironsites/install</slingUrl>
                     <usePut>true</usePut>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>maven-sling-plugin</artifactId>
-                <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>

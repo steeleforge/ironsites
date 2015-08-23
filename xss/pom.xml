@@ -58,10 +58,6 @@
             <artifactId>org.apache.felix.scr</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
@@ -102,6 +98,13 @@
             <version>5.6.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
+            <classifier>obfuscated-apis</classifier>
+        </dependency>
         <!-- ironsites -->
         <dependency>
             <groupId>com.steeleforge.aem</groupId>
@@ -116,6 +119,14 @@
     <!-- ====================================================================== -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>

@@ -34,7 +34,7 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.wcm.api.Page;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMURLBuilder;
@@ -42,7 +42,7 @@ import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 import com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter;
 import com.steeleforge.aem.ironsites.wcm.page.filter.InvalidPageFilter;
 
-public class LinkUse extends WCMUse {
+public class LinkUse extends WCMUsePojo {
     // statics
     public static final String PN_PATH = "path";
     public static final String PN_TEXT = "text";
@@ -69,7 +69,11 @@ public class LinkUse extends WCMUse {
     private Boolean ping;
     private String text;
     
-    @Override
+    public LinkUse() {
+        super();
+    }
+
+    @Override    
     public void activate() throws Exception {
         path = get(PN_PATH, String.class);
         if (null == path) path = getProperties().get(PN_PATH, String.class);

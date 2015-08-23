@@ -29,13 +29,13 @@ package com.steeleforge.aem.ironsites.wcm.page;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletResponse;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.adobe.granite.xss.XSSAPI;
 import com.day.cq.wcm.api.Page;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 
-public class RedirectUse extends WCMUse {
+public class RedirectUse extends WCMUsePojo {
     // statics
     private static final String PN_REDIRECT_PROPERTY = "property";
     private static final String PN_DEFAULT_REDIRECT_PROPERTY = "redirectTarget";
@@ -46,6 +46,10 @@ public class RedirectUse extends WCMUse {
     String redirectPath = null;
     String redirectProperty = null;
     Integer redirectType = null;
+    
+    public RedirectUse() {
+        super();
+    }
 
     @Override
     public void activate() throws Exception {

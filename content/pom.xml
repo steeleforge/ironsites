@@ -40,10 +40,6 @@
             <artifactId>ironsites-syndicate</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.adobe.aem</groupId>
-            <artifactId>aem-api</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <resources>

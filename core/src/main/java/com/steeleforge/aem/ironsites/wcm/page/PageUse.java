@@ -33,7 +33,7 @@ import java.util.Set;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.adobe.cq.sightly.WCMUse;
+import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.tagging.Tag;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
@@ -41,7 +41,7 @@ import com.steeleforge.aem.ironsites.wcm.api.ApiService;
 import com.steeleforge.aem.ironsites.wcm.page.head.Icon;
 import com.steeleforge.aem.ironsites.wcm.page.head.Meta;
 
-public class PageUse extends WCMUse {
+public class PageUse extends WCMUsePojo {
     // statics
     public static final String PN_CATEGORIES = "categories";
     public static final String PN_JS = "js";
@@ -67,11 +67,14 @@ public class PageUse extends WCMUse {
     private List<Icon> icons = null;
     private List<Meta> meta = null;
     
+    public PageUse() {
+        super();
+    }
+
     @Override
     public void activate() throws Exception {
         // noop
     }
-
     
     /**
      * @return current page path

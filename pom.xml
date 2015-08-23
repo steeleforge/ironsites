@@ -14,7 +14,7 @@
     <description>AEM Development Utilities</description>
 
     <prerequisites>
-        <maven>3.0.2</maven>
+        <maven>3.2.1</maven>
     </prerequisites>
 
     <!-- ====================================================================== -->
@@ -28,12 +28,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>            
         <!-- ironsites -->
-        <slf4j.version>1.6.4</slf4j.version>
+        <slf4j.version>1.6.6</slf4j.version>
         <junit.version>4.8.2</junit.version>
-        <scr.annotations.version>1.9.12</scr.annotations.version>
-        <scr.generator.version>1.3.0</scr.generator.version>
+        <scr.annotations.version>1.9.6</scr.annotations.version>
+        <scr.generator.version>1.8.0</scr.generator.version>
         <maven.bundle.version>2.5.3</maven.bundle.version>
-        <maven.scr.version>1.21.0</maven.scr.version>
+        <maven.scr.version>1.15.0</maven.scr.version>
         <maven.sling.version>2.1.0</maven.sling.version>
         <powermock.version>1.5</powermock.version>
     </properties>
@@ -42,14 +42,8 @@
         <dependencies>
             <dependency>
                 <groupId>org.osgi</groupId>
-                <artifactId>org.osgi.core</artifactId>
-                <version>4.2.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.compendium</artifactId>
-                <version>4.2.0</version>
+                <version>4.3.1</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -103,33 +97,9 @@
             <!-- common libraries/API -->
             <dependency>
                 <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.scr</artifactId>
-                <scope>provided</scope>
-                <version>1.6.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.osgi</groupId>
-                <artifactId>org.osgi.core</artifactId>
-                <scope>provided</scope>
-                <version>4.2.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
                 <scope>provided</scope>
                 <version>${maven.scr.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.scr.annotations</artifactId>
-                <scope>provided</scope>
-                <version>${scr.annotations.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.api</artifactId>
-                <scope>provided</scope>
-                <version>2.3.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.sling</groupId>
@@ -166,39 +136,16 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>org.apache.felix.scr</artifactId>
                 <scope>provided</scope>
-                <version>1.6.2</version>
+                <version>1.6.3-R1409029</version>
             </dependency>
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.core</artifactId>
                 <scope>provided</scope>
-                <version>4.2.0</version>
+                <version>5.0.0</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.api</artifactId>
-                <scope>provided</scope>
-                <version>2.3.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.scripting.jsp</artifactId>
-                <scope>provided</scope>
-                <version>2.0.8</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <scope>provided</scope>
-                <version>1.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.day.commons.osgi.wrapper</groupId>
-                <artifactId>com.day.commons.osgi.wrapper.commons-lang2</artifactId>
-                <scope>provided</scope>
-                <version>2.5-0001</version>
-            </dependency>
-            <dependency><!-- fixes junit slf4j transitive issue -->
+            <!-- fixes junit slf4j transitive issue -->
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
@@ -211,16 +158,23 @@
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>com.adobe.aem</groupId>
-                <artifactId>aem-api</artifactId>
-                <version>6.0.0.1</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>15.0</version>
+                <version>14.0.1</version>
                 <scope>provided</scope>
+            </dependency>
+			<dependency>
+				<groupId>com.adobe.aem</groupId>
+				<artifactId>aem-api</artifactId>
+				<version>6.0.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+            <dependency>
+                <groupId>com.adobe.aem</groupId>
+                <artifactId>uber-jar</artifactId>
+                <version>6.1.0</version>
+                <scope>provided</scope>
+                <classifier>obfuscated-apis</classifier>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -250,6 +204,10 @@
     <build>
         <pluginManagement>
             <plugins>
+	            <plugin>
+	               <groupId>org.apache.maven.plugins</groupId>
+	               <artifactId>maven-compiler-plugin</artifactId>
+	            </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-scr-plugin</artifactId>
@@ -302,7 +260,7 @@
                 <plugin>
                     <groupId>com.day.jcr.vault</groupId>
                     <artifactId>content-package-maven-plugin</artifactId>
-                    <version>0.0.20</version>
+                    <version>0.0.24</version>
                     <extensions>true</extensions>
                     <configuration>
                         <failOnError>true</failOnError>
