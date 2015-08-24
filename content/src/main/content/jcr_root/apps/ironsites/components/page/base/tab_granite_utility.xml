@@ -15,13 +15,27 @@
             <items jcr:primaryType="nt:unstructured">
                 <site
                     jcr:primaryType="nt:unstructured"
+                    jcr:title="Site"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <site
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            cq-msm-lockable="site"
+                            fieldLabel="Site/Domain"
+                            fieldDescription="(e.g. example.com)"
+                            name="./site"
+                            renderReadOnly="{Boolean}true"/>
+                    </items>
+                </site>
+                <redirect
+                    jcr:primaryType="nt:unstructured"
                     jcr:title="Redirect"
                     sling:resourceType="granite/ui/components/foundation/form/fieldset">
                     <items jcr:primaryType="nt:unstructured">
                         <redirectType
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/checkbox"
-                            allowBulkEdit="true"
                             cq-msm-lockable="redirectType"
                             name="./redirectType"
                             text="Permanent Redirect"
@@ -32,22 +46,6 @@
                             sling:resourceType="granite/ui/components/foundation/form/hidden"
                             name="./redirectType@TypeHint"
                             value="Long"/>
-                    </items>
-                </site>
-                <redirect
-                    jcr:primaryType="nt:unstructured"
-                    jcr:title="Redirect"
-                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
-                    <items jcr:primaryType="nt:unstructured">
-                        <site
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/form/textfield"
-                            allowBulkEdit="true"
-                            cq-msm-lockable="site"
-                            fieldLabel="Site/Domain"
-                            fieldDescription="(e.g. example.com)"
-                            name="./site"
-                            renderReadOnly="{Boolean}true"/>
                     </items>
                 </redirect>
                 <metaicons
@@ -61,7 +59,6 @@
                             sling:resourceType="granite/ui/components/foundation/form/multifield"
                             fieldLabel="Meta Tags"
                             fieldDescription="(name)|(content)"
-                            allowBulkEdit="true"
                             cq-msm-lockable="meta"
                             renderReadOnly="{Boolean}true">
 	                        <field
@@ -73,7 +70,6 @@
                         <favicon
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
-                            allowBulkEdit="true"
                             cq-msm-lockable="favicon"
                             fieldLabel="Favicon"
                             name="./favicon"
@@ -84,7 +80,6 @@
                             sling:resourceType="granite/ui/components/foundation/form/multifield"
                             fieldLabel="Touch Icons"
                             fieldDescription="(rel)|(sizes)|(href)|(type)"
-                            allowBulkEdit="true"
                             cq-msm-lockable="icons"
                             renderReadOnly="{Boolean}true">
                             <field
@@ -105,7 +100,6 @@
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/multifield"
                             fieldLabel="Client Library Categories"
-                            allowBulkEdit="true"
                             cq-msm-lockable="categories"
                             renderReadOnly="{Boolean}true">
                             <field
@@ -118,7 +112,6 @@
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/multifield"
                             fieldLabel="Javascript Includes"
-                            allowBulkEdit="true"
                             cq-msm-lockable="js"
                             renderReadOnly="{Boolean}true">
                             <field
@@ -131,7 +124,6 @@
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/multifield"
                             fieldLabel="CSS Includes"
-                            allowBulkEdit="true"
                             cq-msm-lockable="css"
                             renderReadOnly="{Boolean}true">
                             <field

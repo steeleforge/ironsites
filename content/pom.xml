@@ -51,8 +51,11 @@
                     <exclude>**/.vltignore</exclude>
                 </excludes>
             </resource>
+            <resource>
+                <directory>src/main/content/META-INF</directory>
+                <targetPath>../vault-work/META-INF</targetPath>
+            </resource>
         </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +64,6 @@
                     <includeEmptyDirs>true</includeEmptyDirs>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>com.day.jcr.vault</groupId>
                 <artifactId>content-package-maven-plugin</artifactId>

@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="nt:unstructured" 
-    features="*" />
+    features="*">
+    <specialCharsConfig jcr:primaryType="nt:unstructured">
+        <chars jcr:primaryType="nt:unstructured">
+            <html 
+	            jcr:primaryType="nt:unstructured"
+	            rangeStart="{Long}9728"
+	            rangeEnd="{Long}9983"/>
+            <emoji 
+                jcr:primaryType="nt:unstructured"
+                rangeStart="{Long}128309"
+                rangeEnd="{Long}128512"/>
+        </chars>
+    </specialCharsConfig>
+</jcr:root>
