@@ -88,7 +88,7 @@ public class ApiService extends ResourceResolverSubservice {
         this.componentContext = null;
     }
 
-    protected void bindConfigurations(ServiceReference ref) {
+    protected void bindConfigurations(ServiceReference<?> ref) {
         Object svc = this.componentContext.locateService("ApiConfig", ref);
         ApiConfig config;
         if (svc instanceof ApiConfig) {
@@ -101,7 +101,7 @@ public class ApiService extends ResourceResolverSubservice {
         }
     }
 
-    protected void unbindConfigurations(ServiceReference ref) {
+    protected void unbindConfigurations(ServiceReference<?> ref) {
         configs.clear();
     }
     

@@ -305,7 +305,7 @@ public class TopicReplicationService extends ResourceResolverSubservice implemen
         return IDENTITY_SERVICEMAPPER;
     }
     
-    protected void bindConfigurations(ServiceReference ref) {
+    protected void bindConfigurations(ServiceReference<?> ref) {
         Object svc = this.componentContext.locateService(TopicReplicationConfiguration.REFERENCE, ref);
         TopicReplicationConfiguration config;
         if (svc instanceof TopicReplicationConfiguration) {
@@ -316,7 +316,7 @@ public class TopicReplicationService extends ResourceResolverSubservice implemen
         }
     }
 
-    protected void unbindConfigurations(ServiceReference ref) {
+    protected void unbindConfigurations(ServiceReference<?> ref) {
         agentsByTopic.clear();
     }
 

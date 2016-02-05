@@ -53,22 +53,18 @@ public class SimpleCacheServiceMBeanImpl extends AnnotatedStandardMBean implemen
         super(SimpleCacheServiceMBean.class);
     }
 
-    @Override
     public Set<String> getCacheNames() {
         return cacheService.getCaches();
     }
 
-    @Override
     public long getCacheSize(String cacheName) {
         return cacheService.getCache(cacheName).size();
     }
 
-    @Override
     public CacheStats getCacheStats(String cacheName) {
         return cacheService.getStats(cacheName);
     }
     
-    @Override
     public void clearCache(String cacheName) {
         cacheService.clearCache(cacheName);
     }

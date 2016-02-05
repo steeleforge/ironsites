@@ -56,7 +56,7 @@ import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 public class I18nBindingValueProvider implements BindingsValuesProvider {
     public static final String BINDING_REQUEST = "request";
     
-    public void addBindings(Bindings bindings) {
+	public void addBindings(Bindings bindings) {
         SlingHttpServletRequest request = (SlingHttpServletRequest)bindings.get(BINDING_REQUEST);
         if (null != request && null != bindings) {
             // get valuemap from bindings, or fall back on Resource#adaptTo(ValueMap)

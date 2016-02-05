@@ -46,7 +46,8 @@ import com.steeleforge.aem.ironsites.cache.service.SimpleCacheConfiguration;
     metatype = true, 
     policy = ConfigurationPolicy.REQUIRE)
 public class SimpleCacheConfigurationImpl implements SimpleCacheConfiguration {
-    private ComponentContext componentContext = null;
+    @SuppressWarnings("unused")
+	private ComponentContext componentContext = null;
 
     static final String DEFAULT_CACHE_NAME = "Cache_";
     public static final String DEFAULT_CACHE_SPECFICIATIONS = "";

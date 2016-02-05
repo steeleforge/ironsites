@@ -84,7 +84,6 @@ public class TagOptionsServlet extends SlingSafeMethodsServlet implements Opting
         }
     }
     
-    @Override
     public boolean accepts(SlingHttpServletRequest request) {
         if (enabled && null != request.getParameter(PN_PATH)) {
             return true;

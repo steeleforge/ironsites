@@ -33,7 +33,6 @@ import com.day.cq.wcm.foundation.WCMRenditionPicker;
 
 public enum RenditionSource implements RenditionPicker {
     ORIGINAL(new RenditionPicker() {
-        @Override
         public Rendition getRendition(Asset asset) {
             return asset.getOriginal();
         }
@@ -47,7 +46,6 @@ public enum RenditionSource implements RenditionPicker {
         this.picker = picker;
     }
 
-    @Override
     public Rendition getRendition(Asset asset) {
         return picker.getRendition(asset);
     }

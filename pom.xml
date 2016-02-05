@@ -28,6 +28,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>            
         <!-- ironsites -->
+        <jdk.compiler.version>1.8</jdk.compiler.version>
         <slf4j.version>1.6.6</slf4j.version>
         <junit.version>4.8.2</junit.version>
         <scr.annotations.version>1.9.6</scr.annotations.version>
@@ -205,8 +206,14 @@
         <pluginManagement>
             <plugins>
 	            <plugin>
-	               <groupId>org.apache.maven.plugins</groupId>
-	               <artifactId>maven-compiler-plugin</artifactId>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<verbose>true</verbose>
+						<fork>true</fork>
+						<executable><!-- path-to-javac --></executable>
+						<compilerVersion>${jdk.compiler.version}</compilerVersion>
+					</configuration>
 	            </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>

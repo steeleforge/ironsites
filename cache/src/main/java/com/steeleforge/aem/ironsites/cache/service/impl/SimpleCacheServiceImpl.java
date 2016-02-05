@@ -146,7 +146,7 @@ public class SimpleCacheServiceImpl implements SimpleCacheService {
         this.componentContext = null;
     }
 
-    protected void bindConfigurations(ServiceReference ref) {
+    protected void bindConfigurations(ServiceReference<?> ref) {
         Object svc = this.componentContext.locateService("SimpleCacheConfiguration", ref);
         SimpleCacheConfiguration config;
         if (svc instanceof SimpleCacheConfiguration) {
@@ -156,7 +156,7 @@ public class SimpleCacheServiceImpl implements SimpleCacheService {
         }
     }
 
-    protected void unbindConfigurations(ServiceReference ref) {
+    protected void unbindConfigurations(ServiceReference<?> ref) {
         caches.invalidateAll();
     }
 }

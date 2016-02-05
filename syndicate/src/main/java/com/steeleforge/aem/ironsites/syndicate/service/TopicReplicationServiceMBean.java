@@ -26,8 +26,6 @@
  */
 package com.steeleforge.aem.ironsites.syndicate.service;
 
-import java.util.Set;
-
 import com.adobe.granite.jmx.annotation.Description;
 
 import com.day.cq.replication.ReplicationStatus;

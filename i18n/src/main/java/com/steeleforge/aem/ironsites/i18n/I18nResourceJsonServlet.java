@@ -46,10 +46,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class I18nResourceJsonServlet extends SlingSafeMethodsServlet {
 
     private static final long serialVersionUID = -8837830903603951318L;
-    private static final Logger LOG = LoggerFactory.getLogger(I18nResourceJsonServlet.class);
+    @SuppressWarnings("unused")
+	private static final Logger LOG = LoggerFactory.getLogger(I18nResourceJsonServlet.class);
 
     private ObjectMapper jacksonOM = null;
-    private ComponentContext componentContext = null;
+    @SuppressWarnings("unused")
+	private ComponentContext componentContext = null;
     private final Map<Object, ResourceBundleProvider> providers = new HashMap<Object, ResourceBundleProvider>();
     static final boolean DEFAULT_ENABLED = true;
 
