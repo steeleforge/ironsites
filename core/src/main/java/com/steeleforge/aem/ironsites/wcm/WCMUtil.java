@@ -255,6 +255,8 @@ public enum WCMUtil {
      * @return locale level resource path
      */
     public static String getLanguageRoot(final String path) {
+    	// LaunchUtils.getProductionResourcePath is not null-safe
+    	if (StringUtils.isBlank(LanguageUtil.getLanguageRoot(path))) return StringUtils.EMPTY;
         return LaunchUtils.getProductionResourcePath(LanguageUtil
                 .getLanguageRoot(path));
     }
@@ -386,15 +388,18 @@ public enum WCMUtil {
             final String protocol,
             final String domain,
             final boolean sanitize) {
-        String href = relativePath;
+        String href = getPageURL(request, relativePath);
+        
         SlingScriptHelper sling = getSlingScriptHelper(request);
         ResourceResolver resolver = request.getResourceResolver();
         
         Externalizer externalizer = sling.getService(Externalizer.class);
-        if (StringUtils.isNotBlank(protocol)) {
-            href = externalizer.externalLink(resolver, domain, protocol, relativePath);
+        if (StringUtils.isNotBlank(protocol) && StringUtils.isNotBlank(domain)) {
+            href = externalizer.externalLink(resolver, domain, protocol, href);
         } else {
-            href = externalizer.externalLink(resolver, domain, relativePath);
+        	if (StringUtils.isNotBlank(domain)) {
+        		href = externalizer.externalLink(resolver, domain, href);
+        	}
         }
         // relative path may already be sanitized through xss
         if (sanitize) {
@@ -498,7 +503,7 @@ public enum WCMUtil {
             final String protocol,
             final String domain) {
         return getExternalURL(request, 
-                getPageURL(request, path), 
+                path, 
                 protocol, 
                 domain, 
                 true);
@@ -512,7 +517,7 @@ public enum WCMUtil {
      */
     public static String getSecureURL(final String fullyQualifiedURL) {
         if (!StringUtils.startsWith(fullyQualifiedURL, WCMConstants.HTTPS)) {
-            return WCMConstants.HTTPS + WCMConstants.DELIMITER_PORT + 
+            return WCMConstants.HTTPS + WCMConstants.DELIMITER_PROTOCOL + 
                     StringUtils.substringAfter(fullyQualifiedURL, WCMConstants.PROTOCOL_RELATIVE);
         }
         return fullyQualifiedURL;

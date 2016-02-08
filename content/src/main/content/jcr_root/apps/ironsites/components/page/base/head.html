@@ -31,22 +31,26 @@
     data-sly-use.page="com.steeleforge.aem.ironsites.wcm.page.PageUse" 
     data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}">
     <title>${page.title @ context='text'}</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="keywords" content="${page.keywords @ context='attribute'}">
-    <meta name="description" content="${page.description @ context='attribute'}">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="${page.keywords @ context='attribute'}" />
+    <meta name="description" content="${page.description @ context='attribute'}" />
     <sly data-sly-list.meta="${page.meta @ context='attribute'}" data-sly-unwrap>
-    <meta name="${meta.name}" content="${meta.content @ context='attribute'}">
+    <meta data-sly-test="${meta.name && meta.content}" name="${meta.name}" content="${meta.content @ context='attribute'}" />
     </sly>
     <!--/* other head tags */-->
-    <sly data-sly-call="${clientLib.all @ categories='cq.foundation-main'}" data-sly-unwrap />
-    <sly data-sly-include="/libs/cq/cloudserviceconfigs/components/servicelibs/servicelibs.jsp" data-sly-unwrap />
-    <link data-sly-test="${page.favicon}" rel="icon" type="image/vnd.microsoft.icon" href="${page.favicon @ context='uri'}">
-    <link data-sly-test="${page.favicon}" rel="shortcut icon" type="image/vnd.microsoft.icon" href="${page.favicon @ context='uri'}">
+    <link data-sly-test="${page.canonical}" rel="canonical" href="${page.canonical @ context='uri'}" />
+    <sly data-sly-list.langalts="${page.hreflang}" data-sly-unwrap>
+    <link rel="alternate" hreflang="${langalts.language @ context='attribute'}" href="${langalts.url @ context='uri'}" />
+    </sly>
+    <link data-sly-test="${page.favicon}" rel="icon" type="image/vnd.microsoft.icon" href="${page.favicon @ context='uri'}" />
+    <link data-sly-test="${page.favicon}" rel="shortcut icon" type="image/vnd.microsoft.icon" href="${page.favicon @ context='uri'}" />
     <!--/* other icons */-->
     <sly data-sly-list.icon="${page.icons}" data-sly-unwrap>
-    <link rel="${icon.rel @ context='attribute'}" sizes="${icon.sizes @ context='attribute'}" href="${icon.href @ context='uri'}" type="${icon.type @ context='attribute'}">
+    <link rel="${icon.rel @ context='attribute'}" sizes="${icon.sizes @ context='attribute'}" href="${icon.href @ context='uri'}" type="${icon.type @ context='attribute'}" />
     </sly>
     <!--/* author & headlibs */-->
+    <sly data-sly-call="${clientLib.all @ categories='cq.foundation-main'}" data-sly-unwrap />
+    <sly data-sly-include="/libs/cq/cloudserviceconfigs/components/servicelibs/servicelibs.jsp" data-sly-unwrap />
     <sly data-sly-include="author.html" data-sly-unwrap />
     <sly data-sly-include="headlibs.html" data-sly-unwrap />
 </head>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Panel"
+    title="General">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <page
+            jcr:primaryType="cq:Widget"
+            jcr:title="Page"
+            collapsed="{Boolean}false"
+            collapsible="{Boolean}false"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <canonical
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Canonical"
+                    fieldDescription="Override for canonical URL"
+                    name="./canonical"
+                    xtype="textfield"/>
+                <hreflang
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Language Alternatives"
+                    fieldDescription="(language code)|(url)"
+                    name="./hreflang"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        rootPath="/content"
+                        xtype="pathfield"/>
+                </hreflang>
+            </items>
+        </page>
+        <style
+            jcr:primaryType="cq:Widget"
+            collapsed="{Boolean}true"
+            collapsible="{Boolean}true"
+            title="Style Extensions"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+		        <layout
+		            jcr:primaryType="cq:Widget"
+		            fieldLabel="Layout"
+		            fieldDescription="Template Layout"
+		            name="./layout"
+		            xtype="selection"
+            		options="$PATH.layouts.json"/>
+                <js
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Javascript Includes"
+                    name="./js"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        rootPath="/content/dam"
+                        xtype="pathfield"/>
+                </js>
+                <css
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="CSS Includes"
+                    name="./css"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        rootPath="/content/dam"
+                        xtype="pathfield"/>
+                </css>
+            </items>
+        </style>
+        <metaicons
+            jcr:primaryType="cq:Widget"
+            collapsed="{Boolean}true"
+            collapsible="{Boolean}true"
+            title="Meta"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <meta
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Meta Tags"
+                    fieldDescription="(name)|(content)"
+                    name="./meta"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        xtype="textfield"/>
+                </meta>
+            </items>
+        </metaicons>
+    </items>
+</jcr:root>

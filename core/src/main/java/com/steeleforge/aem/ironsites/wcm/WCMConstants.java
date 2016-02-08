@@ -36,6 +36,7 @@ public enum WCMConstants {
     public static final String PROTOCOL_RELATIVE = "//";
     public static final String DELIMITER_QUERY = "?";
     public static final String DELIMITER_FRAGMENT = "#";
+    public static final String DELIMITER_PROTOCOL = ":";
     public static final String DELIMITER_PORT = ":";
     public static final String DELIMITER_PATH = "/";
     public static final String DELIMITER_PATH_IDENTIFIER = "--";

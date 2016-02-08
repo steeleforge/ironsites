@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:description="ironsites locale template"
+    jcr:mixinTypes="[mix:lockable]"
+    jcr:primaryType="cq:Template"
+    jcr:title="ironsites Locale Template"
+    allowedPaths="[/content(/.*)+]"
+    ranking="{Long}2">
+    <jcr:content
+        cq:designPath="/etc/designs/ironsites"
+        jcr:primaryType="cq:PageContent"
+        layout="{Long}1"
+        sling:resourceType="ironsites/components/page/locale"
+        cq:deviceGroups="[/etc/mobile/groups/responsive]">
+        <header 
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="ironsites/components/layout/header" />
+        <footer 
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="ironsites/components/layout/footer" />
+        <par 
+	        jcr:primaryType="nt:unstructured"
+	        sling:resourceType="wcm/foundation/compoennts/responsivegrid">
+	        <cq:responsive 
+		        jcr:primaryType="nt:unstructured">
+		        <breakpoints
+		        	jcr:primaryType="nt:unstructured">           
+                    <small
+                        jcr:primaryType="nt:unstructured"
+                        title="Small (Phone)"
+                        width="768" />              
+                    <medium
+                        jcr:primaryType="nt:unstructured"
+                        title="Medium (Tablet)"
+                        width="1200"/>
+	        	</breakpoints>
+			</cq:responsive>
+		</par>
+    </jcr:content>
+</jcr:root>

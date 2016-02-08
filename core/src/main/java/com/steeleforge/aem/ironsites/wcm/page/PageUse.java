@@ -27,17 +27,19 @@
 package com.steeleforge.aem.ironsites.wcm.page;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.tagging.Tag;
+import com.day.cq.wcm.api.Page;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
-import com.steeleforge.aem.ironsites.wcm.api.ApiService;
+import com.steeleforge.aem.ironsites.wcm.page.head.Hreflang;
 import com.steeleforge.aem.ironsites.wcm.page.head.Icon;
 import com.steeleforge.aem.ironsites.wcm.page.head.Meta;
 
@@ -46,11 +48,14 @@ public class PageUse extends WCMUsePojo {
     public static final String PN_CATEGORIES = "categories";
     public static final String PN_JS = "js";
     public static final String PN_CSS = "css";
+    public static final String PN_PROTOCOL = "protocol";
     public static final String PN_SITE = "site";
     public static final String PN_FAVICON = "favicon";
     public static final String PN_ICONS = "icons";
     public static final String PN_META = "meta";
-    public static final String PN_API = "api";
+    public static final String PN_CANONICAL = "canonical";
+    public static final String PN_HREFLANG = "hreflang";
+    public static final String PN_LAYOUT = "layout";
     
     // locals
     private String keywords = null;
@@ -60,12 +65,15 @@ public class PageUse extends WCMUsePojo {
     private String designPath = null;
     private String canonical = null;
     private String favicon = null;
+    private String protocol = null;
     private String site = null;
+    private String layout = null;
     private List<String> categories = null;
     private List<String> js = null;
     private List<String> css = null;
     private List<Icon> icons = null;
     private List<Meta> meta = null;
+    private List<Hreflang> hreflang = null;
     
     public PageUse() {
         super();
@@ -74,6 +82,18 @@ public class PageUse extends WCMUsePojo {
     @Override
     public void activate() throws Exception {
         // noop
+    }
+    
+    /**
+     * @return locale page
+     */
+    public Page getLocalePage() {
+    	Page localePage = null;
+    	final String languageRoot = WCMUtil.getLanguageRoot(getCurrentPage().getPath());
+    	if (StringUtils.isNotBlank(languageRoot)) {
+    		localePage = WCMUtil.getPage(getRequest(), languageRoot);
+    	}
+    	return localePage;
     }
     
     /**
@@ -150,7 +170,11 @@ public class PageUse extends WCMUsePojo {
      */
     public String getCanonical() {
         if (null != canonical || null == getCurrentPage()) return canonical;
-        canonical = WCMUtil.getPageURL(getRequest(), getCurrentPage().getPath());
+        canonical = getInheritedProperties().get(PN_CANONICAL, String.class);
+        if (null == canonical) {
+	        canonical = WCMUtil.getExternalPageURL(getRequest(), 
+	        		getCurrentPage().getPath(), getProtocol(), getSite());
+        }
         return canonical;
     }
     
@@ -171,6 +195,31 @@ public class PageUse extends WCMUsePojo {
     }
     
     /**
+	 * @return the protocol
+	 */
+	public String getProtocol() {
+        if (null != protocol) return protocol;
+        protocol = getInheritedProperties().get(PN_PROTOCOL, String.class);
+        if (StringUtils.isBlank(protocol)) {
+        	protocol = WCMConstants.HTTP;
+        	final String extd = WCMUtil.getExternalPageURL(getRequest(), 
+        			getCurrentPage().getPath(), null, getSite());
+        	// pluck protocol from externalized path
+        	if (StringUtils.startsWith(extd, WCMConstants.HTTPS)) {
+        		protocol = WCMConstants.HTTPS;
+        	}
+        }
+		return protocol;
+	}
+
+	/**
+	 * @param protocol the protocol to set
+	 */
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
+
+	/**
      * @return get inherited site identifier
      */
     public String getSite() {
@@ -180,6 +229,34 @@ public class PageUse extends WCMUsePojo {
     }
     
     /**
+	 * @param canonical the canonical to set
+	 */
+	public void setCanonical(String canonical) {
+		this.canonical = canonical;
+	}
+
+	/**
+	 * @return the layout
+	 */
+	public String getLayout() {
+		return layout;
+	}
+	
+	// TODO
+	public List<String> getLayouts() {
+		return Collections.emptyList();
+	}
+
+	/**
+	 * @param layout the layout to set
+	 */
+	public void setLayout(String layout) {
+		this.layout = layout;
+	}
+
+	/**
+	 * ClientLibrary categories
+	 * 
      * @return inherited categories
      */
     public List<String> getCategories() {
@@ -265,24 +342,53 @@ public class PageUse extends WCMUsePojo {
     }
     
     /**
-     * @return set of configured APIs for a given site
-     */
-    public Set<String> getApis() {
-        ApiService api = getSlingScriptHelper().getService(ApiService.class);
-        return api.getServices(getSite());        
-    }
-    
-    /**
-     * Given a service option, return API value if available
-     * 
-     * @param serviceID
-     * @return
-     */
-    public String getApi() {
-        ApiService api = getSlingScriptHelper().getService(ApiService.class);
-        if (null != api) {
-            return api.getApi(getSite(), get(PN_API, String.class));
+	 * @return the hreflang language alternatives
+	 */
+	public List<Hreflang> getHreflang() {
+        if (null != hreflang) return hreflang;
+        final String[] inherited = getInheritedProperties().get(PN_HREFLANG, String[].class);
+        if (ArrayUtils.getLength(inherited) > 0) {
+        	hreflang = new ArrayList<Hreflang>();
+        	for (String item : inherited) hreflang.add(new Hreflang(item));
+        } else {
+        	hreflang = new ArrayList<Hreflang>();
+        	final Page localePage = getLocalePage();
+    		if (null != localePage && null != localePage.getParent()) {
+            	// get same path siblings for language alternates
+    			final Page parent = localePage.getParent();
+				final Iterator<Page> children = parent.listChildren();
+    			final String relSubpath = StringUtils.substringAfterLast(getCurrentPage().getPath(), 
+    					localePage.getPath());
+    			// non-final as it will be reassigned as iterated
+				Page siblingOrSelf = null;
+				// compare each sibling subpath
+				// for a same-name name resource stub
+				while(children.hasNext()) {
+					siblingOrSelf = children.next();
+					if (!localePage.equals(siblingOrSelf)) {
+						// sibling rel path ... may not exist
+						siblingOrSelf = getPageManager().getContainingPage(siblingOrSelf.getPath()
+								+ WCMConstants.DELIMITER_PATH + relSubpath);
+						// does the sibling with same subpath exist?
+						if (null != siblingOrSelf) {
+							// add externalized sibling path if it exists
+    						hreflang.add(new Hreflang(siblingOrSelf.getLanguage(false).toString()
+    								+ WCMConstants.DELIMITER_MULTIFIELD
+    								+ WCMUtil.getExternalPageURL(getRequest(), 
+    										siblingOrSelf.getPath(), getProtocol(), getSite())));
+						}
+					}
+				}
+				siblingOrSelf = null;
+			}
         }
-        return null;
-    }
+		return hreflang;
+	}
+
+	/**
+	 * @param hreflang the hreflang to set
+	 */
+	public void setHreflang(List<Hreflang> hreflang) {
+		this.hreflang = hreflang;
+	}
 }

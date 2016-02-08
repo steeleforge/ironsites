@@ -17,7 +17,7 @@
                     xtype="cqinclude"/>
                 <extended
                     jcr:primaryType="cq:Widget"
-                    path="/apps/ironsites/components/page/base/tab_utility.infinity.json"
+                    path="/apps/ironsites/components/page/base/tab_extended.infinity.json"
                     xtype="cqinclude"/>
                 <image
                     jcr:primaryType="cq:Widget"

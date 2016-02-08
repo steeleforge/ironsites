@@ -37,10 +37,10 @@ import com.steeleforge.aem.ironsites.wcm.WCMUtil;
 
 public class RedirectUse extends WCMUsePojo {
     // statics
-    private static final String PN_REDIRECT_PROPERTY = "property";
-    private static final String PN_DEFAULT_REDIRECT_PROPERTY = "redirectTarget";
-    private static final String PN_REDIRECT_PATH = "redirectPath";
-    private static final String PN_REDIRECT_TYPE = "redirectType";
+    public static final String PN_REDIRECT_PROPERTY = "property";
+    public static final String PN_DEFAULT_REDIRECT_PROPERTY = "redirectTarget";
+    public static final String PN_REDIRECT_PATH = "redirectPath";
+    public static final String PN_REDIRECT_TYPE = "redirectType";
 
     // locals
     String redirectPath = null;

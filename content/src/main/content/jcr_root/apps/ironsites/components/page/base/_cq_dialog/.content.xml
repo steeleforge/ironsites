@@ -27,10 +27,10 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/include"
                         path="foundation/components/page/cq:dialog/content/items/tabs/items/advanced"/>
-                    <advanced
+                    <extended
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/include"
-                        path="ironstes/components/page/base/tab_granite_utility"/>
+                        path="ironstes/components/page/base/tab_granite_extended"/>
                     <thumbnail
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/include"

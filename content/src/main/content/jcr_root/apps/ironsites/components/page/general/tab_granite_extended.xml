@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    cq:showOnCreate="{Boolean}true"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Extended"
+    sling:resourceType="granite/ui/components/foundation/section">
+    <layout
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"
+        margin="{Boolean}false"/>
+    <items jcr:primaryType="nt:unstructured">
+        <column
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <page
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Page"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <canonical
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            cq-msm-lockable="canonical"
+                            fieldLabel="Canonical"
+                            fieldDescription="Override for canonical URL"
+                            name="./canonical"
+                            renderReadOnly="{Boolean}true"/>
+                        <hreflang
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Language Alternatives"
+                            fieldDescription="(language code)|(url)"
+                            cq-msm-lockable="hreflang"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="./hreflang"/>
+                        </hreflang>
+                    </items>
+                </page>
+                <style
+                    cq:showOnCreate="{Boolean}false"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Style Extensions"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+		                <layout
+		                    jcr:primaryType="nt:unstructured"
+		                    sling:resourceType="granite/ui/components/foundation/form/select"
+		                    fieldLabel="API Service"
+		                    allowBulkEdit="true"
+		                    cq-msm-lockable="service"
+		                    name="./layout"
+		                    multiple="{Boolean}false"
+	                        forceselection="{Boolean}true"
+		                    renderReadOnly="{Boolean}true">
+		                   <datasource
+		                       jcr:primaryType="nt:unstructured"
+		                       sling:resourceType="ironsites/common/datasource/grid"
+		                       page="${empty param.item ? requestPathInfo.suffix : param.item}"/>
+						</layout>
+                        <categories
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Client Library Categories"
+                            cq-msm-lockable="categories"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="categories"/>
+                        </categories>
+                        <js
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Javascript Includes"
+                            cq-msm-lockable="js"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="./js"/>
+                        </js>
+                        <css
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="CSS Includes"
+                            cq-msm-lockable="css"
+                            renderReadOnly="{Boolean}true">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+                                name="./css"/>
+                        </css>
+                    </items>
+                </style>
+                <metaicons
+                    cq:showOnCreate="{Boolean}false"
+                    jcr:primaryType="nt:unstructured"
+                    jcr:title="Meta &amp; Icons"
+                    sling:resourceType="granite/ui/components/foundation/form/fieldset">
+                    <items jcr:primaryType="nt:unstructured">
+                        <meta
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/form/multifield"
+                            fieldLabel="Meta Tags"
+                            fieldDescription="(name)|(content)"
+                            cq-msm-lockable="meta"
+                            renderReadOnly="{Boolean}true">
+	                        <field
+	                            jcr:primaryType="nt:unstructured"
+	                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                renderReadOnly="{Boolean}true"
+	                            name="./meta"/>
+                        </meta>
+                    </items>
+                </metaicons>
+
+            </items>
+        </column>
+    </items>
+</jcr:root>

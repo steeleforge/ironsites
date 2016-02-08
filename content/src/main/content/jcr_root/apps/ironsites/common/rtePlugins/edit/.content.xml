@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="nt:unstructured" 
-    features="*" />
+    features="*">
+    <htmlPasteRules 
+        jcr:primaryType="nt:unstructured" 
+        cssMode="keep">
+        <allowedAttributes
+		    jcr:primaryType="nt:unstructured"
+		    table="[width,height,cellspacing,cellpadding,border]"
+		    td="width,height,colspan,rowspan" 
+            a="[role,href,class,title]" />
+    </htmlPasteRules>
+</jcr:root>

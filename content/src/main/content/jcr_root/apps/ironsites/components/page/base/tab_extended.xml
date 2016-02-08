@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Panel"
+    title="Extended">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <site
+            jcr:primaryType="cq:Widget"
+            jcr:title="Site"
+            collapsed="{Boolean}false"
+            collapsible="{Boolean}false"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <site
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Site/Domain"
+                    fieldDescription="(e.g. example.com)"
+                    name="./site"
+                    xtype="textfield"/>
+                <protocol
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Site/Domain"
+                    fieldDescription="(e.g. example.com)"
+                    name="./site"
+                    xtype="textfield"/>
+                <homepage
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Homepage"
+                    fieldDescription="Homepage redirect path"
+                    rootPath="/content"
+                    name="./homepage"
+                    xtype="pathfield"/>
+                <canonical
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Canonical"
+                    fieldDescription="Override for canonical URL"
+                    name="./canonical"
+                    xtype="textfield"/>
+                <hreflang
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Language Alternatives"
+                    fieldDescription="(language code)|(url)"
+                    name="./hreflang"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        rootPath="/content"
+                        xtype="pathfield"/>
+                </hreflang>
+            </items>
+        </site>
+        <redirect
+            jcr:primaryType="cq:Widget"
+            jcr:title="Redirect"
+            collapsed="{Boolean}false"
+            collapsible="{Boolean}false"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <redirectType
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Permanent Redirect"
+                    fieldDescription="HTTP 301"
+                    name="./redirectType"
+                    inputValue="{Long}301"
+                    type="checkbox"
+                    xtype="selection"/>
+                <redirectTypeHint
+                    jcr:primaryType="cq:Widget"
+                    name="./redirectType@TypeHint"
+                    value="Long"
+                    xtype="hidden"/>
+            </items>
+        </redirect>
+        <metaicons
+            jcr:primaryType="cq:Widget"
+            collapsed="{Boolean}true"
+            collapsible="{Boolean}true"
+            title="Meta &amp; Icons"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <meta
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Meta Tags"
+                    fieldDescription="(name)|(content)"
+                    name="./meta"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        xtype="textfield"/>
+                </meta>
+                <favicon
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Favicon"
+                    fieldDescription="Defaults to (design)/favicon.ico"
+                    name="./favicon"
+                    rootPath="/content/dam"
+                    xtype="pathfield"/>
+                <icons
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Touch Icons"
+                    fieldDescription="(rel)|(sizes)|(href)|(type)"
+                    name="./icons"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        xtype="textfield"/>
+                </icons>
+            </items>
+        </metaicons>
+        <style
+            jcr:primaryType="cq:Widget"
+            collapsed="{Boolean}true"
+            collapsible="{Boolean}true"
+            title="Style Extensions"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <categories
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Client Library Categories"
+                    name="./categories"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        xtype="textfield"/>
+                </categories>
+                <js
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Javascript Includes"
+                    name="./js"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        rootPath="/content/dam"
+                        xtype="pathfield"/>
+                </js>
+                <css
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="CSS Includes"
+                    name="./css"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="nt:unstructured"
+                        rootPath="/content/dam"
+                        xtype="pathfield"/>
+                </css>
+            </items>
+        </style>
+    </items>
+</jcr:root>

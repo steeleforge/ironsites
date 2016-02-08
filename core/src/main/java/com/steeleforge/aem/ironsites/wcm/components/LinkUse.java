@@ -34,15 +34,15 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.wcm.api.Page;
 import com.steeleforge.aem.ironsites.wcm.WCMConstants;
 import com.steeleforge.aem.ironsites.wcm.WCMURLBuilder;
 import com.steeleforge.aem.ironsites.wcm.WCMUtil;
+import com.steeleforge.aem.ironsites.wcm.page.LocaleUse;
 import com.steeleforge.aem.ironsites.wcm.page.filter.HidePageFilter;
 import com.steeleforge.aem.ironsites.wcm.page.filter.InvalidPageFilter;
 
-public class LinkUse extends WCMUsePojo {
+public class LinkUse extends LocaleUse {
     // statics
     public static final String PN_PATH = "path";
     public static final String PN_TEXT = "text";
@@ -156,9 +156,15 @@ public class LinkUse extends WCMUsePojo {
             Iterator<Page> children = (hideInNav)? 
                        page.listChildren(HidePageFilter.HIDE_IN_NAVIGATION_FILTER)
                        : page.listChildren(InvalidPageFilter.INVALID_PAGE_FILTER);
+            Page current = null;
             while(children.hasNext()) {
-                links.add(new Link(getRequest(), children.next()));
+            	current = children.next();
+            	if (!StringUtils.equals(current.getPath(), 
+            			getHomepagePath())) {
+            		links.add(new Link(getRequest(), current));
+            	}
             }
+            current = null;
             return links;
         }
         return Collections.emptyList();

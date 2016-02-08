@@ -2,4 +2,5 @@
 <workspaceFilter version="1.0">
     <filter root="/apps/ironsites"/>
     <filter root="/etc/tags/ironsites" mode="update"/>
+    <filter root="/etc/designs/ironsites" mode="update"/>
 </workspaceFilter>

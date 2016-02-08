@@ -1,0 +1,31 @@
+@import (once) "/etc/clientlibs/wcm/foundation/grid/grid_base.less";
+
+@max_col: 12;
+
+/* default */
+.aem-Grid {
+  .generate-grid(default, @max_col);
+}
+
+/* grid */
+.aem-GridColumn {
+  padding: 0 5px;
+}
+
+.aem-Grid-full {
+  width: 100%;
+}
+
+/* phone */
+@media (max-width: 768px) {
+  .aem-Grid {
+    .generate-grid(small, @max_col);
+  }
+}
+
+/* tablet */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .aem-Grid {
+    .generate-grid(medium, @max_col);
+  }	
+}
