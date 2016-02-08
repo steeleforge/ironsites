@@ -30,9 +30,10 @@
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/form/checkbox"
                             cq-msm-lockable="protocol"
+                            text="HTTPS"
                             fieldLabel="HTTPS"
                             fieldDescription="Force secure protocol across the website"
-                            checked="unchecked"
+                            checked="{Boolean}false"
                             value="https"
                             name="./protocol"
                             renderReadOnly="{Boolean}true"/>
@@ -100,11 +101,11 @@
                             fieldDescription="(name)|(content)"
                             cq-msm-lockable="meta"
                             renderReadOnly="{Boolean}true">
-	                        <field
-	                            jcr:primaryType="nt:unstructured"
-	                            sling:resourceType="granite/ui/components/foundation/form/textfield"
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
                                 renderReadOnly="{Boolean}true"
-	                            name="./meta"/>
+                                name="./meta"/>
                         </meta>
                         <favicon
                             jcr:primaryType="nt:unstructured"
